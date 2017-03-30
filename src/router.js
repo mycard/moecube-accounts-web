@@ -12,6 +12,8 @@ import Reset from "./routes/Reset.js";
 
 import Profiles from "./routes/Profiles.js";
 
+import Active from "./routes/Activate.js";
+
 function RouterConfig({ history }) {
   return (
     <Router history={history}>
@@ -23,6 +25,7 @@ function RouterConfig({ history }) {
         <Route path="/reset" component={Reset} />
         <Route path="/profiles" component={Profiles} />
       </Route>
+      <Route path="/activate" component={Active} />
     </Router>
   );
 }

@@ -2,26 +2,15 @@ import React from 'react';
 import { connect } from 'dva';
 import { Link } from 'dva/router'
 import styles from './Login.less';
-import { Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Checkbox, Button } from 'antd';
+import { Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Checkbox, Button, Spin } from 'antd';
 const FormItem = Form.Item;
 const Option = Select.Option;
 
 
-const formItemLayout = {
-  labelCol: {
-    xs: { span: 24 },
-    sm: { span: 6 },
-  },
-  wrapperCol: {
-    xs: { span: 24 },
-    sm: { span: 14 },
-  },
-};
-
 class Reset extends React.Component {
 
   onSubmitReset = (e) => {
-    const { form, dispatch, location: { query: { key, user_id  }}} = this.props
+    const { form, dispatch, location: { query: { key, user_id  }} } = this.props
 
     e && e.preventDefault();
     form.validateFieldsAndScroll((err, values) => {
@@ -53,9 +42,11 @@ class Reset extends React.Component {
   }
 
   render() {
-    const { getFieldDecorator, dispatch } = this.props.form;
+    const { getFieldDecorator } = this.props.form;
+    const { isResetSubmit=false } = this.props
     return (
       <div style={{ display: 'flex', justifyContent:'center', alignItems: 'center', height: '100%'}}>
+        <Spin spinning={isResetSubmit} delay={500}>
         <Form onSubmit={this.onSubmitReset} className="login-form">
 
           <FormItem>
@@ -84,13 +75,19 @@ class Reset extends React.Component {
             Submit
           </Button>
         </Form>
+        </Spin>
       </div>
     )
   }
 }
 
 function mapStateToProps(state, props) {
-  return {};
+  const {
+    auth: {isResetSubmit}
+  } = state
+  return {
+    isResetSubmit
+  };
 }
 
 const WrapperReset = Form.create()(Reset)

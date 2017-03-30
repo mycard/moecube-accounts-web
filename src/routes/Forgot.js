@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'dva';
 import { Link } from 'dva/router'
 import styles from './Login.less';
-import { Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Checkbox, Button } from 'antd';
+import { Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Checkbox, Button, Spin } from 'antd';
 const FormItem = Form.Item;
 const Option = Select.Option;
 
@@ -30,22 +30,24 @@ class Login extends React.Component {
         
         const {email} = values
 
-
-        dispatch({type: "auth/forgot", payload: {emailOrUsername: email}})
+        dispatch({type: "auth/forgot", payload: {account: email}})
       }
     });
   }
 
   render() {
     const { getFieldDecorator, dispatch } = this.props.form;
+    const {isForgotSubmit=false} = this.props
+
     return (
       <div style={{ display: 'flex', justifyContent:'center', alignItems: 'center', height: '100%'}}>
+        <Spin spinning={isForgotSubmit} delay={500}>
         <Form onSubmit={this.onSubmitLogin} className="login-form">
           <FormItem>
             {getFieldDecorator('email', {
-              rules: [{ required: true, message: 'Please input your email!' }],
+              rules: [{ required: true, message: 'Please input your username or email!' }],
             })(
-              <Input prefix={<Icon type="user" style={{ fontSize: 13 }} />} placeholder="email" />
+              <Input prefix={<Icon type="user" style={{ fontSize: 13 }} />} placeholder="username or email" />
             )}
           </FormItem>
         
@@ -54,13 +56,19 @@ class Login extends React.Component {
           </Button>
           Or <Link to="/login">Sign In</Link>
         </Form>
+        </Spin>
       </div>
     )
   }
 }
 
-function mapStateToProps() {
-  return {};
+function mapStateToProps(state) {
+  const {
+    auth: {isForgotSubmit}
+  } = state
+  return {
+    isForgotSubmit
+  };
 }
 
 const WrapperLogin = Form.create()(Login)

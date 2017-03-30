@@ -1,3 +1,3 @@
 export default {
-  apiRoot: 'http://localhost:8081',
+  apiRoot: 'http://localhost:3000',
 }

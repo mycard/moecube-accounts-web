@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'dva';
 import { Link } from 'dva/router'
 import styles from './Login.less';
-import { Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Checkbox, Button } from 'antd';
+import { Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Checkbox, Button, Spin } from 'antd';
 const FormItem = Form.Item;
 const Option = Select.Option;
 
@@ -28,22 +28,25 @@ class Login extends React.Component {
       if (!err) {
         console.log('Received values of form: ', values);
         
-        const {username, password} = values
+        const {account, password} = values
 
 
-        dispatch({type: "auth/login", payload: {emailOrUsername: username, password}})
+        dispatch({type: "auth/login", payload: {account: account, password}})
       }
     });
   }
 
   render() {
-    const { getFieldDecorator, dispatch } = this.props.form;
+    const { getFieldDecorator, dispatch} = this.props.form;
+    const { isLoginSubmit=false } = this.props
+
     return (
       <div style={{ display: 'flex', justifyContent:'center', alignItems: 'center', height: '100%'}}>
+      <Spin spinning={isLoginSubmit} delay={500}>
         <Form onSubmit={this.onSubmitLogin} className="login-form">
           <FormItem>
-            {getFieldDecorator('username', {
-              rules: [{ required: true, message: 'Please input your username!' }],
+            {getFieldDecorator('account', {
+              rules: [{ required: true, message: 'Please input your account!' }],
             })(
               <Input prefix={<Icon type="user" style={{ fontSize: 13 }} />} placeholder="Username" />
             )}
@@ -69,13 +72,19 @@ class Login extends React.Component {
             Or <Link to="/register">register now!</Link>
           </FormItem>
         </Form>
+      </Spin>
       </div>
     )
   }
 }
 
-function mapStateToProps() {
-  return {};
+function mapStateToProps(state) {
+  const {
+    auth: {isLoginSubmit}
+  } = state
+  return {
+    isLoginSubmit
+  };
 }
 
 const WrapperLogin = Form.create()(Login)
