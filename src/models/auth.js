@@ -5,15 +5,16 @@ import { message } from 'antd'
 export default {
   namespace: 'auth',
   state: {
-    activateState: false,
     checkEmail: '',
     checkUsername: '',
+    isSendEmailActive: false,
     isEmailExists: false,
     isUserNameExists: false,
     isRegisterSubmit: false,
     isLoginSubmit: false,
     isForgotSubmit: false,
     isSpinSubmit: false,
+    isActivateSubmit: false,
     register: {}
   },
   reducers: {
@@ -136,36 +137,44 @@ export default {
   effects: {
     *activate({ payload }, { call, put }) {
       const { data } = yield call(activate, payload)
+
+      
+
     },
     *checkEmail({ payload }, { call, put }) {
-      const { data } = yield call(checkUserExists, payload)
 
-      if(data) {
-        yield put({ type: 'check', payload: { isEmailExists: true , checkEmail: 'warning'}})
-      } else {
-        yield put({ type: 'check', payload: { isEmailExists: false , checkEmail: 'success'}})
+      try {
+        const { data } = yield call(checkUserExists, payload)
+        if(data) {
+          yield put({ type: 'check', payload: { isEmailExists: true , checkEmail: 'warning'}})
+        }
+      } catch (error) {
+        yield put({ type: 'check', payload: { isEmailExists: false , checkEmail: 'success'}}) 
       }
     },
     *checkUsername({ payload }, { call, put }) {
-      const { data } = yield call(checkUserExists, payload)
-
-      if(data) {
-        yield put({ type: 'check', payload: { isUserNameExists: true , checkUsername: 'warning'}})
-      } else {
+      try {
+        const { data } = yield call(checkUserExists, payload)    
+        if(data) {
+          yield put({ type: 'check', payload: { isUserNameExists: true , checkUsername: 'warning'}})
+        }    
+      } catch (error) {
         yield put({ type: 'check', payload: { isUserNameExists: false , checkUsername: 'success'}})
+        
       }
     },
     *login({ payload }, { call, put }) {
+      try {
         const {data} = yield call(login, payload)
-        
         if(data){
           yield put({ type: 'loginSuccess' })   
           yield put({ type: 'user/loginSuccess', payload: { data } })
           message.info("登录成功")
-        } else {
-          yield put({ type: 'loginFail' })
-          message.error("登陆失败")
         }
+      } catch (error) {
+        yield put({ type: 'loginFail' })
+        message.error(error.message)
+      }
     },
     *forgot({ payload }, { call, put }) {
         const { data } = yield call(forgot, payload)

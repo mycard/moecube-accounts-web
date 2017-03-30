@@ -93,16 +93,18 @@ export default {
         }
     },
     *updateAccount({ payload }, { call, put }) {
+      try {
+        
+        let { data } = yield call(updateAccount, payload )   
 
-      let { data } = yield call(updateAccount, payload )
-      
-      if(data){
+        if(data){
           yield put({ type: 'updateAccountSuccess', payload: { data } })
           message.info("更新成功")
-        }else {
+        }     
+      } catch (error) {
           yield put({ type: 'updateAccountFail' })
-          message.error("更新失败")      
-        }
+          message.error(error.message)
+      }
     },
   },
   subscriptions: {

@@ -5,12 +5,19 @@ function parseJSON(response) {
   return response.json();
 }
 
-function checkStatus(response) {
+async function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
     return response;
   }
 
-  const error = new Error(response.statusText);
+  let message 
+  try {
+    message = (await response.json())["message"]
+  } catch (error) {
+    message = response.statusText
+  }
+
+  const error = new Error(message);
   error.response = response;
   throw error;
 }
@@ -34,5 +41,5 @@ export default function request(url, options) {
     .then(checkStatus)
     .then(parseJSON)
     .then(data => ({ data }))
-    .catch(err => ({ err }));
+    // .catch(err => ({ err }));
 }

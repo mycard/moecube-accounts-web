@@ -1,12 +1,17 @@
 import dva from 'dva';
 import ReactDOM from 'react-dom';
 import { browserHistory } from 'dva/router'
+import { message } from 'antd'
 import './index.css';
 
 import { IntlProvider, addLocaleData } from 'react-intl';
 
 // 1. Initialize
 const app = dva({
+    onError: (error, dispatch) => {
+      message.destroy();
+      message.error(error.message);
+    },
     history: browserHistory
 });
 

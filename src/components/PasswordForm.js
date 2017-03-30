@@ -38,9 +38,9 @@ class EmailForm extends React.Component {
       if (!err) {
         console.log('Received values of form: ', values);
         
-        const { email, password } = values
+        const { new_password, password } = values
 
-        // dispatch({type: "user/updateEmail", payload: { email, password, user_id: id }})
+        dispatch({type: "user/updateAccount", payload: { new_password, password, user_id: id }})
       }
     });
   }
@@ -87,7 +87,7 @@ class EmailForm extends React.Component {
     return (
       <Form onSubmit={this.onSubmit}>          
         <FormItem {...passwordProps.fromItem} label="old password">
-          {getFieldDecorator(`old_password`, {...passwordProps.decorator})(
+          {getFieldDecorator(`password`, {...passwordProps.decorator})(
             <Input {...passwordProps.input} />
           )}
         </FormItem>

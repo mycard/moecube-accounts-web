@@ -13,7 +13,7 @@ const formItemLayout = {
 
 class EmailForm extends React.Component {
 
-  onUpdateEmail = (e) => {
+  onSubmit = (e) => {
     const { form, dispatch, data: {id} } = this.props
 
     e && e.preventDefault();
@@ -23,7 +23,7 @@ class EmailForm extends React.Component {
         
         const { email, password } = values
 
-        dispatch({type: "user/updateEmail", payload: { email, password, user_id: id }})
+        dispatch({type: "user/updateAccount", payload: { email, password, user_id: id }})
       }
     });
   }
@@ -68,7 +68,7 @@ class EmailForm extends React.Component {
     }
     
     return (
-      <Form onSubmit={this.onUpdateEmail}>
+      <Form onSubmit={this.onSubmit}>
         <FormItem {...emailProps.fromItem}>
           {getFieldDecorator(`email`, {...emailProps.decorator})(
             <Input 
