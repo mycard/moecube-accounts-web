@@ -148,7 +148,9 @@ class Register extends React.Component {
             <Button type="primary" htmlType="submit" className="login-form-button">
               <Format id={'sign-up'} />
             </Button>
-            Or <Link to="/login"><Format id={'sign-in'} /></Link>
+            <FormItem>
+              <Link to="/signin"><Format id={'login'} /></Link>
+            </FormItem>
           </Form>
         </Spin>
       </div>

@@ -53,18 +53,15 @@ class Login extends React.Component {
               )}
             </FormItem>
             <FormItem>
-              {getFieldDecorator('remember', {
-                valuePropName: 'checked',
-                initialValue: true,
-              })(
-                <Checkbox><Format id={'remember-me'} /></Checkbox>,
-              )}
-              <Link to="/forgot" className="login-form-forgot"><Format id={'forgot-password'} /></Link>
+              
               <Button type="primary" htmlType="submit" className="login-form-button">
                 <Format id={'sign-in'} />
               </Button>
-              Or <Link to="/register"><Format id={'sign-up'} /></Link>
             </FormItem>
+            <Form>
+              <Link to="/register"><Format id={'Register'} /></Link>
+              <Link to="/forgot" className="login-form-forgot"><Format id={'forgot-password'} /></Link>
+            </Form>
           </Form>
         </Spin>
       </div>

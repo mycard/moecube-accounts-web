@@ -43,7 +43,7 @@ class Login extends React.Component {
 
   render() {
     const { getFieldDecorator, dispatch } = this.props.form;
-    const { isForgotSubmit = false } = this.props;
+    const { loading } = this.props;
     const { intl: { messages } } = this.context;
     return (
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
@@ -66,7 +66,9 @@ class Login extends React.Component {
             <Button type="primary" htmlType="submit" className="login-form-button">
               <Format id={'send-email'} />
             </Button>
-            Or <Link to="/login"><Format id={'sign-in'} /></Link>
+            <FormItem>
+              <Link to="/signin"><Format id={'login'} /></Link>                       
+            </FormItem>
           </Form>
         </Spin>
       </div>
