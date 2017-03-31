@@ -66,15 +66,26 @@ export default {
   effects: {
     *loginSuccess({ payload }, { call, put }) {
 
-      localStorage.setItem("user", JSON.stringify(payload.data))
+      const {data} = payload
 
-      yield put(routerRedux.replace("/profiles"))
+      if(!data) {
+        message.error("error ")
+      }
+
+      if(data.active) {
+        yield put(routerRedux.replace("/profiles"))
+        message.info("登录成功")
+        localStorage.setItem("user", JSON.stringify(payload.data))              
+      } else {
+        yield put(routerRedux.replace(`/verify`))        
+      }
+      
     },
     *preLogin({ payload }, { call, put }) {
       let user = localStorage.getItem("user")
 
       if (!user) {
-        yield put(routerRedux.replace("/login"))
+        yield put(routerRedux.replace("/signin"))
       }
 
       yield put({ type: 'loginFromStorage', payload: { data: JSON.parse(user) } })

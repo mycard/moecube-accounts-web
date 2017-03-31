@@ -7,7 +7,6 @@ import './Login.less';
 
 const FormItem = Form.Item;
 
-
 class Login extends React.Component {
 
   static contextTypes = {
@@ -31,12 +30,12 @@ class Login extends React.Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    const { isLoginSubmit = false } = this.props;
-    const { intl: { messages } } = this.context;
+    const { loading } = this.props;
+    const { intl: { messages } } = this.context
 
     return (
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
-        <Spin spinning={isLoginSubmit} delay={500}>
+        <Spin spinning={loading} delay={100}>
           <Form onSubmit={this.onSubmitLogin} className="login-form">
             <FormItem>
               {getFieldDecorator('account', {
@@ -75,11 +74,13 @@ class Login extends React.Component {
 function mapStateToProps(state) {
   const {
     common: { language },
-    auth: { isLoginSubmit },
   } = state;
+
+  const loading = state.loading.global || false
+
   return {
+    loading,
     language,
-    isLoginSubmit,
   };
 }
 

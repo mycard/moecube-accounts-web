@@ -1,10 +1,13 @@
 import { login, forgot, register, reset, activate, checkUserExists } from '../services/auth'
 import { message } from 'antd'
+import { routerRedux } from 'dva/router'
+
 
 
 export default {
   namespace: 'auth',
   state: {
+    input:{},
     activateState: false,
     checkEmail: '',
     checkUsername: '',
@@ -80,7 +83,7 @@ export default {
     },
     loginSuccess(state, action) {
       return {
-        ...state, ...{
+        ...state, ...action.payload, ...{
           isLoginSubmit: false,
         }
       };
@@ -137,37 +140,48 @@ export default {
   },
   effects: {
     *activate({ payload }, { call, put }) {
-      const { data } = yield call(activate, payload)
+      try {
+        const { data } = yield call(activate, payload)
+        if(data) {
+          message.success("激活成功")
+        }
+      } catch (error) {
+        message.error(error.message)
+      }
     },
     *checkEmail({ payload }, { call, put }) {
-      const { data } = yield call(checkUserExists, payload)
-      console.log(data);
-      if(data) {
-        yield put({ type: 'check', payload: { isEmailExists: true , checkEmail: 'warning'}})
-      } else {
-        yield put({ type: 'check', payload: { isEmailExists: false , checkEmail: 'success'}})
+
+      try {
+        const { data } = yield call(checkUserExists, payload)
+        if (data) {
+          yield put({ type: 'check', payload: { isEmailExists: true, checkEmail: 'warning' } })
+        }
+      } catch (error) {
+        yield put({ type: 'check', payload: { isEmailExists: false, checkEmail: 'success' } })
       }
     },
     *checkUsername({ payload }, { call, put }) {
-      const { data } = yield call(checkUserExists, payload)
+      try {
+        const { data } = yield call(checkUserExists, payload)
+        if (data) {
+          yield put({ type: 'check', payload: { isUserNameExists: true, checkUsername: 'warning' } })
+        }
+      } catch (error) {
+        yield put({ type: 'check', payload: { isUserNameExists: false, checkUsername: 'success' } })
 
-      if(data) {
-        yield put({ type: 'check', payload: { isUserNameExists: true , checkUsername: 'warning'}})
-      } else {
-        yield put({ type: 'check', payload: { isUserNameExists: false , checkUsername: 'success'}})
       }
     },
     *login({ payload }, { call, put }) {
-        const {data} = yield call(login, payload)
-
-        if(data){
-          yield put({ type: 'loginSuccess' })
+      try {
+        const { data } = yield call(login, payload)
+        if (data) {
+          yield put({ type: 'loginSuccess', payload: { input: payload } })          
           yield put({ type: 'user/loginSuccess', payload: { data } })
-          message.info("登录成功")
-        } else {
-          yield put({ type: 'loginFail' })
-          message.error("登陆失败")
         }
+      } catch (error) {
+        yield put({ type: 'loginFail' })
+        message.error(error.message)
+      }
     },
     *forgot({ payload }, { call, put }) {
         try {
@@ -182,26 +196,30 @@ export default {
         }
     },
     *register({ payload }, { call, put }) {
-        const {data} = yield call(register, payload)
 
-        if(data) {
-          yield put({ type: 'registerSuccess'})
-          message.info("注册成功")
-        } else {
-          yield put({ type: 'registerFail' })
-          message.error("注册失败")
+      try {
+        const { data } = yield call(register, payload)
+        if (data) {
+          yield put({ type: 'registerSuccess' })
+          message.info("注册成功, 请验证激活邮件~", 3)
+          yield put(routerRedux.replace("/verify"))
         }
+      } catch (error) {
+        yield put({ type: 'registerFail' })
+        message.error("注册失败")
+      }
     },
     *reset({ payload }, { call, put }) {
-        const { data } = yield call(reset, payload)
-
-        if(data){
+      try {
+        const { data } = yield call(reset, payload)        
+        if (data) {
           yield put({ type: 'resetSuccess' })
           message.info("重置成功")
-        }else{
-          yield put({ type: 'resetFail' })
-          message.error("重置失败")
         }
+      } catch (error) {
+         yield put({ type: 'resetFail' })
+         message.error("重置失败")
+      }
     },
   },
   subscriptions: {},

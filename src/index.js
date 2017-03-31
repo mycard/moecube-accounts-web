@@ -1,8 +1,9 @@
 import dva from 'dva';
 import ReactDOM from 'react-dom';
-import { browserHistory } from 'dva/router'
-import { message } from 'antd'
-import './index.css';
+import { browserHistory } from 'dva/router';
+import { message } from 'antd';
+import createLoading from 'dva-loading'
+import './index.less';
 
 import { IntlProvider, addLocaleData } from 'react-intl';
 
@@ -14,6 +15,8 @@ const app = dva({
     },
     history: browserHistory
 });
+
+app.use(createLoading())
 
 
 app.model(require('./models/user'));
@@ -42,13 +45,19 @@ import zh from 'react-intl/locale-data/zh'
 import localeData from '../i18n.json'
 
 
+
+
 addLocaleData([...en, ...zh]);
 /*eslint-disable */
-const language = navigator.language || (navigator.languages && navigator.languages[0]) || navigator.userLanguage;
+let language = navigator.language || (navigator.languages && navigator.languages[0]) || navigator.userLanguage;
 /*eslint-enable */
 const languageWithoutRegionCode = language.toLowerCase().split(/[_-]+/)[0];
 
 const messages = localeData[languageWithoutRegionCode] || localeData[language] || localeData.zh;
+
+if(localStorage.getItem('locale')){
+  language = JSON.parse(localStorage.getItem('locale'))
+}
 
 const App = app.start();
 ReactDOM.render(
