@@ -1,8 +1,10 @@
 {
   "en": {
-    "Apps" : "Apps"
+    "Login": "Login",
+    "Username": "Username"
   },
   "zh": {
-    "Apps" : "应用"
+    "Login": "登录",
+    "Username": "用户名"
   }
 }

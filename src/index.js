@@ -53,8 +53,10 @@ const messages = localeData[languageWithoutRegionCode] || localeData[language] |
 const App = app.start();
 ReactDOM.render(
   <IntlProvider locale={ language } messages={ messages }>
-    <App />
+    <App/>
   </IntlProvider>,
   document.getElementById('root'),
 );
 
+
+console.log(language)

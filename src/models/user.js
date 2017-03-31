@@ -73,47 +73,62 @@ export default {
     *preLogin({ payload }, { call, put }) {
       let user = localStorage.getItem("user")
 
-      if(!user){
-        yield put(routerRedux.replace("/login"))       
+      if (!user) {
+        yield put(routerRedux.replace("/login"))
       }
 
-      yield put({type: 'loginFromStorage', payload: { data: JSON.parse(user) }})
+      yield put({ type: 'loginFromStorage', payload: { data: JSON.parse(user) } })
     },
     *updateProfile({ payload }, { call, put }) {
 
-      let { data } = yield call(updateProfile, payload )
-      
-      if(data){
+      try {
+        let { data } = yield call(updateProfile, payload)
+        if (data) {
           yield put({ type: 'updateProfileSuccess', payload: { data } })
-          
+
           message.info("更新成功")
-        }else {
-          yield put({ type: 'updateProfileFail' })
-          message.error("更新失败")      
         }
+      } catch (error) {
+        yield put({ type: 'updateProfileFail' })
+        message.error("更新失败")
+      }
     },
+    *updateEmail({ payload }, { call, put }) {
+      try {
+
+        let { data } = yield call(updateAccount, payload)
+
+        if (data) {
+          yield put({ type: 'updateAccountSuccess', payload: { data } })
+          message.info("验证邮件已发送")
+        }
+      } catch (error) {
+        yield put({ type: 'updateAccountFail' })
+        message.error(error.message)
+      }
+    },
+
     *updateAccount({ payload }, { call, put }) {
       try {
-        
-        let { data } = yield call(updateAccount, payload )   
 
-        if(data){
+        let { data } = yield call(updateAccount, payload)
+
+        if (data) {
           yield put({ type: 'updateAccountSuccess', payload: { data } })
           message.info("更新成功")
-        }     
+        }
       } catch (error) {
-          yield put({ type: 'updateAccountFail' })
-          message.error(error.message)
+        yield put({ type: 'updateAccountFail' })
+        message.error(error.message)
       }
     },
   },
   subscriptions: {
     setup({ dispatch, history }) {
-      return history.listen(({ pathname, query}) => {
-        if(pathname == '/profiles') {
+      return history.listen(({ pathname, query }) => {
+        if (pathname == '/profiles') {
 
-          dispatch({ type: 'preLogin', payload: query})
-          
+          dispatch({ type: 'preLogin', payload: query })
         }
       })
     }

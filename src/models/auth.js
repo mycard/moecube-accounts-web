@@ -170,14 +170,15 @@ export default {
         }
     },
     *forgot({ payload }, { call, put }) {
-        const { data } = yield call(forgot, payload)
-
-        if(data){
-          yield put({ type: 'forgotSuccess' })
-          message.info("已发送密码重置邮件")
-        }else {
+        try {
+          const { data } = yield call(forgot, payload)
+          if(data){
+            yield put({ type: 'forgotSuccess' })
+            message.info("已发送密码重置邮件")
+          }
+        } catch (error) {
           yield put({ type: 'forgotFail' })
-          message.error("密码重置邮件发送失败")
+          message.error(error.message) 
         }
     },
     *register({ payload }, { call, put }) {

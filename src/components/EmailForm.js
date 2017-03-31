@@ -23,7 +23,7 @@ class EmailForm extends React.Component {
         
         const { email, password } = values
 
-        dispatch({type: "user/updateAccount", payload: { email, password, user_id: id }})
+        dispatch({type: "user/updateEmail", payload: { email, password, user_id: id }})
       }
     });
   }

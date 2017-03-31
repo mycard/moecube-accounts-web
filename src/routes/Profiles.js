@@ -27,29 +27,28 @@ class Profiles extends React.Component {
 
         const { username, nickname, password } = values;
 
-
-        dispatch({ type: 'user/updateProfile', payload: { username, nickname, password, user_id: id } });
+        dispatch({type: "user/updateProfile", payload: { username, name, password, user_id: id }})
       }
     });
   };
 
   render() {
-    const { form, data, isUpdateSubmit = false } = this.props;
-    const { getFieldDecorator } = form;
-    const { nickname } = data;
+    const { dispatch, form, data, isUpdateSubmit=false, checkUsername, isUserNameExists } = this.props
+    const { getFieldDecorator } = form;    
+    const { username, name, id } = data
 
-    const nicknameProps = {
+    const nameProps = {
       fromItem: {
-        label: 'nickname',
+        label: "name",
         ...formItemLayout
       },
       decorator: {
-        initialValue: nickname,
+        initialValue: name                        
       },
       input: {
-        placeholder: 'nickname',
-      },
-    };
+        placeholder: "name",
+      }
+    }
 
     return (
       <Spin spinning={isUpdateSubmit} delay={500}>
@@ -57,9 +56,9 @@ class Profiles extends React.Component {
           <TabPane tab={<span><Icon type="setting" /> 基本信息 </span>} key="1">
             <Form onSubmit={this.onUpdateSubmit}>
 
-              <FormItem {...nicknameProps.fromItem}>
-                {getFieldDecorator('nickname', { ...nicknameProps.decorator })(
-                  <Input {...nicknameProps.input} />,
+              <FormItem {...nameProps.fromItem}>
+                {getFieldDecorator(`name`, {...nameProps.decorator})(
+                  <Input {...nameProps.input}/>
                 )}
               </FormItem>
 

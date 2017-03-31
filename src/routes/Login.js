@@ -1,7 +1,10 @@
 import { Button, Checkbox, Form, Icon, Input, Spin } from 'antd';
+import { FormattedMessage as Format } from 'react-intl'
+import languages from '../../i18n.json'
 import { connect } from 'dva';
 import { Link } from 'dva/router';
 import React from 'react';
+import "./Login.less"
 
 const FormItem = Form.Item;
 
@@ -25,7 +28,8 @@ class Login extends React.Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    const { isLoginSubmit = false } = this.props;
+    const { isLoginSubmit = false, language } = this.props;
+    const lan = languages[language]
 
     return (
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
@@ -35,7 +39,7 @@ class Login extends React.Component {
               {getFieldDecorator('account', {
                 rules: [{ required: true, message: 'Please input your account!' }],
               })(
-                <Input prefix={<Icon type="user" style={{ fontSize: 13 }} />} placeholder="Username" />,
+                <Input prefix={<Icon type="user" style={{ fontSize: 13 }} />} placeholder={lan["Username"]} />,
               )}
             </FormItem>
             <FormItem>
@@ -54,7 +58,7 @@ class Login extends React.Component {
               )}
               <Link to="/forgot" className="login-form-forgot">Forgot password</Link>
               <Button type="primary" htmlType="submit" className="login-form-button">
-                Log in
+                <Format id={"Login"} /> 
               </Button>
               Or <Link to="/register">register now!</Link>
             </FormItem>
@@ -67,9 +71,11 @@ class Login extends React.Component {
 
 function mapStateToProps(state) {
   const {
+    common: { language },
     auth: { isLoginSubmit },
   } = state;
   return {
+    language,
     isLoginSubmit,
   };
 }
