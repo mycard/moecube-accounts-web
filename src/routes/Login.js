@@ -61,9 +61,9 @@ class Login extends React.Component {
               )}
               <Link to="/forgot" className="login-form-forgot"><Format id={'forgot-password'} /></Link>
               <Button type="primary" htmlType="submit" className="login-form-button">
-                <Format id={'login'} />
+                <Format id={'sign-in'} />
               </Button>
-              Or <Link to="/register"><Format id={'register-now'} /></Link>
+              Or <Link to="/register"><Format id={'sign-up'} /></Link>
             </FormItem>
           </Form>
         </Spin>
@@ -74,11 +74,9 @@ class Login extends React.Component {
 
 function mapStateToProps(state) {
   const {
-    common: { language },
     auth: { isLoginSubmit },
   } = state;
   return {
-    language,
     isLoginSubmit,
   };
 }

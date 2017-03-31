@@ -56,5 +56,3 @@ export async function checkUserExists(params) {
   });
 }
 
-
-

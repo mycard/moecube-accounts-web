@@ -1,6 +1,7 @@
 import { Button } from 'antd';
 import { connect } from 'dva';
 import React from 'react';
+import { FormattedMessage as Format } from 'react-intl';
 
 class Active extends React.Component {
 
@@ -15,7 +16,7 @@ class Active extends React.Component {
     return (
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100%' }}>
         <Button type="primary" icon="poweroff" loading={activateState} onClick={this.handleClick}>
-          激活
+          <Format id={'verify email'} />
         </Button>
       </div>
     );

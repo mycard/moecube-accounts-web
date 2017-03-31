@@ -18,12 +18,11 @@
     "moecube": "MoeCube",
     "index-leftbox1": "You can use this account to sign in.",
     "yonghuan": "The Disappearing of Gensokyo",
-    "please-sign-up": "Sign Up",
-    "please-sign-in": "Sign In",
+    "sign-up": "Sign Up",
+    "sign-in": "Sign In",
     "email-address-or-username": "E-Mail or Username",
     "register-now": "register-now!",
     "register":"register",
-    "login": "Login",
     "forgot-password": "Forgot Password",
     "send-email": "Send Email",
     "reset-success": "reset success",
@@ -67,7 +66,13 @@
     "Your email has been updated.": "Your email has been updated. You will receive an verification email. Please check the mail to finish verification. ",
 
     "Please input your account!":"Please input your email or username!",
-    "Please input your Password!":"Please input your Password!"
+    "Please input your Password!":"Please input your Password!",
+
+    "verify email":"verify email",
+    "account-info":"Account Info",
+    "reset-username":"Reset Username",
+    "reset-email":"Reset Email",
+    "reset-password":"Reset Password"
 
   },
   "zh": {
@@ -89,12 +94,11 @@
     "moecube": "萌立方",
     "index-leftbox1": "您可使用以下几种账号登陆",
     "yonghuan": "永远消失的幻想乡",
-    "please-sign-up": "注册",
-    "please-sign-in": "登陆",
+    "sign-up": "注册",
+    "sign-in": "登陆",
     "email-address-or-username": "邮箱或用户名",
     "register-now": "现在注册",
     "register":"注册",
-    "login": "登陆",
     "forgot-password": "忘记密码",
     "send-email": "发送邮件",
     "reset-success": "修改成功",
@@ -139,7 +143,14 @@
 
     "Please input your account!":"请填写你的邮箱或用户名!",
     "Please input your Password!":"请填写你的密码!",
-    "密码至少为8-24位":"密码至少为8-24位"
 
+    "verify email":"验证邮箱",
+    "account-info":"账户信息",
+    "reset-username":"修改用户名",
+    "reset-email":"修改邮箱",
+    "reset-password":"修改密码",
+
+
+    "密码至少为8-24位":"密码至少为8-24位"
   }
 }

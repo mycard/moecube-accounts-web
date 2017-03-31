@@ -1,5 +1,6 @@
 import { Button, Form, Icon, Input, Select, Spin } from 'antd';
 import { connect } from 'dva';
+import { FormattedMessage as Format } from 'react-intl';
 import React from 'react';
 const FormItem = Form.Item;
 const Option = Select.Option;

@@ -1,6 +1,7 @@
 import { Button, Form, Icon, Input, Spin, Tabs } from 'antd';
 import { connect } from 'dva';
-import React from 'react';
+import React, { PropTypes } from 'react';
+import { FormattedMessage as Format } from 'react-intl';
 import EmailForm from '../components/EmailForm';
 import PasswordForm from '../components/PasswordForm';
 import UserNameForm from '../components/UserNameForm';
@@ -16,6 +17,10 @@ const formItemLayout = {
 };
 
 class Profiles extends React.Component {
+
+  static contextTypes = {
+    intl: PropTypes.object.isRequired,
+  }
 
   onUpdateSubmit = (e) => {
     const { form, dispatch, data: { id } } = this.props;
@@ -33,27 +38,28 @@ class Profiles extends React.Component {
   };
 
   render() {
-    const { dispatch, form, data, isUpdateSubmit=false, checkUsername, isUserNameExists } = this.props
-    const { getFieldDecorator } = form;    
-    const { username, name, id } = data
+    const { dispatch, form, data, isUpdateSubmit=false, checkUsername, isUserNameExists } = this.props;
+    const { getFieldDecorator } = form;
+    const { username, name, id } = data;
+    const { intl: {messages} } = this.context;
 
     const nameProps = {
       fromItem: {
-        label: "name",
+        label: 'name',
         ...formItemLayout
       },
       decorator: {
-        initialValue: name                        
+        initialValue: name
       },
       input: {
-        placeholder: "name",
+        placeholder: 'name',
       }
     }
 
     return (
       <Spin spinning={isUpdateSubmit} delay={500}>
         <Tabs defaultActiveKey="1" className="app-detail-nav">
-          <TabPane tab={<span><Icon type="setting" /> 基本信息 </span>} key="1">
+          <TabPane tab={<span><Icon type="setting" /><Format id={'user-info'} /> </span>} key="1">
             <Form onSubmit={this.onUpdateSubmit}>
 
               <FormItem {...nameProps.fromItem}>
@@ -64,24 +70,24 @@ class Profiles extends React.Component {
 
               <FormItem>
                 <div className={styles.wrapSubmit}>
-                  <Button type="primary" htmlType="submit" size="large">提交</Button>
+                  <Button type="primary" htmlType="submit" size="large"><Format id={'save'}/></Button>
                 </div>
               </FormItem>
             </Form>
           </TabPane>
 
-          <TabPane tab={<span><Icon type="setting" /> 账户信息 </span>} key="2">
+          <TabPane tab={<span><Icon type="setting" /><Format id={'account-info'}/></span>} key="2">
 
             <Tabs type="card" className="app-detail-nav">
-              <TabPane tab={'修改用户名'} key={0}>
+              <TabPane tab={messages['reset-username']} key={0}>
                 <UserNameForm />
               </TabPane>
 
-              <TabPane tab={'修改邮箱'} key={1}>
+              <TabPane tab={messages['reset-email']}key={1}>
                 <EmailForm />
               </TabPane>
 
-              <TabPane tab={'修改密码'} key={2}>
+              <TabPane tab={messages['reset-password']}key={2}>
                 <PasswordForm />
               </TabPane>
             </Tabs>
