@@ -149,7 +149,7 @@ class Register extends React.Component {
               <Format id={'sign-up'} />
             </Button>
             <FormItem>
-              <Link to="/signin"><Format id={'login'} /></Link>
+              <Link to="/signin"><Format id={'sign-in'} /></Link>
             </FormItem>
           </Form>
         </Spin>

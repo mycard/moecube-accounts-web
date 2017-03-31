@@ -59,7 +59,7 @@ class Login extends React.Component {
               </Button>
             </FormItem>
             <Form>
-              <Link to="/register"><Format id={'Register'} /></Link>
+              <Link to="/signup"><Format id={'sign-up'} /></Link>
               <Link to="/forgot" className="login-form-forgot"><Format id={'forgot-password'} /></Link>
             </Form>
           </Form>

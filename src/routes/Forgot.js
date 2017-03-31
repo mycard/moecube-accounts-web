@@ -67,7 +67,7 @@ class Login extends React.Component {
               <Format id={'send-email'} />
             </Button>
             <FormItem>
-              <Link to="/signin"><Format id={'login'} /></Link>                       
+              <Link to="/signin"><Format id={'sign-in'} /></Link>                       
             </FormItem>
           </Form>
         </Spin>

@@ -151,8 +151,13 @@ export default {
     },
     *checkEmail({ payload }, { call, put }) {
 
+      if(!payload.email){
+          yield put({ type: 'check', payload: { checkEmail: 'error' } })      
+          return   
+      }
+
       try {
-        const { data } = yield call(checkUserExists, payload)
+        const { data } = yield call(checkUserExists, {email: payload.email})
         if (data) {
           yield put({ type: 'check', payload: { isEmailExists: true, checkEmail: 'warning' } })
         }
@@ -161,14 +166,18 @@ export default {
       }
     },
     *checkUsername({ payload }, { call, put }) {
+      if(!payload.username){
+          yield put({ type: 'check', payload: { checkUsername: 'error' } })      
+          return   
+      }
+
       try {
-        const { data } = yield call(checkUserExists, payload)
+        const { data } = yield call(checkUserExists, { username: payload.username})
         if (data) {
           yield put({ type: 'check', payload: { isUserNameExists: true, checkUsername: 'warning' } })
         }
       } catch (error) {
         yield put({ type: 'check', payload: { isUserNameExists: false, checkUsername: 'success' } })
-
       }
     },
     *login({ payload }, { call, put }) {
@@ -196,7 +205,6 @@ export default {
         }
     },
     *register({ payload }, { call, put }) {
-
       try {
         const { data } = yield call(register, payload)
         if (data) {

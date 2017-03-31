@@ -23,7 +23,7 @@ function RouterConfig({ history }) {
       <Route path="/">
         <Route path="/signin" component={Login}/>
         <Route path="/forgot" component={Forgot}/>
-        <Route path="/register" component={Register}/>
+        <Route path="/signup" component={Register}/>
         <Route path="/reset" component={Reset}/>
         <Route path="/profiles" component={Profiles}/>
       </Route>
