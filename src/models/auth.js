@@ -141,7 +141,7 @@ export default {
     },
     *checkEmail({ payload }, { call, put }) {
       const { data } = yield call(checkUserExists, payload)
-
+      console.log(data);
       if(data) {
         yield put({ type: 'check', payload: { isEmailExists: true , checkEmail: 'warning'}})
       } else {
@@ -178,7 +178,7 @@ export default {
           }
         } catch (error) {
           yield put({ type: 'forgotFail' })
-          message.error(error.message) 
+          message.error(error.message)
         }
     },
     *register({ payload }, { call, put }) {

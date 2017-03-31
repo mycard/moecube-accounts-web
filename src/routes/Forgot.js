@@ -1,7 +1,9 @@
 import { Button, Form, Icon, Input, Select, Spin } from 'antd';
 import { connect } from 'dva';
 import { Link } from 'dva/router';
-import React from 'react';
+import React, { PropTypes } from 'react';
+import { FormattedMessage as Format } from 'react-intl';
+
 const FormItem = Form.Item;
 const Option = Select.Option;
 
@@ -18,6 +20,10 @@ const formItemLayout = {
 };
 
 class Login extends React.Component {
+
+  static contextTypes = {
+    intl: PropTypes.object.isRequired,
+  }
 
   onSubmitLogin = (e) => {
     const { form, dispatch, params: { id } } = this.props;
@@ -37,6 +43,7 @@ class Login extends React.Component {
   render() {
     const { getFieldDecorator, dispatch } = this.props.form;
     const { isForgotSubmit = false } = this.props;
+    const { intl: { messages } } = this.context;
 
     return (
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
@@ -46,14 +53,14 @@ class Login extends React.Component {
               {getFieldDecorator('email', {
                 rules: [{ required: true, message: 'Please input your username or email!' }],
               })(
-                <Input prefix={<Icon type="user" style={{ fontSize: 13 }}/>} placeholder="username or email"/>,
+                <Input prefix={<Icon type="user" style={{ fontSize: 13 }}/>} placeholder={messages['email-address-or-username']} />,
               )}
             </FormItem>
 
             <Button type="primary" htmlType="submit" className="login-form-button">
-              Send
+              <Format id={'send-email'} />
             </Button>
-            Or <Link to="/login">Sign In</Link>
+            Or <Link to="/login"><Format id={'login'} /></Link>
           </Form>
         </Spin>
       </div>

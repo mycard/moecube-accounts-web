@@ -1,12 +1,17 @@
 import { Button, Form, Icon, Input, Select, Spin } from 'antd';
 import { connect } from 'dva';
 import { Link } from 'dva/router';
-import React from 'react';
+import React, { PropTypes } from 'react';
+import { FormattedMessage as Format } from 'react-intl';
 const FormItem = Form.Item;
 const Option = Select.Option;
 
 
 class Register extends React.Component {
+
+  static contextTypes = {
+    intl: PropTypes.object.isRequired,
+  }
 
   onSubmitLogin = (e) => {
     const { form, dispatch, params: { id } } = this.props;
@@ -18,7 +23,6 @@ class Register extends React.Component {
 
         const { email, username, nickname, password, confirm } = values;
 
-
         dispatch({ type: 'auth/register', payload: { email, username, nickname, password } });
       }
     });
@@ -28,7 +32,7 @@ class Register extends React.Component {
   checkPassword = (rule, value, callback) => {
     const form = this.props.form;
     if (value && value !== form.getFieldValue('password')) {
-      callback('两次密码输入不符');
+      callback(this.context.intl.messages['Incorrect password.2']);
     } else {
       callback();
     }
@@ -43,9 +47,10 @@ class Register extends React.Component {
   };
 
   render() {
-    const { dispatch, register, form, checkEmail, checkUsername, isEmailExists, isUserNameExists, isRegisterSubmit } = this.props;
+    const { dispatch, register, form, checkEmail, checkUsername, isEmailExists, isUserNameExists, isRegisterSubmit, } = this.props;
     const { getFieldDecorator, } = form;
     const { email = {}, username = {}, password = {} } = register;
+    const { intl: { messages } } = this.context;
 
     const emailProps = {
       hasFeedback: true,
@@ -55,7 +60,7 @@ class Register extends React.Component {
 
     const emailInputProps = {
       onBlur: () => dispatch({ type: 'auth/checkEmail', payload: { ...form.getFieldsValue() } }),
-      placeholder: 'Email',
+      placeholder: messages.email,
     };
 
     const usernameProps = {
@@ -66,7 +71,7 @@ class Register extends React.Component {
 
     const usernameInputProps = {
       onBlur: () => dispatch({ type: 'auth/checkUsername', payload: { ...form.getFieldsValue() } }),
-      placeholder: 'Username',
+      placeholder: messages.username,
     };
 
     return (
@@ -77,7 +82,7 @@ class Register extends React.Component {
               {getFieldDecorator('email', {
                 rules: [{
                   required: true,
-                  message: '邮箱格式不对!',
+                  message: messages['Please use a correct E-Mail address.'],
                   pattern: /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/,
                 }],
               }, {})(
@@ -89,7 +94,7 @@ class Register extends React.Component {
               {getFieldDecorator('username', {
                 rules: [{
                   required: true,
-                  message: '用户名格式有误!',
+                  message: messages['You can not use this username.'],
                   pattern: /^[A-Za-z0-9_\u4E00-\u9FD5\u3400-\u4DBF\u{20000}-\u{2A6DF}\u{2A700}-\u{2CEAF}\uF900–\uFAFF\u{2F800}-\u{2FA1D}\uAC00–\uD7AF\u3040-\u30FF\u31F0–\u31FF\u{1B000}–\u{1B0FF}\u3005]+$/u,
                 }],
               }, {})(
@@ -99,7 +104,7 @@ class Register extends React.Component {
 
             <FormItem >
               {getFieldDecorator('nickname', {})(
-                <Input placeholder="nickname[optional]"/>,
+                <Input placeholder={messages.nickname} />,
               )}
             </FormItem>
 
@@ -112,7 +117,7 @@ class Register extends React.Component {
                 <Input
                   prefix={<Icon type="lock" style={{ fontSize: 13 }}/>}
                   type="password"
-                  placeholder="Password"/>,
+                  placeholder={messages.password}/>,
               )}
             </FormItem>
 
@@ -128,14 +133,14 @@ class Register extends React.Component {
                   prefix={<Icon type="lock" style={{ fontSize: 13 }}/>}
                   type="password"
                   onBlur={this.handleConfirmBlur}
-                  placeholder="Password Again"/>,
+                  placeholder={messages['password-again']}/>,
               )}
             </FormItem>
 
             <Button type="primary" htmlType="submit" className="login-form-button">
-              Register
+              <Format id={'register'} />
             </Button>
-            Or <Link to="/login">Sign in!</Link>
+            Or <Link to="/login"><Format id={'login'} /></Link>
           </Form>
         </Spin>
       </div>
