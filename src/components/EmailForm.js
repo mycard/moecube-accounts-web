@@ -1,85 +1,85 @@
+import { Form, Input } from 'antd';
 import React from 'react';
-import styles from './EmailForm.css';
-import {connect} from 'react-redux'
-import { Form, Input, Icon, Button } from 'antd'
-const FormItem = Form.Item;
-import SubmitButton from './SubmitButton'
+import { connect } from 'react-redux';
+import SubmitButton from './SubmitButton';
 
+
+const FormItem = Form.Item;
 const formItemLayout = {
   labelCol: { span: 4 },
   wrapperCol: { span: 15 },
-}
+};
 
 
 class EmailForm extends React.Component {
 
   onUpdateEmail = (e) => {
-    const { form, dispatch, data: {id} } = this.props
+    const { form, dispatch, data: { id } } = this.props;
 
     e && e.preventDefault();
     form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
-        
-        const { email, password } = values
 
-        dispatch({type: "user/updateEmail", payload: { email, password, user_id: id }})
+        const { email, password } = values;
+
+        dispatch({ type: 'user/updateEmail', payload: { email, password, user_id: id } });
       }
     });
-  }
+  };
 
-  render(){
+  render() {
 
-    const {form, dispatch, data, checkEmail, isEmailExists} = this.props
-    const {getFieldDecorator} = form
-    const {id, email} = data
+    const { form, dispatch, data, checkEmail, isEmailExists } = this.props;
+    const { getFieldDecorator } = form;
+    const { id, email } = data;
 
 
     const emailProps = {
       fromItem: {
-        label: "email",
+        label: 'email',
         hasFeedback: true,
         validateStatus: checkEmail,
         help: isEmailExists ? 'email exists' : '',
         ...formItemLayout
       },
       decorator: {
-        initialValue: email                        
+        initialValue: email,
       },
       input: {
-        placeholder: "email"
-      }
-    }
+        placeholder: 'email',
+      },
+    };
 
     const passwordProps = {
       fromItem: {
-        label: "passwrod",        
-        ...formItemLayout
+        label: 'passwrod',
+        ...formItemLayout,
       },
       decorator: {
         rules: [
-          { required: true, message: '密码至少为8-24位', pattern: /^.{8,24}$/ }
-        ]
+          { required: true, message: '密码至少为8-24位', pattern: /^.{8,24}$/ },
+        ],
       },
       input: {
-        placeholder: "password",
-        type: 'password'
-      }
-    }
-    
+        placeholder: 'password',
+        type: 'password',
+      },
+    };
+
     return (
       <Form onSubmit={this.onUpdateEmail}>
         <FormItem {...emailProps.fromItem}>
-          {getFieldDecorator(`email`, {...emailProps.decorator})(
-            <Input 
-              {...emailProps.input} 
-              onBlur = {() => dispatch({type: 'auth/checkEmail', payload: { ...form.getFieldsValue(), id} })}/>
+          {getFieldDecorator(`email`, { ...emailProps.decorator })(
+            <Input
+              {...emailProps.input}
+              onBlur={() => dispatch({ type: 'auth/checkEmail', payload: { ...form.getFieldsValue(), id } })}/>,
           )}
         </FormItem>
 
         <FormItem {...passwordProps.fromItem}>
-          {getFieldDecorator(`password`, {...passwordProps.decorator})(
-            <Input {...passwordProps.input} />
+          {getFieldDecorator('password', { ...passwordProps.decorator })(
+            <Input {...passwordProps.input} />,
           )}
         </FormItem>
 
@@ -92,20 +92,19 @@ class EmailForm extends React.Component {
 }
 
 
-
-function mapStateToProps(state, props) {
+function mapStateToProps(state) {
   const {
-    user: {data},
-    auth: {isEmailExists, checkEmail}
-  } = state
+    user: { data },
+    auth: { isEmailExists, checkEmail },
+  } = state;
   return {
     data,
     checkEmail,
-    isEmailExists
+    isEmailExists,
   };
 }
 
-const WrapperEmailForm = Form.create()(EmailForm)
+const WrapperEmailForm = Form.create()(EmailForm);
 
 export default connect(mapStateToProps)(WrapperEmailForm);
 

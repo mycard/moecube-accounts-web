@@ -1,5 +1,5 @@
-import { login, forgot, register, reset, activate, checkUserExists } from '../services/auth'
-import { message } from 'antd'
+import { message } from 'antd';
+import { activate, checkUserExists, forgot, login, register, reset } from '../services/auth';
 
 
 export default {
@@ -14,191 +14,197 @@ export default {
     isLoginSubmit: false,
     isForgotSubmit: false,
     isSpinSubmit: false,
-    register: {}
+    register: {},
   },
   reducers: {
     change(state, action) {
       return {
         ...state, ...action.payload
-      }
+      };
     },
     checkEmail(state, action) {
       return {
         ...state, ...{
-          checkEmail: 'validating'
+          checkEmail: 'validating',
         }
-      }
+      };
     },
     checkUsername(state, action) {
       return {
         ...state, ...{
-          checkUsername: 'validating'
+          checkUsername: 'validating',
         }
-      }
+      };
     },
     activate(state, action) {
       return {
         ...state, ...{
-          activateState: true
+          activateState: true,
         }
-      }
+      };
     },
     check(state, action) {
       return {
         ...state, ...action.payload
-      }
+      };
     },
     register(state, action) {
       return {
         ...state, ...{
-          isRegisterSubmit: true
+          isRegisterSubmit: true,
         }
-      }
+      };
     },
     registerSuccess(state, action) {
       return {
         ...state, ...{
-          isRegisterSubmit: false
+          isRegisterSubmit: false,
         }
-      }
+      };
     },
     registerFail(state, action) {
       return {
         ...state, ...{
-          isRegisterSubmit: false
+          isRegisterSubmit: false,
         }
-      }
+      };
     },
     login(state, action) {
       return {
         ...state, ...{
-          isLoginSubmit: true
+          isLoginSubmit: true,
         }
-      }
+      };
     },
     loginSuccess(state, action) {
       return {
         ...state, ...{
-          isLoginSubmit: false
+          isLoginSubmit: false,
         }
-      }
+      };
     },
     loginFail(state, action) {
       return {
         ...state, ...{
-          isLoginSubmit: false
+          isLoginSubmit: false,
         }
-      }
+      };
     },
     forgot(state, action) {
       return {
         ...state, ...{
-          isForgotSubmit: true
+          isForgotSubmit: true,
         }
-      }
+      };
     },
     forgotSuccess(state, action) {
       return {
         ...state, ...{
-          isForgotSubmit: false
+          isForgotSubmit: false,
         }
-      }
+      };
     },
     forgotFail(state, action) {
       return {
         ...state, ...{
-          isForgotSubmit: false
+          isForgotSubmit: false,
         }
-      }
+      };
     },
     reset(state, action) {
       return {
         ...state, ...{
-          isResetSubmit: true
+          isResetSubmit: true,
         }
-      }
+      };
     },
     resetSuccess(state, action) {
       return {
         ...state, ...{
-          isResetSubmit: false
+          isResetSubmit: false,
         }
-      }
+      };
     },
     resetFail(state, action) {
       return {
         ...state, ...{
-          isResetSubmit: false
+          isResetSubmit: false,
         }
-      }
+      };
     },
   },
   effects: {
     *activate({ payload }, { call, put }) {
-      const { data } = yield call(activate, payload)
-    },
-    *checkEmail({ payload }, { call, put }) {
-      const { data } = yield call(checkUserExists, payload)
+      const { data } = yield call(activate, payload);
 
-      if(data) {
-        yield put({ type: 'check', payload: { isEmailExists: true , checkEmail: 'warning'}})
+      if (data) {
+        yield put({ type: 'check', payload: { activateState: false } });
+      }
+    },
+
+
+    *checkEmail({ payload }, { call, put }) {
+      const { data } = yield call(checkUserExists, payload);
+
+      if (data) {
+        yield put({ type: 'check', payload: { isEmailExists: true, checkEmail: 'warning' } });
       } else {
-        yield put({ type: 'check', payload: { isEmailExists: false , checkEmail: 'success'}})
+        yield put({ type: 'check', payload: { isEmailExists: false, checkEmail: 'success' } });
       }
     },
     *checkUsername({ payload }, { call, put }) {
-      const { data } = yield call(checkUserExists, payload)
+      const { data } = yield call(checkUserExists, payload);
 
-      if(data) {
-        yield put({ type: 'check', payload: { isUserNameExists: true , checkUsername: 'warning'}})
+      if (data) {
+        yield put({ type: 'check', payload: { isUserNameExists: true, checkUsername: 'warning' } });
       } else {
-        yield put({ type: 'check', payload: { isUserNameExists: false , checkUsername: 'success'}})
+        yield put({ type: 'check', payload: { isUserNameExists: false, checkUsername: 'success' } });
       }
     },
     *login({ payload }, { call, put }) {
-        const {data} = yield call(login, payload)
-        
-        if(data){
-          yield put({ type: 'loginSuccess' })   
-          yield put({ type: 'user/loginSuccess', payload: { data } })
-          message.info("登录成功")
-        } else {
-          yield put({ type: 'loginFail' })
-          message.error("登陆失败")
-        }
+      const { data } = yield call(login, payload);
+
+      if (data) {
+        yield put({ type: 'loginSuccess' });
+        yield put({ type: 'user/loginSuccess', payload: { data } });
+        message.info('登录成功');
+      } else {
+        yield put({ type: 'loginFail' });
+        message.error('登陆失败');
+      }
     },
     *forgot({ payload }, { call, put }) {
-        const { data } = yield call(forgot, payload)
-      
-        if(data){
-          yield put({ type: 'forgotSuccess' })
-          message.info("已发送密码重置邮件")
-        }else {
-          yield put({ type: 'forgotFail' })
-          message.error("密码重置邮件发送失败")      
-        }
+      const { data } = yield call(forgot, payload);
+
+      if (data) {
+        yield put({ type: 'forgotSuccess' });
+        message.info('已发送密码重置邮件');
+      } else {
+        yield put({ type: 'forgotFail' });
+        message.error('密码重置邮件发送失败');
+      }
     },
     *register({ payload }, { call, put }) {
-        const {data} = yield call(register, payload)
+      const { data } = yield call(register, payload);
 
-        if(data) {
-          yield put({ type: 'registerSuccess'})
-          message.info("注册成功")
-        } else {
-          yield put({ type: 'registerFail' })
-          message.error("注册失败")
-        }
+      if (data) {
+        yield put({ type: 'registerSuccess' });
+        message.info('注册成功');
+      } else {
+        yield put({ type: 'registerFail' });
+        message.error('注册失败');
+      }
     },
     *reset({ payload }, { call, put }) {
-        const { data } = yield call(reset, payload)
-      
-        if(data){
-          yield put({ type: 'resetSuccess' })
-          message.info("重置成功")
-        }else{
-          yield put({ type: 'resetFail' })
-          message.error("重置失败")          
-        }
+      const { data } = yield call(reset, payload);
+
+      if (data) {
+        yield put({ type: 'resetSuccess' });
+        message.info('重置成功');
+      } else {
+        yield put({ type: 'resetFail' });
+        message.error('重置失败');
+      }
     },
   },
   subscriptions: {},

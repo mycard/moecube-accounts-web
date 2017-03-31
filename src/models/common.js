@@ -1,11 +1,7 @@
-
 export default {
   namespace: 'common',
-  state: {
-    
-  },
-  reducers: {
-  },
+  state: {},
+  reducers: {},
   effects: {},
   subscriptions: {},
 };

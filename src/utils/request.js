@@ -23,16 +23,16 @@ function checkStatus(response) {
  * @return {object}           An object containing either "data" or "err"
  */
 export default function request(url, options) {
-  url = `${config.apiRoot}${url}`
-  if(options && !options.headers && (options.method == 'POST' || options.method == 'PATCH')) {
+  url = `${config.apiRoot}${url}`;
+  if (options && !options.headers && (options.method == 'POST' || options.method == 'PATCH')) {
     options.headers = {
-      "content-type": "application/json"
-    }
+      'content-type': 'application/json',
+    };
   }
-  console.log(options)
+  console.log(options);
   return fetch(url, options)
     .then(checkStatus)
     .then(parseJSON)
     .then(data => ({ data }))
     .catch(err => ({ err }));
-}
+};
