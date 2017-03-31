@@ -1,4 +1,5 @@
 import { Redirect, Route, Router } from 'dva/router';
+import QueueAnim from 'rc-queue-anim'
 import React from 'react';
 
 import Active from './routes/Activate.js';
@@ -13,18 +14,21 @@ import Register from './routes/Register.js';
 
 import Reset from './routes/Reset.js';
 
+import Verify from "./routes/Verify.js";
+
 function RouterConfig({ history }) {
   return (
     <Router history={history}>
-      <Redirect from="/" to="/login"/>
+      <Redirect from="/" to="/signin"/>
       <Route path="/">
-        <Route path="/login" component={Login}/>
+        <Route path="/signin" component={Login}/>
         <Route path="/forgot" component={Forgot}/>
         <Route path="/register" component={Register}/>
         <Route path="/reset" component={Reset}/>
         <Route path="/profiles" component={Profiles}/>
       </Route>
       <Route path="/activate" component={Active}/>
+      <Route path="/verify" component={Verify} />
     </Router>
   );
 }

@@ -1,4 +1,4 @@
-import { Button, Form, Icon, Input, Select, Spin } from 'antd';
+import { Button, Form, Icon, Input, Select, Spin, Steps } from 'antd';
 import { connect } from 'dva';
 import { Link } from 'dva/router';
 import React, { PropTypes } from 'react';
@@ -6,6 +6,7 @@ import { FormattedMessage as Format } from 'react-intl';
 
 const FormItem = Form.Item;
 const Option = Select.Option;
+const Step = Steps.Step
 
 
 const formItemLayout = {
@@ -44,12 +45,17 @@ class Login extends React.Component {
     const { getFieldDecorator, dispatch } = this.props.form;
     const { isForgotSubmit = false } = this.props;
     const { intl: { messages } } = this.context;
-
     return (
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
-        <Spin spinning={isForgotSubmit} delay={500}>
+        <Spin spinning={loading} delay={100}>
           <Form onSubmit={this.onSubmitLogin} className="login-form">
-            <FormItem>
+
+            <Steps size="large" current={0}>
+              <Step title="Sent Email" icon={<Icon type="solution" />} />
+              <Step title="Verify Email" icon={<Icon type="mail" />} />
+            </Steps>
+
+            <FormItem style={{ marginTop: '28px'}}>
               {getFieldDecorator('email', {
                 rules: [{ required: true, message: 'Please input your username or email!' }],
               })(
@@ -68,11 +74,15 @@ class Login extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state, props) {
   const {
     auth: { isForgotSubmit },
   } = state;
+
+  const loading = state.loading.global || false
+
   return {
+    loading,
     isForgotSubmit,
   };
 }

@@ -12,10 +12,10 @@ class Active extends React.Component {
   };
 
   render() {
-    const { activateState } = this.props;
+    const { loading } = this.props;
     return (
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100%' }}>
-        <Button type="primary" icon="poweroff" loading={activateState} onClick={this.handleClick}>
+        <Button type="primary" icon="poweroff" loading={loading} onClick={this.handleClick}>
           <Format id={'verify email'} />
         </Button>
       </div>
@@ -25,10 +25,12 @@ class Active extends React.Component {
 
 function mapStateToProps(state) {
   const {
-    auth: { activateState },
   } = state;
+
+  const loading = state.loading.global || false
+
   return {
-    activateState,
+    loading,
   };
 }
 

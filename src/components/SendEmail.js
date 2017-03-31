@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './EmailForm.css';
-import {connect} from 'react-redux'
-import { Form, Input, Icon, Button } from 'antd'
+import { connect } from 'react-redux'
+import { Form, Input, Icon, Button, Modal } from 'antd'
 const FormItem = Form.Item;
 import SubmitButton from './SubmitButton'
 
@@ -14,25 +14,25 @@ const formItemLayout = {
 class EmailForm extends React.Component {
 
   onSubmit = (e) => {
-    const { form, dispatch, data: {id} } = this.props
+    const { form, dispatch, data: { id } } = this.props
 
     e && e.preventDefault();
     form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
-        
+
         const { email, password } = values
 
-        dispatch({type: "user/updateEmail", payload: { email, password, user_id: id }})
+        dispatch({ type: "user/updateEmail", payload: { email, password, user_id: id } })
       }
     });
   }
 
-  render(){
+  render() {
 
-    const {form, dispatch, data, checkEmail, isEmailExists} = this.props
-    const {getFieldDecorator} = form
-    const {id, email} = data
+    const { form, dispatch, data, checkEmail, isEmailExists, isSendEmailActive } = this.props
+    const { getFieldDecorator } = form;
+    const { id, email } = data;
 
     const emailProps = {
       fromItem: {
@@ -43,7 +43,7 @@ class EmailForm extends React.Component {
         ...formItemLayout
       },
       decorator: {
-        initialValue: email                        
+        initialValue: email
       },
       input: {
         placeholder: "email"
@@ -52,7 +52,7 @@ class EmailForm extends React.Component {
 
     const passwordProps = {
       fromItem: {
-        label: "passwrod",        
+        label: "passwrod",
         ...formItemLayout
       },
       decorator: {
@@ -65,20 +65,14 @@ class EmailForm extends React.Component {
         type: 'password'
       }
     }
-    
+
     return (
       <Form onSubmit={this.onSubmit}>
         <FormItem {...emailProps.fromItem}>
-          {getFieldDecorator(`email`, {...emailProps.decorator})(
-            <Input 
-              {...emailProps.input} 
-              onBlur = {() => dispatch({type: 'auth/checkEmail', payload: { ...form.getFieldsValue(), id} })}/>
-          )}
-        </FormItem>
-
-        <FormItem {...passwordProps.fromItem}>
-          {getFieldDecorator(`password`, {...passwordProps.decorator})(
-            <Input {...passwordProps.input} />
+          {getFieldDecorator('email', { ...emailProps.decorator })(
+            <Input
+              {...emailProps.input}
+              onBlur={() => dispatch({ type: 'auth/checkEmail', payload: { ...form.getFieldsValue(), id } })} />
           )}
         </FormItem>
 
@@ -94,13 +88,14 @@ class EmailForm extends React.Component {
 
 function mapStateToProps(state, props) {
   const {
-    user: {data},
-    auth: {isEmailExists, checkEmail}
+    user: { data },
+    auth: { isEmailExists, checkEmail, isSendEmailActive }
   } = state
   return {
     data,
     checkEmail,
-    isEmailExists
+    isEmailExists,
+    isSendEmailActive
   };
 }
 

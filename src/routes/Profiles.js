@@ -30,7 +30,7 @@ class Profiles extends React.Component {
       if (!err) {
         console.log('Received values of form: ', values);
 
-        const { username, nickname, password } = values;
+        const { username, name, password } = values;
 
         dispatch({type: "user/updateProfile", payload: { username, name, password, user_id: id }})
       }
@@ -38,7 +38,7 @@ class Profiles extends React.Component {
   };
 
   render() {
-    const { dispatch, form, data, isUpdateSubmit=false, checkUsername, isUserNameExists } = this.props;
+    const { dispatch, form, data, isUpdateSubmit=false, checkUsername, isUserNameExists, loading } = this.props
     const { getFieldDecorator } = form;
     const { username, name, id } = data;
     const { intl: {messages} } = this.context;
@@ -57,7 +57,7 @@ class Profiles extends React.Component {
     }
 
     return (
-      <Spin spinning={isUpdateSubmit} delay={500}>
+      <Spin spinning={loading} delay={100}>
         <Tabs defaultActiveKey="1" className="app-detail-nav">
           <TabPane tab={<span><Icon type="setting" /><Format id={'user-info'} /> </span>} key="1">
             <Form onSubmit={this.onUpdateSubmit}>
@@ -102,10 +102,14 @@ class Profiles extends React.Component {
 function mapStateToProps(state) {
   const {
     user: { data, isUpdateSubmit },
-    auth: { checkUsername, isEmailExists, isUserNameExists, },
+    auth: { checkUsername, isEmailExists, isUserNameExists },
   } = state;
+
+  const loading = state.loading.global || false
+
   return {
     data,
+    loading,
     checkUsername,
     isEmailExists,
     isUserNameExists,
