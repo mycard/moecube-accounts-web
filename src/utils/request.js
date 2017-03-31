@@ -5,12 +5,19 @@ function parseJSON(response) {
   return response.json();
 }
 
-function checkStatus(response) {
+async function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
     return response;
   }
 
-  const error = new Error(response.statusText);
+  let message 
+  try {
+    message = (await response.json())["message"]
+  } catch (error) {
+    message = response.statusText
+  }
+
+  const error = new Error(message);
   error.response = response;
   throw error;
 }
@@ -23,16 +30,16 @@ function checkStatus(response) {
  * @return {object}           An object containing either "data" or "err"
  */
 export default function request(url, options) {
-  url = `${config.apiRoot}${url}`;
-  if (options && !options.headers && (options.method == 'POST' || options.method == 'PATCH')) {
+  url = `${config.apiRoot}${url}`
+  if(options && !options.headers && (options.method == 'POST' || options.method == 'PATCH')) {
     options.headers = {
-      'content-type': 'application/json',
-    };
+      "content-type": "application/json"
+    }
   }
-  console.log(options);
+  console.log(options)
   return fetch(url, options)
     .then(checkStatus)
     .then(parseJSON)
     .then(data => ({ data }))
-    .catch(err => ({ err }));
-};
+    // .catch(err => ({ err }));
+}

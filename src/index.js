@@ -1,16 +1,18 @@
 import dva from 'dva';
-import { browserHistory } from 'dva/router';
 import ReactDOM from 'react-dom';
-import { addLocaleData, IntlProvider } from 'react-intl';
-import en from 'react-intl/locale-data/en';
-import zh from 'react-intl/locale-data/zh';
-import localeData from '../i18n.json';
+import { browserHistory } from 'dva/router'
+import { message } from 'antd'
 import './index.css';
 
+import { IntlProvider, addLocaleData } from 'react-intl';
 
 // 1. Initialize
 const app = dva({
-  history: browserHistory,
+    onError: (error, dispatch) => {
+      message.destroy();
+      message.error(error.message);
+    },
+    history: browserHistory
 });
 
 
@@ -35,6 +37,9 @@ app.model(require('./models/common'));
 app.router(require('./router'));
 
 // 5. Start
+import en from 'react-intl/locale-data/en'
+import zh from 'react-intl/locale-data/zh'
+import localeData from '../i18n.json'
 
 
 addLocaleData([...en, ...zh]);
