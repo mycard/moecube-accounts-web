@@ -2,14 +2,14 @@ import { message } from 'antd';
 import dva from 'dva';
 import { browserHistory } from 'dva/router';
 import ReactDOM from 'react-dom';
-import createLoading from 'dva-loading'
+import createLoading from 'dva-loading';
 import { addLocaleData, IntlProvider } from 'react-intl';
 import en from 'react-intl/locale-data/en';
 import zh from 'react-intl/locale-data/zh';
 import localeData from '../i18n.json';
 import './index.less';
 
-import { IntlProvider, addLocaleData } from 'react-intl';
+
 
 // 1. Initialize
 const app = dva({
