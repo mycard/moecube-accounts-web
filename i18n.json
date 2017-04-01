@@ -68,12 +68,16 @@
     "Please input your account!":"Please input your email or username!",
     "Please input your Password!":"Please input your Password!",
 
-    "verify email":"verify email",
+    "verify-email":"verify email",
     "account-info":"Account Info",
     "reset-username":"Reset Username",
     "reset-email":"Reset Email",
-    "reset-password":"Reset Password"
+    "reset-password":"Reset Password",
+    "old-password":"old password",
+    "new-password":"new password",
+    "Password length must be between 8 and 24 characters":"Password length must be between 8 and 24 characters",
 
+    "没毛用":"防逗号报错,上线删"
   },
   "zh": {
     "language": "english",
@@ -84,7 +88,7 @@
     "user-info": "用户信息",
     "reset-info": "修改信息",
     "avatar": "头像",
-    "nickname": "昵称[选填]",
+    "nickname": "昵称",
     "reset-account-info": "修改账户信息",
     "current_password": "原密码",
     "password-again": "再次输入密码",
@@ -144,13 +148,17 @@
     "Please input your account!":"请填写你的邮箱或用户名!",
     "Please input your Password!":"请填写你的密码!",
 
-    "verify email":"验证邮箱",
+    "verify-email":"验证邮箱",
     "account-info":"账户信息",
     "reset-username":"修改用户名",
     "reset-email":"修改邮箱",
     "reset-password":"修改密码",
+    "old-password":"原密码",
+    "new-password":"新密码",
+    "Password length must be between 8 and 24 characters":"密码必须为8-24位",
 
 
-    "密码至少为8-24位":"密码至少为8-24位"
+    "密码至少为8-24位":"密码至少为8-24位",
+    "没毛用":"防逗号报错,上线删"
   }
 }

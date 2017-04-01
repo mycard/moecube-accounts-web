@@ -45,14 +45,14 @@ class Profiles extends React.Component {
 
     const nameProps = {
       fromItem: {
-        label: 'name',
+        label: messages['nickname'],
         ...formItemLayout
       },
       decorator: {
         initialValue: name
       },
       input: {
-        placeholder: 'name',
+        placeholder: messages['nickname'],
       }
     }
 

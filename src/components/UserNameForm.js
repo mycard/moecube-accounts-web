@@ -1,5 +1,5 @@
 import { Form, Input } from 'antd';
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import SubmitButton from './SubmitButton';
 const FormItem = Form.Item;
@@ -12,6 +12,9 @@ const formItemLayout = {
 
 class EmailForm extends React.Component {
 
+  static contextTypes = {
+    intl: PropTypes.object.isRequired,
+  }
   onSubmit = (e) => {
     const { form, dispatch, data: { id } } = this.props;
 
@@ -32,10 +35,11 @@ class EmailForm extends React.Component {
     const { form, dispatch, data, checkUsername, isUserNameExists } = this.props;
     const { getFieldDecorator } = form;
     const { id, username } = data;
+    const { intl: {messages} } = this.context;
 
     const usernameProps = {
       fromItem: {
-        label: 'username',
+        label: messages.username,
         hasFeedback: true,
         validateStatus: checkUsername,
         help: isUserNameExists ? 'username exists' : '',
@@ -45,23 +49,23 @@ class EmailForm extends React.Component {
         initialValue: username,
       },
       input: {
-        placeholder: 'username',
+        placeholder: messages.username,
         onBlur: () => dispatch({ type: 'auth/checkUsername', payload: { ...form.getFieldsValue(), user_id: id } }),
       },
     };
 
     const passwordProps = {
       fromItem: {
-        label: 'passwrod',
+        label: messages.password,
         ...formItemLayout
       },
       decorator: {
         rules: [
-          { required: true, message: '密码至少为8-24位', pattern: /^.{8,24}$/ },
+          { required: true, message: messages['Password length must be between 8 and 24 characters'], pattern: /^.{8,24}$/ },
         ],
       },
       input: {
-        placeholder: 'password',
+        placeholder: messages.password,
         type: 'password',
       },
     };

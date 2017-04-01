@@ -53,15 +53,15 @@ class Login extends React.Component {
               )}
             </FormItem>
             <FormItem>
-              
+
               <Button type="primary" htmlType="submit" className="login-form-button">
                 <Format id={'sign-in'} />
               </Button>
             </FormItem>
-            <Form>
+            <div>
               <Link to="/signup"><Format id={'sign-up'} /></Link>
               <Link to="/forgot" className="login-form-forgot"><Format id={'forgot-password'} /></Link>
-            </Form>
+            </div>
           </Form>
         </Spin>
       </div>

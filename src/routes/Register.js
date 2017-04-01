@@ -78,15 +78,15 @@ class Register extends React.Component {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
-        
+
         <Spin spinning={loading} delay={100}>
           <Steps size="large" current={0}>
-            <Step title="register" icon={<Icon type="solution" />} />
-            <Step title="verify Email" icon={<Icon type="mail" />} />
+            <Step title={messages['sign-up']} icon={<Icon type="solution" />} />
+            <Step title={messages['verify-email']} icon={<Icon type="mail" />} />
           </Steps>
 
           <Form onSubmit={this.onSubmitLogin} className="login-form" style={{ marginTop: '24px'}}>
-            <FormItem {...emailProps}  >
+            <FormItem  {...emailProps} >
               {getFieldDecorator('email', {
                 rules: [{
                   required: true,
@@ -118,7 +118,7 @@ class Register extends React.Component {
 
             <FormItem hasFeedback>
               {getFieldDecorator('password', {
-                rules: [{ required: true, message: '密码至少为8-24位', pattern: /^.{8,24}$/ }],
+                rules: [{ required: true, message: messages['Password length must be between 8 and 24 characters'], pattern: /^.{8,24}$/ }],
               }, {
                 validator: this.checkConfirm,
               })(
@@ -132,7 +132,7 @@ class Register extends React.Component {
             <FormItem hasFeedback>
               {getFieldDecorator('confirm', {
                 rules: [{
-                  required: true, message: '密码至少为8-24位', pattern: /^.{8,24}$/,
+                  required: true, message: messages['Password length must be between 8 and 24 characters'], pattern: /^.{8,24}$/,
                 }, {
                   validator: this.checkPassword,
                 }],
@@ -148,9 +148,9 @@ class Register extends React.Component {
             <Button type="primary" htmlType="submit" className="login-form-button">
               <Format id={'sign-up'} />
             </Button>
-            <FormItem>
+            <div>
               <Link to="/signin"><Format id={'sign-in'} /></Link>
-            </FormItem>
+            </div>
           </Form>
         </Spin>
       </div>

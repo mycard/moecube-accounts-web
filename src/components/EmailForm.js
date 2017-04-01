@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import styles from './EmailForm.css';
 import {connect} from 'react-redux'
 import { Form, Input, Icon, Button } from 'antd'
@@ -13,6 +13,9 @@ const formItemLayout = {
 
 class EmailForm extends React.Component {
 
+  static contextTypes = {
+    intl: PropTypes.object.isRequired,
+  }
   onSubmit = (e) => {
     const { form, dispatch, data: {id} } = this.props
 
@@ -20,7 +23,7 @@ class EmailForm extends React.Component {
     form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
-        
+
         const { email, password } = values
 
         dispatch({type: "user/updateEmail", payload: { email, password, user_id: id }})
@@ -32,47 +35,48 @@ class EmailForm extends React.Component {
 
     const {form, dispatch, data, checkEmail, isEmailExists} = this.props
     const {getFieldDecorator} = form
-    const {id, email} = data
+    const {id, email} = data;
+    const { intl: {messages} } = this.context;
 
 
     const emailProps = {
       fromItem: {
-        label: "email",
+        label: messages.email,
         hasFeedback: true,
         validateStatus: checkEmail,
         help: isEmailExists ? 'email exists' : '',
         ...formItemLayout
       },
       decorator: {
-        initialValue: email                        
+        initialValue: email
       },
       input: {
-        placeholder: "email"
+        placeholder: messages.email
       }
     }
 
     const passwordProps = {
       fromItem: {
-        label: "passwrod",        
+        label: messages.password,
         ...formItemLayout
       },
       decorator: {
         rules: [
-          { required: true, message: '密码至少为8-24位', pattern: /^.{8,24}$/ }
+          { required: true, message: messages['Password length must be between 8 and 24 characters'], pattern: /^.{8,24}$/ }
         ]
       },
       input: {
-        placeholder: "password",
+        placeholder: messages.password,
         type: 'password'
       }
     }
-    
+
     return (
       <Form onSubmit={this.onSubmit}>
         <FormItem {...emailProps.fromItem}>
           {getFieldDecorator(`email`, {...emailProps.decorator})(
-            <Input 
-              {...emailProps.input} 
+            <Input
+              {...emailProps.input}
               onBlur = {() => dispatch({type: 'auth/checkEmail', payload: { ...form.getFieldsValue(), id} })}/>
           )}
         </FormItem>
