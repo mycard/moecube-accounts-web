@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import styles from './EmailForm.css';
 import {connect} from 'react-redux'
-import { Form, Input, Icon, Button } from 'antd'
+import { Form, Input, Icon, Button } from 'antd';
+
+import SubmitButton from './SubmitButton';
+
 const FormItem = Form.Item;
-import SubmitButton from './SubmitButton'
+
 
 const formItemLayout = {
   labelCol: { span: 4 },
@@ -13,6 +16,9 @@ const formItemLayout = {
 
 class EmailForm extends React.Component {
 
+  static contextTypes = {
+    intl: PropTypes.object.isRequired,
+  }
   checkPassword = (rule, value, callback) => {
     const form = this.props.form;
     if (value && value !== form.getFieldValue('new_password')) {
@@ -37,7 +43,7 @@ class EmailForm extends React.Component {
     form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
-        
+
         const { new_password, password } = values
 
         dispatch({type: "user/updateAccount", payload: { new_password, password, user_id: id }})
@@ -48,53 +54,58 @@ class EmailForm extends React.Component {
   render(){
 
     const {form } = this.props
-    const {getFieldDecorator} = form
+    const {getFieldDecorator} = form;
+    const { intl: { messages } } = this.context
 
     const passwordProps = {
       fromItem: {
-        label: "passwrod",        
+        label: 'old passwrod',
         ...formItemLayout
       },
       decorator: {
         rules: [
-          { required: true, message: '密码至少为8-24位', pattern: /^.{8,24}$/ },
+          { required: true, message: messages['Password length must be between 8 and 24 characters'], pattern: /^.{8,24}$/ },
           { validator: this.checkConfirm }
-        ]
+        ],
       },
       input: {
-        placeholder: "password",
+        placeholder: messages['old-password'],
+        type: 'password'
+      },
+      input2: {
+        placeholder: messages['new-password'],
         type: 'password'
       }
     }
 
     const confirmProps = {
       fromItem: {
-        label: "comfirm",        
+        label: messages['password-again'],
         ...formItemLayout
       },
       decorator: {
         rules: [
-          { required: true, message: '密码至少为8-24位', pattern: /^.{8,24}$/}, 
+          { required: true, message: messages['Password length must be between 8 and 24 characters'], pattern: /^.{8,24}$/},
           { validator: this.checkPassword}
-        ]
+        ],
       },
       input: {
-        placeholder: "confirm",
+        placeholder: messages['password-again'],
         type: 'password'
       }
     }
-    
+
     return (
-      <Form onSubmit={this.onSubmit}>          
-        <FormItem {...passwordProps.fromItem} label="old password">
-          {getFieldDecorator(`password`, {...passwordProps.decorator})(
+      <Form onSubmit={this.onSubmit}>
+        <FormItem {...passwordProps.fromItem} label={messages['old-password']}>
+          {getFieldDecorator('password')(
             <Input {...passwordProps.input} />
           )}
         </FormItem>
 
-        <FormItem {...passwordProps.fromItem} label="new password">
-          {getFieldDecorator(`new_password`, {...passwordProps.decorator})(
-            <Input {...passwordProps.input} />
+        <FormItem {...passwordProps.fromItem} label={messages['new-password']}>
+          {getFieldDecorator('new_password', {...passwordProps.decorator})(
+            <Input {...passwordProps.input2} />
           )}
         </FormItem>
 

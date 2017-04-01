@@ -1,12 +1,17 @@
 import { Button, Form, Icon, Input, Select, Spin } from 'antd';
 import { connect } from 'dva';
+import React, { PropTypes } from 'react';
 import { FormattedMessage as Format } from 'react-intl';
-import React from 'react';
+
 const FormItem = Form.Item;
 const Option = Select.Option;
 
 
 class Reset extends React.Component {
+
+  static contextTypes = {
+    intl: PropTypes.object.isRequired,
+  };
 
   onSubmitReset = (e) => {
     const { form, dispatch, location: { query: { key, user_id } } } = this.props;
@@ -43,35 +48,40 @@ class Reset extends React.Component {
   render() {
     const { getFieldDecorator } = this.props.form;
     const { isResetSubmit = false } = this.props;
+    const { intl: { messages } } = this.context;
+
     return (
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
         <Spin spinning={isResetSubmit} delay={100}>
           <Form onSubmit={this.onSubmitReset} className="login-form">
-
+            <FormItem>
+              <h1><Format id='reset-password'/></h1>
+            </FormItem>
             <FormItem>
               {getFieldDecorator('password', {
-                rules: [{ required: true, message: 'Please input your Password!' }],
+                rules: [{ required: true, message: messages['Password can not be blank'] }],
               }, {
                 validator: this.checkConfirm,
               })(
-                <Input prefix={<Icon type="lock" style={{ fontSize: 13 }}/>} type="password" placeholder="Password"/>,
+                <Input prefix={<Icon type="lock" style={{ fontSize: 13 }}/>} type="password"
+                       placeholder={messages.password}/>,
               )}
             </FormItem>
 
             <FormItem>
               {getFieldDecorator('confirm', {
                 rules: [{
-                  required: true, message: 'Please confirm your password!',
+                  required: true, message: messages['Incorrect password.2'],
                 }, {
                   validator: this.checkPassword,
                 }],
               })(
-                <Input type="password" onBlur={this.handleConfirmBlur} placeholder="Password Again"/>,
+                <Input type="password" onBlur={this.handleConfirmBlur} placeholder={messages['password-again']}/>,
               )}
             </FormItem>
 
             <Button type="primary" htmlType="submit" className="login-form-button">
-              Submit
+              <Format id='reset-password'/>
             </Button>
           </Form>
         </Spin>

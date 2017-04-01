@@ -16,7 +16,7 @@ class Active extends React.Component {
     return (
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100%' }}>
         <Button type="primary" icon="poweroff" loading={loading} onClick={this.handleClick}>
-          <Format id={'verify email'} />
+          <Format id={'verify-email'} />
         </Button>
       </div>
     );

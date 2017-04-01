@@ -51,8 +51,8 @@ class Login extends React.Component {
           <Form onSubmit={this.onSubmitLogin} className="login-form">
 
             <Steps size="large" current={0}>
-              <Step title="Sent Email" icon={<Icon type="solution" />} />
-              <Step title="Verify Email" icon={<Icon type="mail" />} />
+              <Step title={messages['send-email']} icon={<Icon type="solution" />} />
+              <Step title={messages['verify-email']} icon={<Icon type="mail" />} />
             </Steps>
 
             <FormItem style={{ marginTop: '28px'}}>
@@ -62,13 +62,12 @@ class Login extends React.Component {
                 <Input prefix={<Icon type="user" style={{ fontSize: 13 }}/>} placeholder={messages['email-address-or-username']} />,
               )}
             </FormItem>
-
             <Button type="primary" htmlType="submit" className="login-form-button">
               <Format id={'send-email'} />
             </Button>
-            <FormItem>
-              <Link to="/signin"><Format id={'sign-in'} /></Link>                       
-            </FormItem>
+            <div>
+              <Link to="/signin"><Format id={'sign-in'} /></Link>
+            </div>
           </Form>
         </Spin>
       </div>
