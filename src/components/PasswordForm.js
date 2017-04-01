@@ -66,7 +66,7 @@ class EmailForm extends React.Component {
         rules: [
           { required: true, message: messages['Password length must be between 8 and 24 characters'], pattern: /^.{8,24}$/ },
           { validator: this.checkConfirm }
-        ]
+        ],
       },
       input: {
         placeholder: messages['old-password'],
@@ -87,7 +87,7 @@ class EmailForm extends React.Component {
         rules: [
           { required: true, message: messages['Password length must be between 8 and 24 characters'], pattern: /^.{8,24}$/},
           { validator: this.checkPassword}
-        ]
+        ],
       },
       input: {
         placeholder: messages['password-again'],
@@ -98,13 +98,13 @@ class EmailForm extends React.Component {
     return (
       <Form onSubmit={this.onSubmit}>
         <FormItem {...passwordProps.fromItem} label={messages['old-password']}>
-          {getFieldDecorator(`password`, {...passwordProps.decorator})(
+          {getFieldDecorator('password')(
             <Input {...passwordProps.input} />
           )}
         </FormItem>
 
         <FormItem {...passwordProps.fromItem} label={messages['new-password']}>
-          {getFieldDecorator(`new_password`, {...passwordProps.decorator})(
+          {getFieldDecorator('new_password', {...passwordProps.decorator})(
             <Input {...passwordProps.input2} />
           )}
         </FormItem>

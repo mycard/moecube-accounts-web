@@ -2,8 +2,8 @@ import { Form, Input } from 'antd';
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import SubmitButton from './SubmitButton';
-const FormItem = Form.Item;
 
+const FormItem = Form.Item;
 const formItemLayout = {
   labelCol: { span: 4 },
   wrapperCol: { span: 15 },
@@ -35,7 +35,7 @@ class EmailForm extends React.Component {
     const { form, dispatch, data, checkUsername, isUserNameExists } = this.props;
     const { getFieldDecorator } = form;
     const { id, username } = data;
-    const { intl: {messages} } = this.context;
+    const { intl: { messages } } = this.context;
 
     const usernameProps = {
       fromItem: {
@@ -73,13 +73,13 @@ class EmailForm extends React.Component {
     return (
       <Form onSubmit={this.onSubmit}>
         <FormItem {...usernameProps.fromItem}>
-          {getFieldDecorator(`username`, { ...usernameProps.decorator })(
+          {getFieldDecorator('username', { ...usernameProps.decorator })(
             <Input {...usernameProps.input}/>,
           )}
         </FormItem>
 
         <FormItem {...passwordProps.fromItem}>
-          {getFieldDecorator(`password`, { ...passwordProps.decorator })(
+          {getFieldDecorator('password')(
             <Input {...passwordProps.input} />,
           )}
         </FormItem>

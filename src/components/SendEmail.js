@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react';
 import styles from './EmailForm.css';
 import { connect } from 'react-redux'
-import { Form, Input, Icon, Button, Modal } from 'antd'
+import { Form, Input, Icon, Button, Modal } from 'antd';
 const FormItem = Form.Item;
-import SubmitButton from './SubmitButton'
+import SubmitButton from './SubmitButton';
 
 const formItemLayout = {
   labelCol: { span: 4 },

@@ -82,7 +82,7 @@ class EmailForm extends React.Component {
         </FormItem>
 
         <FormItem {...passwordProps.fromItem}>
-          {getFieldDecorator(`password`, {...passwordProps.decorator})(
+          {getFieldDecorator('password')(
             <Input {...passwordProps.input} />
           )}
         </FormItem>

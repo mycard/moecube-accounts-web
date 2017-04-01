@@ -48,7 +48,6 @@
     "You can use this E-mail address.": "You can use this E-mail address.",
     "This user name has been token.": "This user name has been token.",
     "You can use this user name.": "You can use this user name.",
-    "Password is not correct.": "Password is not correct.",
     "User does not exisit.": "User does not exisit.",
     "Incorrect password.": "Incorrect password.",
     "Please check your registration info again.": "Please check your registration info again.",
@@ -128,7 +127,6 @@
     "You can use this E-mail address.": "邮箱可以使用",
     "This user name has been token.": "该用户名已被注册",
     "You can use this user name.": "用户名可以使用",
-    "Password is not correct.": "密码不一致",
     "User does not exisit.": "用户不存在",
     "Incorrect password.": "密码不正确",
     "Please check your registration info again.": "请填写正确的注册信息。",
@@ -156,6 +154,7 @@
     "old-password":"原密码",
     "new-password":"新密码",
     "Password length must be between 8 and 24 characters":"密码必须为8-24位",
+    "Please confirm your password":"",
 
 
     "密码至少为8-24位":"密码至少为8-24位",

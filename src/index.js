@@ -49,12 +49,11 @@ app.router(require('./router'));
 
 addLocaleData([...en, ...zh]);
 /*eslint-disable */
-let language = navigator.language || (navigator.languages && navigator.languages[0]) || navigator.userLanguage;
+let language =localStorage.getItem('locale') || navigator.language || (navigator.languages && navigator.languages[0]) || navigator.userLanguage;
 /*eslint-enable */
-if(localStorage.getItem('locale')){
-  language = localStorage.getItem('locale');
-}
+
 const languageWithoutRegionCode = language.toLowerCase().split(/[_-]+/)[0];
+language = (localeData[languageWithoutRegionCode] || localeData[language]) ? language : 'zh-CN';
 const messages = localeData[languageWithoutRegionCode] || localeData[language] || localeData.zh;
 
 const App = app.start();
@@ -65,5 +64,3 @@ ReactDOM.render(
   document.getElementById('root'),
 );
 
-
-console.log(language);
