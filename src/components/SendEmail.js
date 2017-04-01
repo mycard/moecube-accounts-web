@@ -14,7 +14,7 @@ const formItemLayout = {
 class EmailForm extends React.Component {
 
   onSubmit = (e) => {
-    const { form, dispatch, data: { id } } = this.props
+    const { form, dispatch, user: { id } } = this.props
 
     e && e.preventDefault();
     form.validateFieldsAndScroll((err, values) => {
@@ -30,9 +30,9 @@ class EmailForm extends React.Component {
 
   render() {
 
-    const { form, dispatch, data, checkEmail, isEmailExists, isSendEmailActive } = this.props
+    const { form, dispatch, user, checkEmail, isEmailExists, isSendEmailActive } = this.props
     const { getFieldDecorator } = form;
-    const { id, email } = data;
+    const { id, email } = user;
 
     const emailProps = {
       fromItem: {
@@ -88,11 +88,11 @@ class EmailForm extends React.Component {
 
 function mapStateToProps(state, props) {
   const {
-    user: { data },
+    user: { user },
     auth: { isEmailExists, checkEmail, isSendEmailActive }
   } = state
   return {
-    data,
+    user,
     checkEmail,
     isEmailExists,
     isSendEmailActive

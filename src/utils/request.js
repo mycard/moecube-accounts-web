@@ -31,7 +31,7 @@ async function checkStatus(response) {
  */
 export default function request(url, options) {
   url = `${config.apiRoot}${url}`
-  if(options && !options.headers && (options.method == 'POST' || options.method == 'PATCH')) {
+  if(options && !options.headers) {
     options.headers = {
       "content-type": "application/json"
     }

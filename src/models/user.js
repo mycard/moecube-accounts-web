@@ -1,12 +1,15 @@
 import { routerRedux } from 'dva/router'
 import { updateProfile, updateAccount } from '../services/user'
+import { getAuthUser } from '../services/auth'
 import { message } from 'antd'
+
 
 
 export default {
   namespace: 'user',
   state: {
-    data: {},
+    token: "",
+    user: {},
     isUpdateSubmit: false
   },
   reducers: {
@@ -17,7 +20,7 @@ export default {
     },
     loginSuccess(state, action) {
       return {
-        ...state, ...action.payload
+        ...state, ...action.payload.data
       }
     },
     updateProfile(state, action) {
@@ -62,55 +65,78 @@ export default {
         }
       }
     },
+    storeToken(state, action) {
+      return {
+        ...state, ...action.payload
+      }
+    },
+    preLoginSuccess(state, action) {
+      return {
+        ...state, ...action.payload
+      }
+    }
   },
   effects: {
     *loginSuccess({ payload }, { call, put }) {
 
-      const {data} = payload
+      const { data: {user, token} } = payload
 
-      if(!data) {
+      if(!payload.data) {
         message.error("error ")
       }
+      if(token) {
+        yield put({ type: 'storeToken', payload: { token }})
+        localStorage.setItem("token", token)
+      }
 
-      if(data.active) {
+      if(user && user.active) {
         yield put(routerRedux.replace("/profiles"))
-        message.info("登录成功")
-        localStorage.setItem("user", JSON.stringify(payload.data))              
+        // message.info("登录成功")        
       } else {
         yield put(routerRedux.replace(`/verify`))        
       }
       
     },
     *preLogin({ payload }, { call, put }) {
-      let user = localStorage.getItem("user")
-
-      if (!user) {
-        yield put(routerRedux.replace("/signin"))
-      }
-
-      yield put({ type: 'loginFromStorage', payload: { data: JSON.parse(user) } })
-    },
-    *updateProfile({ payload }, { call, put }) {
+      let token = localStorage.getItem("token")
 
       try {
-        let { data } = yield call(updateProfile, payload)
-        if (data) {
-          yield put({ type: 'updateProfileSuccess', payload: { data } })
+        let { data } =  yield call(getAuthUser, { token }) 
+        if (data ) {
+          yield put({ type: 'preLoginSuccess', payload: { user: data, token }})
 
+          if(data.active) {
+            // yield put(routerRedux.replace("/profiles")) 
+          }         
+        }       
+      } catch (error) {
+        message.error("自动登录失败")
+      }
+    },
+    *updateProfile({ payload }, { call, put, select }) {
+      message.destroy()
+      try {
+        let token = yield select(state => state.user.token)        
+        let { data } = yield call(updateProfile, {...payload, token})
+        
+        if (data) {
+          yield put({ type: 'updateProfileSuccess', payload: { user: data, token } })
+          
           message.info("更新成功")
         }
       } catch (error) {
         yield put({ type: 'updateProfileFail' })
-        message.error("更新失败")
+        message.error(error.message)
       }
     },
-    *updateEmail({ payload }, { call, put }) {
+    *updateEmail({ payload }, { call, put, select }) {
       try {
 
-        let { data } = yield call(updateAccount, payload)
+        let token = yield select(state => state.user.token)        
+        let { data } = yield call(updateAccount, {...payload, token})
 
         if (data) {
-          yield put({ type: 'updateAccountSuccess', payload: { data } })
+          yield put({ type: 'updateAccountSuccess', payload: { user: data, token } })
           message.info("验证邮件已发送")
         }
       } catch (error) {
@@ -119,13 +145,14 @@ export default {
       }
     },
 
-    *updateAccount({ payload }, { call, put }) {
+    *updateAccount({ payload }, { call, put, select }) {
       try {
-
-        let { data } = yield call(updateAccount, payload)
+        
+        let token = yield select(state => state.user.token)        
+        let { data } = yield call(updateAccount, {...payload, token})
 
         if (data) {
-          yield put({ type: 'updateAccountSuccess', payload: { data } })
+          yield put({ type: 'updateAccountSuccess', payload: { user: data, token } })
           message.info("更新成功")
         }
       } catch (error) {

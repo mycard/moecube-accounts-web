@@ -15,7 +15,7 @@ class Verify extends React.Component {
   }
 
   onSubmit = (e) => {
-    const { form, dispatch, input: { password }, data: { id }} = this.props;
+    const { form, dispatch, input: { password }, user: { id }} = this.props;
 
     e && e.preventDefault();
     form.validateFieldsAndScroll((err, values) => {
@@ -30,7 +30,7 @@ class Verify extends React.Component {
   };
 
   onReSend = (e) => {
-    const { dispatch, input: { password }, data: { id, email }} = this.props;
+    const { dispatch, input: { password }, user: { id, email }} = this.props;
 
     e && e.preventDefault();
 
@@ -38,9 +38,9 @@ class Verify extends React.Component {
   };
 
   render() {
-    const { form, dispatch, data, checkEmail, isEmailExists, loading, input } = this.props
+    const { form, dispatch, user, checkEmail, isEmailExists, loading, input } = this.props
     const { getFieldDecorator } = form;
-    const { id, email } = data;
+    const { id, email } = user;
 
     const emailProps = {
       fromItem: {
@@ -121,7 +121,7 @@ class Verify extends React.Component {
 
 function mapStateToProps(state, props) {
   const {
-    user: { data } ,
+    user: { user } ,
     auth: { input, isEmailExists, checkEmail }
   } = state
 
@@ -129,7 +129,7 @@ function mapStateToProps(state, props) {
 
   return {
     input,
-    data,
+    user,
     loading,    
     checkEmail,
     isEmailExists,

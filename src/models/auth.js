@@ -209,12 +209,15 @@ export default {
         const { data } = yield call(register, payload)
         if (data) {
           yield put({ type: 'registerSuccess' })
+
+          yield put({ type: 'user/loginSuccess', payload: { data } })
+          yield put({ type: 'loginSuccess', payload: { input: payload } })                    
           message.info("注册成功, 请验证激活邮件~", 3)
           yield put(routerRedux.replace("/verify"))
         }
       } catch (error) {
         yield put({ type: 'registerFail' })
-        message.error("注册失败")
+        message.error(error.message, 3)
       }
     },
     *reset({ payload }, { call, put }) {

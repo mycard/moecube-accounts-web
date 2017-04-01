@@ -31,7 +31,7 @@ class EmailForm extends React.Component {
   }
 
   onSubmit = (e) => {
-    const { form, dispatch, data: {id} } = this.props
+    const { form, dispatch, user: {id} } = this.props
 
     e && e.preventDefault();
     form.validateFieldsAndScroll((err, values) => {
@@ -117,10 +117,10 @@ class EmailForm extends React.Component {
 
 function mapStateToProps(state, props) {
   const {
-    user: {data}
+    user: {user}
   } = state
   return {
-    data,
+    user,
   };
 }
 

@@ -1422,6 +1422,10 @@ cosmiconfig@^2.1.0, cosmiconfig@^2.1.1:
     parse-json "^2.2.0"
     require-from-string "^1.1.0"
 
+cropperjs@^0.8.0:
+  version "0.8.1"
+  resolved "https://registry.yarnpkg.com/cropperjs/-/cropperjs-0.8.1.tgz#3dc01813e2f6d1df2c8909e1ce092146c692548e"
+
 cross-spawn@^5.0.1:
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/cross-spawn/-/cross-spawn-5.1.0.tgz#e8bd0efee58fcff6f8f94510a0a554bbfa235449"
@@ -4482,6 +4486,12 @@ react-addons-transition-group@^15.4.2:
     fbjs "^0.8.4"
     object-assign "^4.1.0"
 
+react-cropper@^0.10.1:
+  version "0.10.1"
+  resolved "https://registry.yarnpkg.com/react-cropper/-/react-cropper-0.10.1.tgz#827df18166581ea3a42da983a49f90ebce066e22"
+  dependencies:
+    cropperjs "^0.8.0"
+
 react-dev-utils@^0.4.2:
   version "0.4.2"
   resolved "https://registry.yarnpkg.com/react-dev-utils/-/react-dev-utils-0.4.2.tgz#ba6fae581fe945a2fc402e9b27c71fda4f62f6a1"
@@ -4511,6 +4521,10 @@ react-hammerjs@~0.5.0:
   resolved "https://registry.yarnpkg.com/react-hammerjs/-/react-hammerjs-0.5.0.tgz#aa20e5c5f44d660f3e8e87ed11282f12173e77ae"
   dependencies:
     hammerjs "^2.0.8"
+
+react-image-crop@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/react-image-crop/-/react-image-crop-2.0.3.tgz#81dcbaecc39553f0ac93e9d0e748cdc3216b2cf0"
 
 react-intl@^2.2.3:
   version "2.2.3"

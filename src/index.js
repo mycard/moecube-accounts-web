@@ -25,6 +25,8 @@ app.use(createLoading())
 
 app.model(require('./models/user'));
 
+app.model(require("./models/upload"));
+
 app.model(require('./models/auth'));
 
 app.model(require('./models/haha'));

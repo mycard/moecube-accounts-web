@@ -23,9 +23,9 @@ class Register extends React.Component {
       if (!err) {
         console.log('Received values of form: ', values);
 
-        const { email, username, nickname, password, confirm } = values;
+        const { email, username, password, } = values;
 
-        dispatch({ type: 'auth/register', payload: { email, username, nickname, password } });
+        dispatch({ type: 'auth/register', payload: { email, username, password } });
       }
     });
   };
@@ -51,7 +51,7 @@ class Register extends React.Component {
   render() {
     const { dispatch, register, form, checkEmail, checkUsername, isEmailExists, isUserNameExists, isRegisterSubmit, loading } = this.props;
     const { getFieldDecorator, } = form;
-    const { email = {}, username = {}, password = {} } = register;
+    const { email, username, password } = register;
     const { intl: { messages } } = this.context;
 
     const emailProps = {
@@ -107,12 +107,6 @@ class Register extends React.Component {
                 }],
               }, {})(
                 <Input {...usernameInputProps}/>,
-              )}
-            </FormItem>
-
-            <FormItem >
-              {getFieldDecorator('nickname', {})(
-                <Input placeholder={messages.nickname} />,
               )}
             </FormItem>
 
