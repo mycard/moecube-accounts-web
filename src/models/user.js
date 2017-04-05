@@ -75,6 +75,11 @@ export default {
       return {
         ...state, ...action.payload
       }
+    },
+    getAuthUserSuccess(state, action) {
+      return {
+        ...state, ...action.payload
+      }
     }
   },
   effects: {
@@ -104,33 +109,41 @@ export default {
         }
       }
     },
-    *preLogin({ payload }, { call, put }) {
-      const {token } = payload
+    *getAuthUser({ payload }, { call, put, select }) {
+      const { token } = payload
+
+      try {
+        let { data } =  yield call(getAuthUser, { token })  
+        if(data) {
+          yield put({ type: 'getAuthUserSuccess', payload: { user: data, token }})  
+          yield put({ type: 'preLogin'})
+        }            
+      }catch(error) {
+        message.error(error.message)
+      }
+    },
+    *preLogin({ payload }, { call, put, select }) {
+      const {token, user } = yield select(state => state.user)
       
       if(!token) {
         yield put(routerRedux.replace("/signin"))        
       }
 
       try {
-        let { data } =  yield call(getAuthUser, { token })
-        if (data ) {
-          yield put({ type: 'preLoginSuccess', payload: { user: data, token }})
-
-
-          if(data) {
+        if (user["id"]) {
             if(handleSSO(user)){
               return
             }           
 
-            if(data.active) {
-              yield put(routerRedux.replace("/profiles")) 
+            if(user.active) {
+              yield put(routerRedux.replace("/profiles"))
             }else {
               yield put(routerRedux.replace("/verify"))
-            } 
-          }     
+            }   
         }       
       } catch (error) {
-        yield put(routerRedux.replace("/signin"))        
+        yield put(routerRedux.replace("/signin")) 
+        message.error(error.message)       
       }
     },
     *updateProfile({ payload }, { call, put, select }) {
@@ -188,14 +201,13 @@ export default {
     setup({ dispatch, history }) {
       let token = localStorage.getItem("token")
 
-      return history.listen(({ pathname, query }) => {
+      if (token) {
+        dispatch({type: 'getAuthUser', payload: { token }})        
+      }
 
-        if(pathname == '/' || pathname == 'profiles') {
-          dispatch({ type: 'preLogin', payload: { token } })                        
-        }
-
-        if(pathname == 'profiles' && !token) {
-          history.push("/signin")
+      history.listen(({ pathname, query }) => {
+        if(pathname == '/') {
+          dispatch({ type: 'preLogin'})                       
         }
       })
     }
