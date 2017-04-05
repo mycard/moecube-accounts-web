@@ -55,16 +55,20 @@ class Login extends React.Component {
               <Step title={messages['verify-email']} icon={<Icon type="mail" />} />
             </Steps>
 
-            <FormItem style={{ marginTop: '28px'}}>
+            <FormItem style={{ marginTop: '28px' }}>
               {getFieldDecorator('email', {
                 rules: [{ required: true, message: 'Please input your username or email!' }],
               })(
-                <Input prefix={<Icon type="user" style={{ fontSize: 13 }}/>} placeholder={messages['email-address-or-username']} />,
+                <Input prefix={<Icon type="user" style={{ fontSize: 13 }} />} placeholder={messages['email-address-or-username']} />,
               )}
             </FormItem>
-            <Button type="primary" htmlType="submit" className="login-form-button">
-              <Format id={'send-email'} />
-            </Button>
+
+            <FormItem>
+              <Button type="primary" htmlType="submit" className="login-form-button">
+                <Format id={'send-email'} />
+              </Button>
+            </FormItem>
+
             <div>
               <Link to="/signin"><Format id={'sign-in'} /></Link>
             </div>

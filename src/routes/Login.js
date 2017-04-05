@@ -58,6 +58,7 @@ class Login extends React.Component {
                 <Format id={'sign-in'} />
               </Button>
             </FormItem>
+            
             <div>
               <Link to="/signup"><Format id={'sign-up'} /></Link>
               <Link to="/forgot" className="login-form-forgot"><Format id={'forgot-password'} /></Link>

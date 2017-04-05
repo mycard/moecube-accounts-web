@@ -2,6 +2,20 @@
 # yarn lockfile v1
 
 
+"@types/node@^7.0.8":
+  version "7.0.12"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-7.0.12.tgz#ae5f67a19c15f752148004db07cbbb372e69efc9"
+
+"@types/react-dom@^0.14.23":
+  version "0.14.23"
+  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-0.14.23.tgz#cecfcfad754b4c2765fe5d29b81b301889ad6c2e"
+  dependencies:
+    "@types/react" "*"
+
+"@types/react@*", "@types/react@^15.0.16":
+  version "15.0.21"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-15.0.21.tgz#29d849427237c1463abfb7b370755ee3e5b5b375"
+
 abbrev@1, abbrev@1.0.x:
   version "1.0.9"
   resolved "https://registry.yarnpkg.com/abbrev/-/abbrev-1.0.9.tgz#91b4792588a7738c25f35dd6f63752a2f8776135"
@@ -4543,6 +4557,15 @@ react-lazy-load@^3.0.10:
     lodash.debounce "^4.0.0"
     lodash.throttle "^4.0.0"
 
+react-particles-js@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/react-particles-js/-/react-particles-js-1.5.0.tgz#d30313c52941282b8f8f58eaf909056bcf57a2ba"
+  dependencies:
+    "@types/node" "^7.0.8"
+    "@types/react" "^15.0.16"
+    "@types/react-dom" "^0.14.23"
+    react "^15.4.1"
+
 react-redux@4.4.x:
   version "4.4.6"
   resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-4.4.6.tgz#4b9d32985307a11096a2dd61561980044fcc6209"
@@ -4591,7 +4614,7 @@ react@^0.14.0:
     envify "^3.0.0"
     fbjs "^0.6.1"
 
-react@^15.4.0:
+react@^15.4.0, react@^15.4.1:
   version "15.4.2"
   resolved "https://registry.yarnpkg.com/react/-/react-15.4.2.tgz#41f7991b26185392ba9bae96c8889e7e018397ef"
   dependencies:

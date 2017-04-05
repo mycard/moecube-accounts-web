@@ -85,7 +85,7 @@ class Register extends React.Component {
             <Step title={messages['verify-email']} icon={<Icon type="mail" />} />
           </Steps>
 
-          <Form onSubmit={this.onSubmitLogin} className="login-form" style={{ marginTop: '24px'}}>
+          <Form onSubmit={this.onSubmitLogin} className="login-form" style={{ marginTop: '24px' }}>
             <FormItem  {...emailProps} >
               {getFieldDecorator('email', {
                 rules: [{
@@ -106,7 +106,7 @@ class Register extends React.Component {
                   pattern: /^[A-Za-z0-9_\u4E00-\u9FD5\u3400-\u4DBF\u{20000}-\u{2A6DF}\u{2A700}-\u{2CEAF}\uF900–\uFAFF\u{2F800}-\u{2FA1D}\uAC00–\uD7AF\u3040-\u30FF\u31F0–\u31FF\u{1B000}–\u{1B0FF}\u3005]+$/u,
                 }],
               }, {})(
-                <Input {...usernameInputProps}/>,
+                <Input {...usernameInputProps} />,
               )}
             </FormItem>
 
@@ -114,12 +114,12 @@ class Register extends React.Component {
               {getFieldDecorator('password', {
                 rules: [{ required: true, message: messages['Password length must be between 8 and 24 characters'], pattern: /^.{8,24}$/ }],
               }, {
-                validator: this.checkConfirm,
-              })(
+                  validator: this.checkConfirm,
+                })(
                 <Input
-                  prefix={<Icon type="lock" style={{ fontSize: 13 }}/>}
+                  prefix={<Icon type="lock" style={{ fontSize: 13 }} />}
                   type="password"
-                  placeholder={messages.password}/>,
+                  placeholder={messages.password} />,
               )}
             </FormItem>
 
@@ -132,16 +132,19 @@ class Register extends React.Component {
                 }],
               })(
                 <Input
-                  prefix={<Icon type="lock" style={{ fontSize: 13 }}/>}
+                  prefix={<Icon type="lock" style={{ fontSize: 13 }} />}
                   type="password"
                   onBlur={this.handleConfirmBlur}
-                  placeholder={messages['password-again']}/>,
+                  placeholder={messages['password-again']} />,
               )}
             </FormItem>
 
-            <Button type="primary" htmlType="submit" className="login-form-button">
-              <Format id={'sign-up'} />
-            </Button>
+            <FormItem>
+              <Button type="primary" htmlType="submit" className="login-form-button">
+                <Format id={'sign-up'} />
+              </Button>
+            </FormItem>
+
             <div>
               <Link to="/signin"><Format id={'sign-in'} /></Link>
             </div>
