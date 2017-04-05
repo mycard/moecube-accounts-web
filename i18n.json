@@ -1,6 +1,6 @@
 {
   "en": {
-    "MoeCube":"MoeCube",
+    "title":"MoeCube",
     "username": "User Name",
     "email": "E-Mail",
     "password": "Password",
@@ -79,7 +79,7 @@
     "没毛用":"防逗号报错,上线删"
   },
   "zh": {
-    "MoeCube":"萌立方",
+    "title":"萌立方",
     "username": "用户名",
     "email": "邮箱",
     "password": "密码",
