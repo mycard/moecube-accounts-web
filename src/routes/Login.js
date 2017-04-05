@@ -38,9 +38,7 @@ class Login extends React.Component {
     return (
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
         <Spin spinning={loading} delay={100}>
-          <FormItem style={{display: 'flex', justifyContent:'center'}}>
-            <img src={logo} style={{height:'20vw', width: '20vw'}}/>                                        
-          </FormItem>
+
           <Form onSubmit={this.onSubmitLogin} className="login-form">
             <FormItem>
               {getFieldDecorator('account', {

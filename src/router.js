@@ -21,16 +21,16 @@ import Index from "./routes/Index.js";
 function RouterConfig({ history }) {
   return (
     <Router history={history}>
-      <Redirect from="/" to="/signin"/>
       <Route path="/" component={Index} >
+        <Redirect from="/home" to="/profiles" />
         <Route path="/signin" component={Login}/>
         <Route path="/forgot" component={Forgot}/>
         <Route path="/signup" component={Register}/>
         <Route path="/reset" component={Reset}/>
         <Route path="/profiles" component={Profiles}/>
+        <Route path="/activate" component={Active}/>
+        <Route path="/verify" component={Verify} />
       </Route>
-      <Route path="/activate" component={Active}/>
-      <Route path="/verify" component={Verify} />
     </Router>
   );
 }

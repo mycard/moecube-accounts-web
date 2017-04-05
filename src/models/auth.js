@@ -1,6 +1,8 @@
-import { message } from 'antd';
-import { routerRedux } from 'dva/router';
-import { activate, checkUserExists, forgot, login, register, reset } from '../services/auth';
+import { login, forgot, register, reset, activate, checkUserExists } from '../services/auth'
+import { message } from 'antd'
+import { routerRedux } from 'dva/router'
+import config from '../config'
+
 
 
 export default {
@@ -238,5 +240,12 @@ export default {
       }
     },
   },
-  subscriptions: {},
+  subscriptions: {
+
+    setup({ dispatch, history }) { 
+      return history.listen(({ pathname, query }) => {
+        
+      })
+    }
+  }
 };
