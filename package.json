@@ -18,6 +18,7 @@
     "react": "^15.4.0",
     "react-addons-transition-group": "^15.4.2",
     "react-cropper": "^0.10.1",
+    "react-document-title": "^2.0.2",
     "react-dom": "^15.4.0",
     "react-image-crop": "^2.0.3",
     "react-intl": "^2.2.3",

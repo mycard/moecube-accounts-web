@@ -2,10 +2,12 @@ import React from 'react';
 import { connect } from 'dva';
 import styles from './Index.less';
 import Particles from 'react-particles-js'
+import DocumentTitle from 'react-document-title'
 
-function Index({ children }) {
+function Index({ children, messages }) {
   return (
     <div style={{ height: "100%" }}>
+      <DocumentTitle title={messages['title'] || 'Moe Cube'}>
         <Particles
           params={{
             'particles': {
@@ -124,13 +126,19 @@ function Index({ children }) {
             position: "fixed"
           }}          
           />
-      {children}
+      </DocumentTitle>      
+      {children}      
     </div>
   );
 }
 
-function mapStateToProps() {
-  return {};
+function mapStateToProps(state) {
+  const {
+    common: {messages}
+  } = state
+  return {
+    messages
+  };
 }
 
 export default connect(mapStateToProps)(Index);
