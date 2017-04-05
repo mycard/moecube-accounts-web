@@ -1,15 +1,19 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'dva';
+import { FormattedMessage as Format } from 'react-intl';
 import styles from './Verify.css';
 import { Form, Input, Steps, Icon, Spin, Alert, Tag } from 'antd';
 import { routerRedux } from 'dva/router'
 const FormItem = Form.Item;
-import SubmitButton from '../components/SubmitButton'
+import SubmitButton from '../components/SubmitButton';
 
 const Step = Steps.Step
 
 class Verify extends React.Component {
 
+  static contextTypes = {
+    intl: PropTypes.object.isRequired,
+  }
   state = {
     isChangeEmail: false
   }
@@ -37,58 +41,59 @@ class Verify extends React.Component {
     dispatch({ type: 'user/updateEmail', payload: { email, password, user_id: id } });
   };
 
-  render() {
+  render(select) {
     const { form, dispatch, user, checkEmail, isEmailExists, loading, input } = this.props
     const { getFieldDecorator } = form;
     const { id, email } = user;
+    const { intl: { messages } } = this.context
 
     const emailProps = {
       fromItem: {
-        label: "修改邮箱",
+        label: messages['reset-email'],
         hasFeedback: true,
         validateStatus: checkEmail,
-        help: isEmailExists ? 'email exists' : '',
+        help: isEmailExists ? messages.email_exists : '',
       },
       decorator: {
         initialValue: email
       },
       input: {
-        placeholder: "email"
+        placeholder: messages.email,
       }
     }
-    
+
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
 
         <Spin spinning={loading} delay={100}>
           <Steps size="large" current={1}>
-            <Step title="Register" icon={<Icon type="solution" />} />
-            <Step title="Verify Email" icon={<Icon type="mail" />} />
+            <Step title={messages['sign-up']} icon={<Icon type="solution" />} />
+            <Step title={messages['verify-email']} icon={<Icon type="mail" />} />
           </Steps>
 
-          {id && input["password"]  ? 
+          {id && input["password"]  ?
           <Alert
             style={{ marginTop: '24px' }}
             message={
               <div>
-                <span style={{marginRight: '10px'}}>验证邮件已发送，请查收~</span>
-                <Tag color="blue" onClick={this.onReSend}>重发</Tag>                
+                <span style={{marginRight: '10px'}}><Format id={'Your-account-has-been-created.'} /></span>
+                <Tag color="blue" onClick={this.onReSend}><Format id={'send-email2'} /></Tag>
                 <Tag color="orange" onClick={() => this.setState({ isChangeEmail: true })}>
-                  修改邮箱
+                  <Format id={'reset-email'} />
                 </Tag>
               </div>
             }
             type="warning"
             showIcon
           />
-          : 
+          :
           <Alert
             style={{ marginTop: '24px' }}
             message={
               <div>
-                <span style={{marginRight: '10px'}}>您尚未登录，请先登录</span>
-                <Tag color="blue" onClick={ () => dispatch(routerRedux.replace("/signin"))}>登录</Tag>                
+                <span style={{marginRight: '10px'}}><Format id={'Please-sign-in'} /></span>
+                <Tag color="blue" onClick={ () => dispatch(routerRedux.replace("/signin"))}><Format id={'sign-in'} /></Tag>
               </div>
             }
             type="warning"
@@ -97,7 +102,7 @@ class Verify extends React.Component {
           }
 
           {
-            this.state.isChangeEmail && 
+            this.state.isChangeEmail &&
             <Form onSubmit={this.onSubmit} className="login-form" style={{ marginTop: '24px' }}>
               <FormItem {...emailProps.fromItem}>
                 {getFieldDecorator('email', { ...emailProps.decorator })(
@@ -112,7 +117,7 @@ class Verify extends React.Component {
               </FormItem>
             </Form>
           }
-          
+
         </Spin>
       </div>
     );
@@ -130,7 +135,7 @@ function mapStateToProps(state, props) {
   return {
     input,
     user,
-    loading,    
+    loading,
     checkEmail,
     isEmailExists,
   };

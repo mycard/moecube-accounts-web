@@ -34,7 +34,7 @@ class Register extends React.Component {
   checkPassword = (rule, value, callback) => {
     const form = this.props.form;
     if (value && value !== form.getFieldValue('password')) {
-      callback(this.context.intl.messages['Incorrect password.2']);
+      callback(this.context.intl.messages['Incorrect-password.2']);
     } else {
       callback();
     }
@@ -90,7 +90,7 @@ class Register extends React.Component {
               {getFieldDecorator('email', {
                 rules: [{
                   required: true,
-                  message: messages['Please use a correct E-Mail address.'],
+                  message: messages['Please-use-a-correct-E-Mail-address.'],
                   pattern: /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/,
                 }],
               }, {})(
@@ -102,7 +102,7 @@ class Register extends React.Component {
               {getFieldDecorator('username', {
                 rules: [{
                   required: true,
-                  message: messages['You can not use this username.'],
+                  message: messages['You-can-not-use-this-username.'],
                   pattern: /^[A-Za-z0-9_\u4E00-\u9FD5\u3400-\u4DBF\u{20000}-\u{2A6DF}\u{2A700}-\u{2CEAF}\uF900–\uFAFF\u{2F800}-\u{2FA1D}\uAC00–\uD7AF\u3040-\u30FF\u31F0–\u31FF\u{1B000}–\u{1B0FF}\u3005]+$/u,
                 }],
               }, {})(
@@ -112,7 +112,7 @@ class Register extends React.Component {
 
             <FormItem hasFeedback>
               {getFieldDecorator('password', {
-                rules: [{ required: true, message: messages['Password length must be between 8 and 24 characters'], pattern: /^.{8,24}$/ }],
+                rules: [{ required: true, message: messages['Password-length-must-be-between-8-and-24-characters.'], pattern: /^.{8,24}$/ }],
               }, {
                 validator: this.checkConfirm,
               })(
@@ -126,7 +126,7 @@ class Register extends React.Component {
             <FormItem hasFeedback>
               {getFieldDecorator('confirm', {
                 rules: [{
-                  required: true, message: messages['Password length must be between 8 and 24 characters'], pattern: /^.{8,24}$/,
+                  required: true, message: messages['Password-length-must-be-between-8-and-24-characters.'], pattern: /^.{8,24}$/,
                 }, {
                   validator: this.checkPassword,
                 }],

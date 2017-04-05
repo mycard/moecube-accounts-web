@@ -91,56 +91,55 @@ export default {
 
       if(user && user.active) {
         yield put(routerRedux.replace("/profiles"))
-        // message.info("登录成功")        
+        // message.info("登录成功")
       } else {
-        yield put(routerRedux.replace(`/verify`))        
+        yield put(routerRedux.replace(`/verify`))
       }
-      
+
     },
     *preLogin({ payload }, { call, put }) {
       let token = localStorage.getItem("token")
 
       try {
-        let { data } =  yield call(getAuthUser, { token }) 
+        let { data } =  yield call(getAuthUser, { token })
         if (data ) {
           yield put({ type: 'preLoginSuccess', payload: { user: data, token }})
 
           if(data.active) {
-            // yield put(routerRedux.replace("/profiles")) 
-          }         
-        }       
+            // yield put(routerRedux.replace("/profiles"))
+          }
+        }
       } catch (error) {
-        message.error("自动登录失败")
+        message.error(error.message)
       }
     },
     *updateProfile({ payload }, { call, put, select }) {
       message.destroy()
       try {
-        let token = yield select(state => state.user.token)        
+        let token = yield select(state => state.user.token)
         let { messages } = yield select(state => state.common)
 
         let { data } = yield call(updateProfile, {...payload, token})
-        
+
         if (data) {
           yield put({ type: 'updateProfileSuccess', payload: { user: data, token } })
-          
-          message.info(messages["i_update_success"])          
+
+          message.info(messages["update_success"])
         }
       } catch (error) {
         yield put({ type: 'updateProfileFail' })
-        message.error(messages[error.message])
+        message.error(error.message)
       }
     },
     *updateEmail({ payload }, { call, put, select }) {
+      let { messages } = yield select(state => state.common)
       try {
-
-        let token = yield select(state => state.user.token)      
-        let { messages } = yield select(state => state.common)          
+        let token = yield select(state => state.user.token)
         let { data } = yield call(updateAccount, {...payload, token})
 
         if (data) {
           yield put({ type: 'updateAccountSuccess', payload: { user: data, token } })
-          message.info("验证邮件已发送")
+          message.info(messages['A-verification-email-has-been-sent-to-you,please-check-the-mail-to-complete.'])
         }
       } catch (error) {
         yield put({ type: 'updateAccountFail' })
@@ -149,16 +148,14 @@ export default {
     },
 
     *updateAccount({ payload }, { call, put, select }) {
+      let { messages } = yield select(state => state.common)
       try {
-        
         let token = yield select(state => state.user.token)
-        let { messages } = yield select(state => state.common)
-
         let { data } = yield call(updateAccount, {...payload, token})
 
         if (data) {
           yield put({ type: 'updateAccountSuccess', payload: { user: data, token } })
-          message.info(messages["i_update_success"])
+          message.info(messages["update_success"])
         }
       } catch (error) {
         yield put({ type: 'updateAccountFail' })

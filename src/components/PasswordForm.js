@@ -21,8 +21,9 @@ class EmailForm extends React.Component {
   }
   checkPassword = (rule, value, callback) => {
     const form = this.props.form;
+    const { intl: { messages } } = this.context;
     if (value && value !== form.getFieldValue('new_password')) {
-      callback('两次密码输入不符');
+      callback(messages['Incorrect-password.2']);
     } else {
       callback();
     }
@@ -64,7 +65,7 @@ class EmailForm extends React.Component {
       },
       decorator: {
         rules: [
-          { required: true, message: messages['Password length must be between 8 and 24 characters'], pattern: /^.{8,24}$/ },
+          { required: true, message: messages['Password-length-must-be-between-8-and-24-characters.'], pattern: /^.{8,24}$/ },
           { validator: this.checkConfirm }
         ],
       },
@@ -85,7 +86,7 @@ class EmailForm extends React.Component {
       },
       decorator: {
         rules: [
-          { required: true, message: messages['Password length must be between 8 and 24 characters'], pattern: /^.{8,24}$/},
+          { required: true, message: messages['Password-length-must-be-between-8-and-24-characters.'], pattern: /^.{8,24}$/},
           { validator: this.checkPassword}
         ],
       },

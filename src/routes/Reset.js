@@ -71,7 +71,7 @@ class Reset extends React.Component {
             <FormItem>
               {getFieldDecorator('confirm', {
                 rules: [{
-                  required: true, message: messages['Incorrect password.2'],
+                  required: true, message: messages['Incorrect-password.2'],
                 }, {
                   validator: this.checkPassword,
                 }],

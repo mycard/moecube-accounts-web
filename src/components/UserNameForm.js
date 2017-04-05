@@ -61,7 +61,7 @@ class EmailForm extends React.Component {
       },
       decorator: {
         rules: [
-          { required: true, message: messages['Password length must be between 8 and 24 characters'], pattern: /^.{8,24}$/ },
+          { required: true, message: messages['Password-length-must-be-between-8-and-24-characters.'], pattern: /^.{8,24}$/ },
         ],
       },
       input: {
