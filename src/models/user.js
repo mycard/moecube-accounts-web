@@ -90,15 +90,6 @@ export default {
         localStorage.setItem("token", token)
       }
 
-<<<<<<< Updated upstream
-      if(user && user.active) {
-        yield put(routerRedux.replace("/profiles"))
-        // message.info("登录成功")
-      } else {
-        yield put(routerRedux.replace(`/verify`))
-      }
-
-=======
       if(user) {
         if(handleSSO(user)){
           return
@@ -112,7 +103,6 @@ export default {
           yield put(routerRedux.replace(`/verify`))        
         }
       }
->>>>>>> Stashed changes
     },
     *preLogin({ payload }, { call, put }) {
       const {token } = payload
@@ -126,14 +116,7 @@ export default {
         if (data ) {
           yield put({ type: 'preLoginSuccess', payload: { user: data, token }})
 
-<<<<<<< Updated upstream
-          if(data.active) {
-            // yield put(routerRedux.replace("/profiles"))
-          }
-        }
-      } catch (error) {
-        message.error(error.message)
-=======
+
           if(data) {
             if(handleSSO(user)){
               return
@@ -148,7 +131,6 @@ export default {
         }       
       } catch (error) {
         yield put(routerRedux.replace("/signin"))        
->>>>>>> Stashed changes
       }
     },
     *updateProfile({ payload }, { call, put, select }) {
@@ -157,11 +139,6 @@ export default {
       let token = yield select(state => state.user.token)        
       let { messages } = yield select(state => state.common)
       try {
-<<<<<<< Updated upstream
-        let token = yield select(state => state.user.token)
-        let { messages } = yield select(state => state.common)
-=======
->>>>>>> Stashed changes
 
         let { data } = yield call(updateProfile, {...payload, token})
 
