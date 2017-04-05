@@ -8,6 +8,6 @@
 
 # misc
 .DS_Store
-npm-debug.log*
+*.log*
 
 /utils/config.js

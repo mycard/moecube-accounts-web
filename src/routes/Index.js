@@ -1,12 +1,11 @@
-import React from 'react';
 import { connect } from 'dva';
-import styles from './Index.less';
-import Particles from 'react-particles-js'
-import DocumentTitle from 'react-document-title'
+import React from 'react';
+import DocumentTitle from 'react-document-title';
+import Particles from 'react-particles-js';
 
 function Index({ children, messages }) {
   return (
-    <div style={{ height: "100%" }}>
+    <div style={{ height: '100%' }}>
       <DocumentTitle title={messages['title'] || 'Moe Cube'}>
         <Particles
           params={{
@@ -15,28 +14,28 @@ function Index({ children, messages }) {
                 'value': 20,
                 'density': {
                   'enable': true,
-                  'value_area': 1000
-                }
+                  'value_area': 1000,
+                },
               },
               'color': {
                 'value': '#888',
-                'opacity': 0.4
+                'opacity': 0.4,
               },
               'shape': {
                 'type': 'circle',
                 'stroke': {
                   'width': 4,
                   'color': '#888',
-                  'opacity': 0.4
+                  'opacity': 0.4,
                 },
                 'polygon': {
-                  'nb_sides': 5
+                  'nb_sides': 5,
                 },
                 'image': {
                   'src': 'img/github.svg',
                   'width': 100,
-                  'height': 100
-                }
+                  'height': 100,
+                },
               },
               'opacity': {
                 'value': 0.5,
@@ -45,8 +44,8 @@ function Index({ children, messages }) {
                   'enable': false,
                   'speed': 1,
                   'opacity_min': 0.1,
-                  'sync': false
-                }
+                  'sync': false,
+                },
               },
               'size': {
                 'value': 3,
@@ -55,15 +54,15 @@ function Index({ children, messages }) {
                   'enable': false,
                   'speed': 1,
                   'size_min': 0.1,
-                  'sync': false
-                }
+                  'sync': false,
+                },
               },
               'line_linked': {
                 'enable': true,
                 'distance': 150,
                 'color': '#888',
                 'opacity': 0.4,
-                'width': 1
+                'width': 1,
               },
               'move': {
                 'enable': true,
@@ -76,9 +75,9 @@ function Index({ children, messages }) {
                 'attract': {
                   'enable': false,
                   'rotateX': 600,
-                  'rotateY': 1200
-                }
-              }
+                  'rotateY': 1200,
+                },
+              },
             },
             'interactivity': {
               'detect_on': 'canvas',
@@ -86,58 +85,58 @@ function Index({ children, messages }) {
                 'onhover': {
                   'enable': true,
                   'mode': 'grab',
-                  'nb': 2
+                  'nb': 2,
                 },
                 'onclick': {
                   'enable': true,
-                  'mode': 'push'
+                  'mode': 'push',
                 },
-                'resize': true
+                'resize': true,
               },
               'modes': {
                 'grab': {
                   'distance': 400,
                   'line_linked': {
-                    'opacity': 0.4
-                  }
+                    'opacity': 0.4,
+                  },
                 },
                 'bubble': {
                   'distance': 400,
                   'size': 20,
                   'duration': 2,
                   'opacity': 8,
-                  'speed': 1
+                  'speed': 1,
                 },
                 'repulse': {
                   'distance': 200,
-                  'duration': 0.4
+                  'duration': 0.4,
                 },
                 'push': {
-                  'particles_nb': 4
+                  'particles_nb': 4,
                 },
                 'remove': {
-                  'particles_nb': 2
-                }
-              }
+                  'particles_nb': 2,
+                },
+              },
             },
-            'retina_detect': true
-          }} 
+            'retina_detect': true,
+          }}
           style={{
-            position: "fixed"
-          }}          
-          />
-      </DocumentTitle>      
-      {children}      
+            position: 'fixed',
+          }}
+        />
+      </DocumentTitle>
+      {children}
     </div>
   );
 }
 
 function mapStateToProps(state) {
   const {
-    common: {messages}
-  } = state
+    common: { messages },
+  } = state;
   return {
-    messages
+    messages,
   };
 }
 
