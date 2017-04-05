@@ -29,7 +29,7 @@ app.model(require("./models/upload"));
 
 app.model(require('./models/auth'));
 
-app.model(require('./models/haha'));
+// app.model(require('./models/haha'));
 
 // app.model(require("./models/login"));
 

@@ -75,8 +75,14 @@
     "old-password":"old password",
     "new-password":"new password",
     "Password length must be between 8 and 24 characters":"Password length must be between 8 and 24 characters",
-
-    "没毛用":"防逗号报错,上线删"
+    "i_update_success": "Update Success!",
+    "i_password_error": "Incorrect password. ",
+    "i_user_unexists":"",
+    "i_email_exists":"email is exists",
+    "i_username_exists":"",
+    "i_not_found":"",
+    "i_key_out_time":"",
+    "没毛用":"防逗号报错,上线删"    
   },
   "zh": {
     "language": "english",
@@ -159,5 +165,6 @@
 
     "密码至少为8-24位":"密码至少为8-24位",
     "没毛用":"防逗号报错,上线删"
+    
   }
 }

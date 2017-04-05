@@ -34,7 +34,7 @@ class EmailForm extends React.Component {
 
     const { form, dispatch, user, checkUsername, isUserNameExists } = this.props;
     const { getFieldDecorator } = form;
-    const { id, username } = data;
+    const { id, username } = user;
     const { intl: { messages } } = this.context;
 
     const usernameProps = {

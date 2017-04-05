@@ -57,7 +57,7 @@ class Register extends React.Component {
     const emailProps = {
       hasFeedback: true,
       validateStatus: checkEmail,
-      help: isEmailExists ? 'email exists' : '',
+      help: isEmailExists ? messages['i_email_exists'] : '',
     };
 
     const emailInputProps = {

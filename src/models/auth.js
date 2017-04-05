@@ -180,16 +180,18 @@ export default {
         yield put({ type: 'check', payload: { isUserNameExists: false, checkUsername: 'success' } })
       }
     },
-    *login({ payload }, { call, put }) {
+    *login({ payload }, { call, put, select }) {
+      const { messages } = yield select(state => state.common)      
       try {
         const { data } = yield call(login, payload)
+
         if (data) {
           yield put({ type: 'loginSuccess', payload: { input: payload } })          
           yield put({ type: 'user/loginSuccess', payload: { data } })
         }
       } catch (error) {
         yield put({ type: 'loginFail' })
-        message.error(error.message)
+        message.error(messages[error.message])
       }
     },
     *forgot({ payload }, { call, put }) {
@@ -197,7 +199,7 @@ export default {
           const { data } = yield call(forgot, payload)
           if(data){
             yield put({ type: 'forgotSuccess' })
-            message.info("已发送密码重置邮件")
+            message.info("已发送密码重置邮件", 3)
           }
         } catch (error) {
           yield put({ type: 'forgotFail' })
@@ -229,7 +231,7 @@ export default {
         }
       } catch (error) {
          yield put({ type: 'resetFail' })
-         message.error("重置失败")
+         message.error(error.message, 3)
       }
     },
   },

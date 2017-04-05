@@ -117,22 +117,25 @@ export default {
       message.destroy()
       try {
         let token = yield select(state => state.user.token)        
+        let { messages } = yield select(state => state.common)
+
         let { data } = yield call(updateProfile, {...payload, token})
         
         if (data) {
           yield put({ type: 'updateProfileSuccess', payload: { user: data, token } })
           
-          message.info("更新成功")
+          message.info(messages["i_update_success"])          
         }
       } catch (error) {
         yield put({ type: 'updateProfileFail' })
-        message.error(error.message)
+        message.error(messages[error.message])
       }
     },
     *updateEmail({ payload }, { call, put, select }) {
       try {
 
-        let token = yield select(state => state.user.token)        
+        let token = yield select(state => state.user.token)      
+        let { messages } = yield select(state => state.common)          
         let { data } = yield call(updateAccount, {...payload, token})
 
         if (data) {
@@ -141,23 +144,25 @@ export default {
         }
       } catch (error) {
         yield put({ type: 'updateAccountFail' })
-        message.error(error.message)
+        message.error(messages[error.message])
       }
     },
 
     *updateAccount({ payload }, { call, put, select }) {
       try {
         
-        let token = yield select(state => state.user.token)        
+        let token = yield select(state => state.user.token)
+        let { messages } = yield select(state => state.common)
+
         let { data } = yield call(updateAccount, {...payload, token})
 
         if (data) {
           yield put({ type: 'updateAccountSuccess', payload: { user: data, token } })
-          message.info("更新成功")
+          message.info(messages["i_update_success"])
         }
       } catch (error) {
         yield put({ type: 'updateAccountFail' })
-        message.error(error.message)
+        message.error(messages[error.message])
       }
     },
   },
