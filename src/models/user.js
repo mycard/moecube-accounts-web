@@ -188,16 +188,11 @@ export default {
     setup({ dispatch, history }) {
       let token = localStorage.getItem("token")
 
-      if(window.location.pathname != '/signin') {
-        dispatch({ type: 'preLogin', payload: { token } })              
-      }
-
-      history.listen((a) => {
-        console.log(a)
-      })
-
       return history.listen(({ pathname, query }) => {
-        console.log(pathname, query)
+
+        if(pathname == '/' || pathname == 'profiles') {
+          dispatch({ type: 'preLogin', payload: { token } })                        
+        }
 
         if(pathname == 'profiles' && !token) {
           history.push("/signin")
