@@ -104,7 +104,7 @@ class Profiles extends React.Component {
     return (
       <Spin spinning={loading} delay={100}>
         <Tabs defaultActiveKey="1" className="app-detail-nav">
-          <TabPane tab={<span><Icon type="setting" /><Format id={'user-info'} /> </span>} key="1">
+          <TabPane tab={<span><Icon type="user" /><Format id={'user-info'} /> </span>} key="1">
             <Form onSubmit={this.onUpdateSubmit}>
 
               <FormItem style={{ display: 'flex', justifyContent: 'center' }}>

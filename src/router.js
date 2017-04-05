@@ -16,11 +16,13 @@ import Reset from './routes/Reset.js';
 
 import Verify from "./routes/Verify.js";
 
+import Index from "./routes/Index.js";
+
 function RouterConfig({ history }) {
   return (
     <Router history={history}>
       <Redirect from="/" to="/signin"/>
-      <Route path="/">
+      <Route path="/" component={Index} >
         <Route path="/signin" component={Login}/>
         <Route path="/forgot" component={Forgot}/>
         <Route path="/signup" component={Register}/>

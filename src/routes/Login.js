@@ -3,6 +3,7 @@ import { connect } from 'dva';
 import { Link } from 'dva/router';
 import React, { PropTypes } from 'react';
 import { FormattedMessage as Format } from 'react-intl';
+import logo from '../assets/MoeCube.png'
 import './Login.less';
 
 const FormItem = Form.Item;
@@ -37,6 +38,9 @@ class Login extends React.Component {
     return (
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
         <Spin spinning={loading} delay={100}>
+          <FormItem style={{display: 'flex', justifyContent:'center'}}>
+            <img src={logo} style={{height:'20vw', width: '20vw'}}/>                                        
+          </FormItem>
           <Form onSubmit={this.onSubmitLogin} className="login-form">
             <FormItem>
               {getFieldDecorator('account', {
@@ -58,6 +62,7 @@ class Login extends React.Component {
                 <Format id={'sign-in'} />
               </Button>
             </FormItem>
+
             <div>
               <Link to="/signup"><Format id={'sign-up'} /></Link>
               <Link to="/forgot" className="login-form-forgot"><Format id={'forgot-password'} /></Link>
