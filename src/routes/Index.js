@@ -10,10 +10,10 @@ function Index({ children }) {
           params={{
             'particles': {
               'number': {
-                'value': 80,
+                'value': 20,
                 'density': {
                   'enable': true,
-                  'value_area': 800
+                  'value_area': 1000
                 }
               },
               'color': {
@@ -101,7 +101,7 @@ function Index({ children }) {
                 },
                 'bubble': {
                   'distance': 400,
-                  'size': 40,
+                  'size': 20,
                   'duration': 2,
                   'opacity': 8,
                   'speed': 1
