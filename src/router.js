@@ -22,7 +22,6 @@ function RouterConfig({ history }) {
   return (
     <Router history={history}>
       <Route path="/" component={Index} >
-        <Redirect from="/home" to="/profiles" />
         <Route path="/signin" component={Login}/>
         <Route path="/forgot" component={Forgot}/>
         <Route path="/signup" component={Register}/>

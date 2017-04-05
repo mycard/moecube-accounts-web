@@ -241,11 +241,5 @@ export default {
     },
   },
   subscriptions: {
-
-    setup({ dispatch, history }) { 
-      return history.listen(({ pathname, query }) => {
-        
-      })
-    }
   }
 };

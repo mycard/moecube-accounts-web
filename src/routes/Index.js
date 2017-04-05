@@ -129,7 +129,7 @@ function Index({ dispatch, children, messages }) {
       <DocumentTitle title={messages['title'] || 'Moe Cube'} />                                                       
 
       <Header style={{ display: 'flex', alignItems: 'center'}}>
-        <Link to="/home" style={{ marginTop: '20px'}}>
+        <Link to="/" style={{ marginTop: '20px'}}>
           <img src={logo} style={{ width: '140px', height: '44px'}}/>   
         </Link>
             
@@ -139,7 +139,7 @@ function Index({ dispatch, children, messages }) {
           defaultSelectedKeys={['1']}
           style={{ lineHeight: '64px' }}>
           <Menu.Item key="1">
-            <Link to="/home">  
+            <Link to="/">  
               Home              
             </Link>
           </Menu.Item>
