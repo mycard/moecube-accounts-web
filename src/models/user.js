@@ -2,6 +2,7 @@ import { routerRedux } from 'dva/router'
 import { updateProfile, updateAccount } from '../services/user'
 import { getAuthUser } from '../services/auth'
 import { message } from 'antd'
+import { handleSSO } from '../utils/sso'
 
 
 
@@ -89,6 +90,7 @@ export default {
         localStorage.setItem("token", token)
       }
 
+<<<<<<< Updated upstream
       if(user && user.active) {
         yield put(routerRedux.replace("/profiles"))
         // message.info("登录成功")
@@ -96,28 +98,70 @@ export default {
         yield put(routerRedux.replace(`/verify`))
       }
 
+=======
+      if(user) {
+        if(handleSSO(user)){
+          return
+        }
+         
+        
+        if(user.active) {
+          yield put(routerRedux.replace("/profiles"))
+          // message.info("登录成功")        
+        } else {
+          yield put(routerRedux.replace(`/verify`))        
+        }
+      }
+>>>>>>> Stashed changes
     },
     *preLogin({ payload }, { call, put }) {
-      let token = localStorage.getItem("token")
+      const {token } = payload
+      
+      if(!token) {
+        yield put(routerRedux.replace("/signin"))        
+      }
 
       try {
         let { data } =  yield call(getAuthUser, { token })
         if (data ) {
           yield put({ type: 'preLoginSuccess', payload: { user: data, token }})
 
+<<<<<<< Updated upstream
           if(data.active) {
             // yield put(routerRedux.replace("/profiles"))
           }
         }
       } catch (error) {
         message.error(error.message)
+=======
+          if(data) {
+            if(handleSSO(user)){
+              return
+            }           
+
+            if(data.active) {
+              yield put(routerRedux.replace("/profiles")) 
+            }else {
+              yield put(routerRedux.replace("/verify"))
+            } 
+          }     
+        }       
+      } catch (error) {
+        yield put(routerRedux.replace("/signin"))        
+>>>>>>> Stashed changes
       }
     },
     *updateProfile({ payload }, { call, put, select }) {
       message.destroy()
+
+      let token = yield select(state => state.user.token)        
+      let { messages } = yield select(state => state.common)
       try {
+<<<<<<< Updated upstream
         let token = yield select(state => state.user.token)
         let { messages } = yield select(state => state.common)
+=======
+>>>>>>> Stashed changes
 
         let { data } = yield call(updateProfile, {...payload, token})
 
@@ -165,10 +209,21 @@ export default {
   },
   subscriptions: {
     setup({ dispatch, history }) {
-      return history.listen(({ pathname, query }) => {
-        if (pathname == '/profiles') {
+      let token = localStorage.getItem("token")
 
-          dispatch({ type: 'preLogin', payload: query })
+      if(window.location.pathname != '/signin') {
+        dispatch({ type: 'preLogin', payload: { token } })              
+      }
+
+      history.listen((a) => {
+        console.log(a)
+      })
+
+      return history.listen(({ pathname, query }) => {
+        console.log(pathname, query)
+
+        if(pathname == 'profiles' && !token) {
+          history.push("/signin")
         }
       })
     }
