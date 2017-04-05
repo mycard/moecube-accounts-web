@@ -65,6 +65,8 @@
     "Password-length-must-be-between-8-and-24-characters.":"Password length must be between 8 and 24 characters.",
     "email_exists":"email exists",
     "update_success": "Update Success!",
+    "A-verification-email-has-been-sent-to-you,please-check-the-mail-to-complete.":"A verification email has been sent to you, please check the mail to complete.",
+
 
     "i_password_error": "Incorrect password. ",
     "i_user_unexists":"User does not exisit.",
@@ -73,8 +75,6 @@
     "i_not_found":"user unexists",
     "i_key_time_out":"url is time out",
     "i_key_invalid":"url is invalid",
-
-    "A-verification-email-has-been-sent-to-you,please-check-the-mail-to-complete.":"A verification email has been sent to you, please check the mail to complete.",
 
     "没毛用":"防逗号报错,上线删"
   },
@@ -146,6 +146,7 @@
     "Password-length-must-be-between-8-and-24-characters.":"密码必须为8-24位",
     "email_exists":"邮箱已存在",
     "update_success": "修改成功",
+    "A-verification-email-has-been-sent-to-you,please-check-the-mail-to-complete.":"一封验证邮件已经发送给您，请查看邮件完成修改。",
 
     "i_password_error": "密码错误",
     "i_user_unexists":"用户不存在",
@@ -154,12 +155,6 @@
     "i_not_found":"用户不存在",
     "i_key_time_out":"此链接已过期",
     "i_key_invalid":"此链接已失效",
-
-
-    "A-verification-email-has-been-sent-to-you,please-check-the-mail-to-complete.":"一封验证邮件已经发送给您，请查看邮件完成修改。",
-
-    "原_验证邮件已发送":"邮件已发送,验证邮箱后,完成修改邮箱",
-
 
     "没毛用":"防逗号报错,上线删"
 
