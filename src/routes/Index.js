@@ -139,7 +139,7 @@ function Index({ dispatch, children, messages }) {
           defaultSelectedKeys={['1']}
           style={{ lineHeight: '64px' }}>
           <Menu.Item key="1">
-            <Link to="/">  
+            <Link to="/home">  
               Home              
             </Link>
           </Menu.Item>
