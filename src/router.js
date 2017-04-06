@@ -1,5 +1,4 @@
 import { Redirect, Route, Router } from 'dva/router';
-import QueueAnim from 'rc-queue-anim'
 import React from 'react';
 
 import Active from './routes/Activate.js';

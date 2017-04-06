@@ -125,7 +125,7 @@ const particleConfig = {
 
 function Index({ dispatch, children, messages }) {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', flex: 1, height: '100vh' }}>
+    <div style={{ display: 'flex', flexDirection: 'column',  flex: 1, height: '100vh' }}>
       <DocumentTitle title={messages['title'] || 'Moe Cube'} />                                                       
 
       <Header style={{ display: 'flex', alignItems: 'center'}}>
@@ -154,7 +154,7 @@ function Index({ dispatch, children, messages }) {
       />
       {children}        
 
-      <Footer style={{ position: 'absolute', width: '100%', bottom: 0, left: 0, display: 'flex', justifyContent: 'space-between' }}>
+      <Footer style={{ flex:1, width: '100%', bottom: 0, left: 0, display: 'flex', justifyContent: 'flex-end', flexDirection: 'column' }}>
         <div>© MoeCube 2017 all right reserved.</div>
       </Footer>
     </div>
