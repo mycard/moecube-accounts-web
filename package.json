@@ -1,8 +1,8 @@
 {
   "private": true,
   "scripts": {
-    "start": "BUILD=development roadhog server",
-    "build:dev":"BUILD=development roadhog build",
+    "start": "cross-env BUILD=development roadhog server",
+    "build:dev": "cross-env BUILD=development roadhog build",
     "build": "roadhog build",
     "lint": "eslint --ext .js src test",
     "precommit": "npm run lint"
@@ -28,6 +28,7 @@
     "babel-plugin-dva-hmr": "^0.3.2",
     "babel-plugin-import": "^1.1.1",
     "babel-plugin-transform-runtime": "^6.9.0",
+    "cross-env": "^4.0.0",
     "eslint": "^3.12.2",
     "eslint-config-airbnb": "^13.0.0",
     "eslint-plugin-import": "^2.2.0",
