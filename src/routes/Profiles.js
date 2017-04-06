@@ -112,7 +112,7 @@ class Profiles extends React.Component {
                     guides
                   />
                   <Button type="primary" onClick={this.handleUpload}>
-                    <Icon type="upload"/> upload
+                    <Icon type="upload"/> <Format id="upload"/>
                   </Button>
                 </div>
 
@@ -120,7 +120,7 @@ class Profiles extends React.Component {
                   <img alt="avatar" src={avatar || imageUrl || defaultAvatar}/>
                   <Button onClick={() => { dispatch({ type: 'upload/start' }); }}>
                     <label>
-                      <Icon type="plus"/> Change Avatar
+                      <Icon type="plus"/><Format id="Change-Avatar"/>
                       <input
                         type="file" onChange={this.onGetFile} ref={(file) => {
                           this.file = file;
