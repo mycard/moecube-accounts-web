@@ -116,26 +116,26 @@ export default {
         let { data } =  yield call(getAuthUser, { token })  
         if(data) {
           yield put({ type: 'getAuthUserSuccess', payload: { user: data, token }})  
-          yield put({ type: 'preLogin'})
         }            
       }catch(error) {
         message.error(error.message)
       }
     },
     *preLogin({ payload }, { call, put, select }) {
-      const {token, user } = yield select(state => state.user)
+      const {token } = payload
       
       if(!token) {
         yield put(routerRedux.replace("/signin"))        
       }
 
       try {
-        if (user["id"]) {
-            if(handleSSO(user)){
+        let { data } =  yield call(getAuthUser, { token })          
+        if (data) {
+            if(handleSSO(data)){
               return
             }           
 
-            if(user.active) {
+            if(data.active) {
               yield put(routerRedux.replace("/profiles"))
             }else {
               yield put(routerRedux.replace("/verify"))
@@ -207,7 +207,7 @@ export default {
 
       history.listen(({ pathname, query }) => {
         if(pathname == '/') {
-          dispatch({ type: 'preLogin'})                       
+          dispatch({ type: 'preLogin', payload: { token } })                       
         }
       })
     }
