@@ -1,7 +1,8 @@
 {
   "private": true,
   "scripts": {
-    "start": "roadhog server",
+    "start": "BUILD=development roadhog server",
+    "build:dev":"BUILD=development roadhog build",
     "build": "roadhog build",
     "lint": "eslint --ext .js src test",
     "precommit": "npm run lint"
@@ -14,14 +15,10 @@
     "babel-runtime": "^6.9.2",
     "dva": "^1.2.1",
     "dva-loading": "^0.2.1",
-    "egg-init": "^1.8.1",
-    "rc-queue-anim": "^0.13.3",
     "react": "^15.4.0",
-    "react-addons-transition-group": "^15.4.2",
     "react-cropper": "^0.10.1",
     "react-document-title": "^2.0.2",
     "react-dom": "^15.4.0",
-    "react-image-crop": "^2.0.3",
     "react-intl": "^2.2.3",
     "react-particles-js": "^1.5.0",
     "url-api-polyfill": "^1.1.0"

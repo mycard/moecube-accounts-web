@@ -13,7 +13,7 @@ import config from '../config'
 const FormItem = Form.Item;
 const TabPane = Tabs.TabPane;
 
-const defaultAvatar = "https://r.my-card.in/accounts/images/default_avatar.jpg"
+const defaultAvatar = require("../../public/default_avatar.jpg")
 
 const formItemLayout = {
   labelCol: { span: 4 },
