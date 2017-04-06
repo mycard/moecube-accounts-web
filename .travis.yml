@@ -1,0 +1,22 @@
+language: node_js
+node_js: node
+
+#sudo: false
+#dist: trusty
+
+env:
+  global:
+    secure: pL8y9VeZcluWZ1DmYg1wt7N9A6BV98lBuP9jWSnBr98vra2e/Ivcr40CxIXbIVC5DAgoIPpLl9FzoHmm2rudG+6HBxzOAaXNCO7U2HtmDP0o7n4eXUu6PUseRs88R/h6QhiTTxwwVnv8H5OyvsR5wsqzs0c8WKwTf5+Gxq3rHFam7dccY7UMGNRAu565veT/uhBnEXrI5vqb3DEs6hPv0YJZIOWsV109s5E/j9sbGZOaDx4XJAe1kGWKI98A2K5mvmm61yKyb2V14F+NDoICgKBgnLNYsCuaNR+88iOAAvblb/ZbPj49cfim2rMnE8W3wjm8cgzThrw+d+Q982zq9pq9AO4pdP+Od1xKe+c0eU57DZ2KUEwfQm9rc4OENYHfUU8Vr35dJ4nJCOzYOIuJCIJVsfLcZejSpSUCEodp8WypaJbiZa8QAlhmDyhtK2WaGwOAsy6qGBT3M5+Om2sNcckvsQXYpCdGLSNvlZ30KpiNrrVYn7reJzk+FEN5gHh1PajgMuXo88ix3g56ZTE4s8S1KoZ2PghZlIUmhEiUuxkWjC++E9ha9tEmE/7JdVPhzgpx6iWRKGB20VB4MZGays+u/CqX4PEkJ4DhvKu5oC8aaaoUfEG3uA7hdRQPb8zDAwf3usB55n4UrAFnvLd4MZjtZJnWPjXoP1WHOWiUBfE=
+
+script: npm run build
+
+before_deploy:
+  - curl --location --retry 5 --output ossutil 'https://github.com/mycard/ossutil/releases/download/1.0.0.Beta2/ossutil'
+  - chmod +x ossutil
+  - ./ossutil config --endpoint oss-cn-hangzhou.aliyuncs.com --access-key-id $ALIYUN_ID --access-key-secret $ALIYUN_SECRET
+deploy:
+  provider: script
+  script: ./ossutil cp -rf dist oss://mycard/accounts
+  skip_cleanup: true
+  on:
+    branch: master

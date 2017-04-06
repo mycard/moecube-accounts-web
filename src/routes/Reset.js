@@ -51,7 +51,7 @@ class Reset extends React.Component {
     const { intl: { messages } } = this.context;
 
     return (
-      <div style={{ display: 'flex', flex: 1, justifyContent: 'center', alignItems: 'center', height: '100%'  }}>
+      <div style={{ display: 'flex', flex: 1, justifyContent: 'center', alignItems: 'center', height: '100%' }}>
         <Spin spinning={isResetSubmit} delay={100}>
           <Form onSubmit={this.onSubmitReset} className="login-form">
             <FormItem>

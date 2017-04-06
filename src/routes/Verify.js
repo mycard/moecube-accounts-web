@@ -69,7 +69,8 @@ class Verify extends React.Component {
 
     return (
       <div
-        style={{  display: 'flex', flex: 1, justifyContent: 'center', alignItems: 'center', height: '100%'  }}>
+        style={{ display: 'flex', flex: 1, justifyContent: 'center', alignItems: 'center', height: '100%' }}
+      >
 
         <Spin spinning={loading} delay={100}>
           <Steps size="large" current={1}>
