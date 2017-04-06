@@ -150,8 +150,8 @@ export default {
           }
         }
       } catch (error) {
-        yield put(routerRedux.replace('/signin'));
-        message.error(error.message);
+        yield put(routerRedux.replace("/signin")) 
+        // message.error(error.message)       
       }
     },
     *updateProfile({ payload }, { call, put, select }) {

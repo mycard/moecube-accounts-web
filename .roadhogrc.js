@@ -1,6 +1,13 @@
-{
+
+let publicPath = 'https://cdn01.moecube.com/accounts/'
+let defineConf = {
+  apiRoot: process.env["BUILD"] == 'development' ? 'http://114.215.243.95:8082' : 'https://api.moeube.com/accounts'
+}
+
+export default {
   "entry": "src/index.js",
-  "publicPath":"https://cdn01.moecube.com/accounts/",
+  publicPath,
+  define: {...defineConf},
   "env": {
     "development": {
       "extraBabelPlugins": [
