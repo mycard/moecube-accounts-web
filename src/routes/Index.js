@@ -1,4 +1,4 @@
-import { Layout, Menu, Dropdown, Icon } from 'antd';
+import { Dropdown, Icon, Layout, Menu } from 'antd';
 import { connect } from 'dva';
 import { Link } from 'dva/router';
 import React from 'react';
@@ -123,17 +123,23 @@ const particleConfig = {
 };
 
 function Index({ children, messages, dispatch }) {
-  const language =  localStorage.getItem('locale') || navigator.language || (navigator.languages && navigator.languages[0]) || navigator.userLanguage || navigator.browserLanguage || 'zh-CN' ;
+  const language = localStorage.getItem('locale') || navigator.language || (navigator.languages && navigator.languages[0]) || navigator.userLanguage || navigator.browserLanguage || 'zh-CN';
   const menu = (
     <Menu style={{ transform: 'translateX(-16px)' }}>
       <Menu.Item key="0">
-        <a onClick={() => { dispatch({ type: 'common/changeLanguage', payload: { id: 'en-US' } })}} className='changelanguage'>
-
+        <a
+          onClick={() => {
+            dispatch({ type: 'common/changeLanguage', payload: { id: 'en-US' } });
+          }}
+        >
           &nbsp;English</a>
       </Menu.Item>
       <Menu.Item key="1">
-        <a onClick={() => { dispatch({ type: 'common/changeLanguage', payload: { id: 'zh-EN' } })}} className='changelanguage'>
-
+        <a
+          onClick={() => {
+            dispatch({ type: 'common/changeLanguage', payload: { id: 'zh-EN' } });
+          }}
+        >
           &nbsp;中文</a>
       </Menu.Item>
     </Menu>
@@ -179,13 +185,12 @@ function Index({ children, messages, dispatch }) {
           <Menu.Item key="2">
             <Dropdown overlay={menu} trigger={['click']}>
               {language === 'en-US' ?
-                (<a className="ant-dropdown-link changelanguage" href="#">
-
-                  &nbsp;English <Icon type="down" className="flag" />
-                </a>) : (<a className="ant-dropdown-link changelanguage" href="#">
-
-                  &nbsp;中文 <Icon type="down" className="flag" />
-                </a>)}
+                <a className="ant-dropdown-link changelanguage" href="#">
+                  &nbsp;English <Icon type="down" className="flag"/>
+                </a> : <a className="ant-dropdown-link changelanguage" href="#">
+                  &nbsp;中文 <Icon type="down" className="flag"/>
+                </a>
+              }
             </Dropdown>
           </Menu.Item>
         </Menu>
