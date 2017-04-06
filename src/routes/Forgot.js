@@ -33,7 +33,7 @@ class Login extends React.Component {
     const { loading } = this.props;
     const { intl: { messages } } = this.context;
     return (
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flex: 1 }}>
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%'}}>
         <Spin spinning={loading} delay={100}>
           <Form onSubmit={this.onSubmitLogin} className="login-form">
 
