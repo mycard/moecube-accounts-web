@@ -21,10 +21,9 @@ export default {
     register: {},
   },
   reducers: {
-    signOut(state){
-      console.log('sign out');
+    signOut(state) {
       localStorage.removeItem('token');
-      localStorage.removeItem('user');
+      location='/';
       return state;
     },
     change(state, action) {

@@ -29,5 +29,4 @@ function mapStateToProps(state) {
     loading,
   };
 }
-
 export default connect(mapStateToProps)(Active);

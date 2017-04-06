@@ -151,11 +151,11 @@ function Index({ children, messages, dispatch }) {
           defaultSelectedKeys={['1']}
           style={{ lineHeight: '64px', position: 'absolute', right: '50px' }}
         >
-          {localStorage.getItem('user') ? (<Menu.Item key="1">
+          {localStorage.getItem('token') ? (<Menu.Item key="1">
             <div onClick={() => { dispatch({ type : 'auth/signOut' }) }}>
               <Format id="sign-out"/>
             </div>
-          </Menu.Item>):(<div></div>)
+          </Menu.Item>):('')
           }
         </Menu>
       </Header>
