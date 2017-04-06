@@ -23,10 +23,10 @@ export default {
   reducers: {
     change(state, action) {
       return {
-        ...state, ...action.payload
+        ...state, ...action.payload,
       };
     },
-    checkEmail(state, action) {
+    checkEmail(state) {
       return {
         ...state,
         ...{
@@ -34,7 +34,7 @@ export default {
         },
       };
     },
-    checkUsername(state, action) {
+    checkUsername(state) {
       return {
         ...state,
         ...{
@@ -42,7 +42,7 @@ export default {
         },
       };
     },
-    activate(state, action) {
+    activate(state) {
       return {
         ...state,
         ...{
@@ -52,18 +52,18 @@ export default {
     },
     check(state, action) {
       return {
-        ...state, ...action.payload
+        ...state, ...action.payload,
       };
     },
-    register(state, action) {
+    register(state) {
       return {
         ...state,
         ...{
           isRegisterSubmit: true,
-        }
+        },
       };
     },
-    registerSuccess(state, action) {
+    registerSuccess(state) {
       return {
         ...state,
         ...{
@@ -71,7 +71,7 @@ export default {
         },
       };
     },
-    registerFail(state, action) {
+    registerFail(state) {
       return {
         ...state,
         ...{
@@ -79,7 +79,7 @@ export default {
         },
       };
     },
-    login(state, action) {
+    login(state) {
       return {
         ...state,
         ...{
@@ -96,7 +96,7 @@ export default {
         },
       };
     },
-    loginFail(state, action) {
+    loginFail(state) {
       return {
         ...state,
         ...{
@@ -104,7 +104,7 @@ export default {
         },
       };
     },
-    forgot(state, action) {
+    forgot(state) {
       return {
         ...state,
         ...{
@@ -112,7 +112,7 @@ export default {
         },
       };
     },
-    forgotSuccess(state, action) {
+    forgotSuccess(state) {
       return {
         ...state,
         ...{
@@ -120,7 +120,7 @@ export default {
         },
       };
     },
-    forgotFail(state, action) {
+    forgotFail(state) {
       return {
         ...state,
         ...{
@@ -128,7 +128,7 @@ export default {
         },
       };
     },
-    reset(state, action) {
+    reset(state) {
       return {
         ...state,
         ...{
@@ -136,7 +136,7 @@ export default {
         },
       };
     },
-    resetSuccess(state, action) {
+    resetSuccess(state) {
       return {
         ...state,
         ...{
@@ -144,7 +144,7 @@ export default {
         },
       };
     },
-    resetFail(state, action) {
+    resetFail(state) {
       return {
         ...state,
         ...{
@@ -154,7 +154,7 @@ export default {
     },
   },
   effects: {
-    *activate({ payload }, { call, put, select }) {
+    *activate({ payload }, { call, select }) {
       const { messages } = yield select(state => state.common);
       try {
         const { data } = yield call(activate, payload);

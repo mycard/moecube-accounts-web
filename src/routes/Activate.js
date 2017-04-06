@@ -16,7 +16,7 @@ class Active extends React.Component {
     return (
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flex: 1 }}>
         <Button type="primary" icon="poweroff" loading={loading} onClick={this.handleClick}>
-          <Format id={'verify-email'} />
+          <Format id={'verify-email'}/>
         </Button>
       </div>
     );
@@ -24,10 +24,9 @@ class Active extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const {
-  } = state;
+  const {} = state;
 
-  const loading = state.loading.global || false
+  const loading = state.loading.global || false;
 
   return {
     loading,

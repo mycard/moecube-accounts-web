@@ -15,15 +15,15 @@ export default {
   reducers: {
     loginFromStorage(state, action) {
       return {
-        ...state, ...action.payload
+        ...state, ...action.payload,
       };
     },
     loginSuccess(state, action) {
       return {
-        ...state, ...action.payload.data
+        ...state, ...action.payload.data,
       };
     },
-    updateProfile(state, action) {
+    updateProfile(state) {
       return {
         ...state,
         ...{
@@ -40,7 +40,7 @@ export default {
         },
       };
     },
-    updateProfileFail(state, action) {
+    updateProfileFail(state) {
       return {
         ...state,
         ...{
@@ -48,7 +48,7 @@ export default {
         },
       };
     },
-    updateAccount(state, action) {
+    updateAccount(state) {
       return {
         ...state,
         ...{
@@ -65,7 +65,7 @@ export default {
         },
       };
     },
-    updateAccountFail(state, action) {
+    updateAccountFail(state) {
       return {
         ...state,
         ...{
@@ -90,10 +90,8 @@ export default {
     },
   },
   effects: {
-    *loginSuccess({ payload }, { call, put }) {
-
+    *loginSuccess({ payload }, { put }) {
       const { data: { user, token } } = payload;
-
       if (!payload.data) {
         message.error('error ');
       }
@@ -116,20 +114,20 @@ export default {
         }
       }
     },
-    *getAuthUser({ payload }, { call, put, select }) {
+    *getAuthUser({ payload }, { call, put }) {
       const { token } = payload;
 
       try {
-        let { data } =  yield call(getAuthUser, { token })
-        if(data) {
-          yield put({ type: 'getAuthUserSuccess', payload: { user: data, token }})
+        let { data } = yield call(getAuthUser, { token });
+        if (data) {
+          yield put({ type: 'getAuthUserSuccess', payload: { user: data, token } });
         }
-      }catch(error) {
-        yield put({ type: 'getAuthUserFail'})
+      } catch (error) {
+        yield put({ type: 'getAuthUserFail' });
         // message.error(error.message)
       }
     },
-    *preLogin({ payload }, { call, put, select }) {
+    *preLogin({ payload }, { call, put }) {
       const { token } = payload;
 
       if (!token) {
@@ -150,8 +148,8 @@ export default {
           }
         }
       } catch (error) {
-        yield put(routerRedux.replace("/signin")) 
-        // message.error(error.message)       
+        yield put(routerRedux.replace('/signin'));
+        // message.error(error.message)
       }
     },
     *updateProfile({ payload }, { call, put, select }) {
@@ -160,12 +158,10 @@ export default {
       let token = yield select(state => state.user.token);
       let { messages } = yield select(state => state.common);
       try {
-
         let { data } = yield call(updateProfile, { ...payload, token });
 
         if (data) {
           yield put({ type: 'updateProfileSuccess', payload: { user: data, token } });
-
           message.info(messages.update_success);
         }
       } catch (error) {
@@ -178,7 +174,6 @@ export default {
       try {
         let token = yield select(state => state.user.token);
         let { data } = yield call(updateAccount, { ...payload, token });
-
         if (data) {
           yield put({ type: 'updateAccountSuccess', payload: { user: data, token } });
           message.info(messages['A-verification-email-has-been-sent-to-you,please-check-the-mail-to-complete.']);
@@ -194,7 +189,6 @@ export default {
       try {
         let token = yield select(state => state.user.token);
         let { data } = yield call(updateAccount, { ...payload, token });
-
         if (data) {
           yield put({ type: 'updateAccountSuccess', payload: { user: data, token } });
           message.info(messages.update_success);
@@ -208,12 +202,10 @@ export default {
   subscriptions: {
     setup({ dispatch, history }) {
       let token = localStorage.getItem('token');
-
       if (token) {
         dispatch({ type: 'getAuthUser', payload: { token } });
       }
-
-      history.listen(({ pathname, query }) => {
+      history.listen(({ pathname }) => {
         if (pathname == '/') {
           dispatch({ type: 'preLogin', payload: { token } });
         }

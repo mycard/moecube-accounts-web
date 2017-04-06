@@ -61,7 +61,7 @@ export async function getAuthUser(params) {
   return request(`/authUser`, {
     method: 'GET',
     headers: {
-      Authorization: `Bearer ${params.token}`
-    }
-  })
+      Authorization: `Bearer ${params.token}`,
+    },
+  });
 }

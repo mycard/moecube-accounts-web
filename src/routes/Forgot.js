@@ -5,26 +5,13 @@ import React, { PropTypes } from 'react';
 import { FormattedMessage as Format } from 'react-intl';
 
 const FormItem = Form.Item;
-const Option = Select.Option;
-const Step = Steps.Step
-
-
-const formItemLayout = {
-  labelCol: {
-    xs: { span: 24 },
-    sm: { span: 6 },
-  },
-  wrapperCol: {
-    xs: { span: 24 },
-    sm: { span: 14 },
-  },
-};
+const Step = Steps.Step;
 
 class Login extends React.Component {
 
   static contextTypes = {
     intl: PropTypes.object.isRequired,
-  }
+  };
 
   onSubmitLogin = (e) => {
     const { form, dispatch, params: { id } } = this.props;
@@ -42,35 +29,35 @@ class Login extends React.Component {
   };
 
   render() {
-    const { getFieldDecorator, dispatch } = this.props.form;
+    const { getFieldDecorator } = this.props.form;
     const { loading } = this.props;
     const { intl: { messages } } = this.context;
     return (
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flex: 1}}>
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flex: 1 }}>
         <Spin spinning={loading} delay={100}>
           <Form onSubmit={this.onSubmitLogin} className="login-form">
 
             <Steps size="large" current={0}>
-              <Step title={messages['send-email']} icon={<Icon type="solution" />} />
-              <Step title={messages['verify-email']} icon={<Icon type="mail" />} />
+              <Step title={messages['send-email']} icon={<Icon type="solution"/>}/>
+              <Step title={messages['verify-email']} icon={<Icon type="mail"/>}/>
             </Steps>
 
             <FormItem style={{ marginTop: '28px' }}>
               {getFieldDecorator('email', {
                 rules: [{ required: true, message: 'Please input your username or email!' }],
               })(
-                <Input prefix={<Icon type="user" style={{ fontSize: 13 }} />} placeholder={messages['email-address-or-username']} />,
+                <Input prefix={<Icon type="user" style={{ fontSize: 13 }}/>} placeholder={messages['email-address-or-username']}/>,
               )}
             </FormItem>
 
             <FormItem>
               <Button type="primary" htmlType="submit" className="login-form-button">
-                <Format id={'send-email'} />
+                <Format id={'send-email'}/>
               </Button>
             </FormItem>
 
             <div>
-              <Link to="/signin"><Format id={'sign-in'} /></Link>
+              <Link to="/signin"><Format id={'sign-in'}/></Link>
             </div>
           </Form>
         </Spin>
@@ -79,12 +66,12 @@ class Login extends React.Component {
   }
 }
 
-function mapStateToProps(state, props) {
+function mapStateToProps(state) {
   const {
     auth: { isForgotSubmit },
   } = state;
 
-  const loading = state.loading.global || false
+  const loading = state.loading.global || false;
 
   return {
     loading,

@@ -3,17 +3,17 @@ import { connect } from 'dva';
 import { Link } from 'dva/router';
 import React, { PropTypes } from 'react';
 import { FormattedMessage as Format } from 'react-intl';
-import styles from './Register.less'
+
 const FormItem = Form.Item;
 const Option = Select.Option;
-const Step = Steps.Step
+const Step = Steps.Step;
 
 
 class Register extends React.Component {
 
   static contextTypes = {
     intl: PropTypes.object.isRequired,
-  }
+  };
 
   onSubmitLogin = (e) => {
     const { form, dispatch, params: { id } } = this.props;
@@ -77,12 +77,13 @@ class Register extends React.Component {
     };
 
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flex: 1 }}>
+      <div
+        style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flex: 1 }}>
 
         <Spin spinning={loading} delay={100}>
           <Steps size="large" current={0}>
-            <Step title={messages['sign-up']} icon={<Icon type="solution" />} />
-            <Step title={messages['verify-email']} icon={<Icon type="mail" />} />
+            <Step title={messages['sign-up']} icon={<Icon type="solution"/>}/>
+            <Step title={messages['verify-email']} icon={<Icon type="mail"/>}/>
           </Steps>
 
           <Form onSubmit={this.onSubmitLogin} className="login-form" style={{ marginTop: '24px' }}>
@@ -112,41 +113,47 @@ class Register extends React.Component {
 
             <FormItem hasFeedback>
               {getFieldDecorator('password', {
-                rules: [{ required: true, message: messages['Password-length-must-be-between-8-and-24-characters.'], pattern: /^.{8,24}$/ }],
+                rules: [{
+                  required: true,
+                  message: messages['Password-length-must-be-between-8-and-24-characters.'],
+                  pattern: /^.{8,24}$/,
+                }],
               }, {
-                  validator: this.checkConfirm,
-                })(
+                validator: this.checkConfirm,
+              })(
                 <Input
-                  prefix={<Icon type="lock" style={{ fontSize: 13 }} />}
+                  prefix={<Icon type="lock" style={{ fontSize: 13 }}/>}
                   type="password"
-                  placeholder={messages.password} />,
+                  placeholder={messages.password}/>,
               )}
             </FormItem>
 
             <FormItem hasFeedback>
               {getFieldDecorator('confirm', {
                 rules: [{
-                  required: true, message: messages['Password-length-must-be-between-8-and-24-characters.'], pattern: /^.{8,24}$/,
+                  required: true,
+                  message: messages['Password-length-must-be-between-8-and-24-characters.'],
+                  pattern: /^.{8,24}$/,
                 }, {
                   validator: this.checkPassword,
                 }],
               })(
                 <Input
-                  prefix={<Icon type="lock" style={{ fontSize: 13 }} />}
+                  prefix={<Icon type="lock" style={{ fontSize: 13 }}/>}
                   type="password"
                   onBlur={this.handleConfirmBlur}
-                  placeholder={messages['password-again']} />,
+                  placeholder={messages['password-again']}/>,
               )}
             </FormItem>
 
             <FormItem>
               <Button type="primary" htmlType="submit" className="login-form-button">
-                <Format id={'sign-up'} />
+                <Format id={'sign-up'}/>
               </Button>
             </FormItem>
 
             <div>
-              <Link to="/signin"><Format id={'sign-in'} /></Link>
+              <Link to="/signin"><Format id={'sign-in'}/></Link>
             </div>
           </Form>
         </Spin>
@@ -160,7 +167,7 @@ function mapStateToProps(state) {
     auth: { register, checkEmail, checkUsername, isEmailExists, isUserNameExists, isRegisterSubmit },
   } = state;
 
-  const loading = state.loading.global || false
+  const loading = state.loading.global || false;
 
   return {
     loading,

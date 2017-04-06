@@ -1,54 +1,55 @@
-import { uploadImage } from '../services/upload'
-import { message } from 'antd'
+import { message } from 'antd';
+import { uploadImage } from '../services/upload';
 
 export default {
   namespace: 'upload',
   state: {
-    imageUrl: "",
+    imageUrl: '',
     isUpload: false,
-    uploadedImage: {}
+    uploadedImage: {},
   },
   reducers: {
-    start(state, action) {
+    start(state) {
       return {
-        ...state, ...{
-          isUpload: true
-        }
-      }
+        ...state,
+        ...{
+          isUpload: true,
+        },
+      };
     },
     getfile(state, action) {
       return {
-        ...state, ...action.payload
-      }
-    },  
+        ...state, ...action.payload,
+      };
+    },
     uploadSuccess(state, action) {
       return {
-        ...state, ...action.payload, ...{
-          isUpload: false
-        }
-      }
-    }
+        ...state,
+        ...action.payload,
+        ...{
+          isUpload: false,
+        },
+      };
+    },
   },
   effects: {
     *upload({ payload }, { call, put }) {
-        try {
-          const { data } = yield call(uploadImage, payload)
+      try {
+        const { data } = yield call(uploadImage, payload);
 
-          if(data){
-            const [ image ] = data
-            yield put({ type: 'uploadSuccess', payload: {  uploadedImage : image } })
+        if (data) {
+          const [image] = data;
+          yield put({ type: 'uploadSuccess', payload: { uploadedImage: image } });
 
-            const {user_id} = payload
+          const { user_id } = payload;
 
-            yield put({ type: 'user/updateProfile', payload: { avatar: image["Key"], user_id }})
-          }
-        } catch (error) {
-          yield put({ type: 'uploadFail' })
-          message.error(error.message)
+          yield put({ type: 'user/updateProfile', payload: { avatar: image.Key, user_id } });
         }
+      } catch (error) {
+        yield put({ type: 'uploadFail' });
+        message.error(error.message);
+      }
     },
   },
-  subscriptions: {
-
-  },
+  subscriptions: {},
 };

@@ -14,7 +14,7 @@ class EmailForm extends React.Component {
 
   static contextTypes = {
     intl: PropTypes.object.isRequired,
-  }
+  };
   onSubmit = (e) => {
     const { form, dispatch, user: { id } } = this.props;
 
@@ -31,7 +31,6 @@ class EmailForm extends React.Component {
   };
 
   render() {
-
     const { form, dispatch, user, checkUsername, isUserNameExists } = this.props;
     const { getFieldDecorator } = form;
     const { id, username } = user;
@@ -43,7 +42,7 @@ class EmailForm extends React.Component {
         hasFeedback: true,
         validateStatus: checkUsername,
         help: isUserNameExists ? 'username exists' : '',
-        ...formItemLayout
+        ...formItemLayout,
       },
       decorator: {
         initialValue: username,
@@ -57,11 +56,15 @@ class EmailForm extends React.Component {
     const passwordProps = {
       fromItem: {
         label: messages.password,
-        ...formItemLayout
+        ...formItemLayout,
       },
       decorator: {
         rules: [
-          { required: true, message: messages['Password-length-must-be-between-8-and-24-characters.'], pattern: /^.{8,24}$/ },
+          {
+            required: true,
+            message: messages['Password-length-must-be-between-8-and-24-characters.'],
+            pattern: /^.{8,24}$/,
+          },
         ],
       },
       input: {
@@ -93,7 +96,7 @@ class EmailForm extends React.Component {
 }
 
 
-function mapStateToProps(state, props) {
+function mapStateToProps(state) {
   const {
     user: { user },
     auth: { isUserNameExists, checkUsername },

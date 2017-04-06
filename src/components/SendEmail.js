@@ -1,42 +1,39 @@
+import { Form, Input } from 'antd';
 import React, { PropTypes } from 'react';
-import styles from './EmailForm.css';
-import { connect } from 'react-redux'
-import { Form, Input, Icon, Button, Modal } from 'antd';
-const FormItem = Form.Item;
+import { connect } from 'react-redux';
 import SubmitButton from './SubmitButton';
 
+const FormItem = Form.Item;
 const formItemLayout = {
   labelCol: { span: 4 },
   wrapperCol: { span: 15 },
-}
+};
 
 
 class EmailForm extends React.Component {
 
   static contextTypes = {
     intl: PropTypes.object.isRequired,
-  }
+  };
 
   onSubmit = (e) => {
-    const { form, dispatch, user: { id } } = this.props
-
+    const { form, dispatch, user: { id } } = this.props;
     e && e.preventDefault();
     form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
 
-        const { email, password } = values
+        const { email, password } = values;
 
-        dispatch({ type: "user/updateEmail", payload: { email, password, user_id: id } })
+        dispatch({ type: 'user/updateEmail', payload: { email, password, user_id: id } });
       }
     });
-  }
+  };
 
   render() {
-
-    const { form, dispatch, user, checkEmail, isEmailExists, isSendEmailActive } = this.props
+    const { form, dispatch, user, checkEmail, isEmailExists } = this.props;
     const { getFieldDecorator } = form;
-    const { id, email } = data;
+    const { id, email } = user;
     const { intl: { messages } } = this.context;
 
     const emailProps = {
@@ -45,31 +42,16 @@ class EmailForm extends React.Component {
         hasFeedback: true,
         validateStatus: checkEmail,
         help: isEmailExists ? 'email exists' : '',
-        ...formItemLayout
+        ...formItemLayout,
       },
       decorator: {
-        initialValue: email
+        initialValue: email,
       },
       input: {
-        placeholder: messages.email
-      }
-    }
+        placeholder: messages.email,
+      },
+    };
 
-    const passwordProps = {
-      fromItem: {
-        label: messages.passwrod,
-        ...formItemLayout
-      },
-      decorator: {
-        rules: [
-          { required: true, message: messages['Password-length-must-be-between-8-and-24-characters.'], pattern: /^.{8,24}$/ }
-        ]
-      },
-      input: {
-        placeholder: messages.password,
-        type: 'password'
-      }
-    }
 
     return (
       <Form onSubmit={this.onSubmit}>
@@ -77,7 +59,7 @@ class EmailForm extends React.Component {
           {getFieldDecorator('email', { ...emailProps.decorator })(
             <Input
               {...emailProps.input}
-              onBlur={() => dispatch({ type: 'auth/checkEmail', payload: { ...form.getFieldsValue(), id } })} />
+              onBlur={() => dispatch({ type: 'auth/checkEmail', payload: { ...form.getFieldsValue(), id } })}/>,
           )}
         </FormItem>
 
@@ -90,21 +72,20 @@ class EmailForm extends React.Component {
 }
 
 
-
 function mapStateToProps(state, props) {
   const {
     user: { user },
-    auth: { isEmailExists, checkEmail, isSendEmailActive }
-  } = state
+    auth: { isEmailExists, checkEmail, isSendEmailActive },
+  } = state;
   return {
     user,
     checkEmail,
     isEmailExists,
-    isSendEmailActive
+    isSendEmailActive,
   };
 }
 
-const WrapperEmailForm = Form.create()(EmailForm)
+const WrapperEmailForm = Form.create()(EmailForm);
 
 export default connect(mapStateToProps)(WrapperEmailForm);
 

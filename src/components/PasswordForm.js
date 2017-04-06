@@ -1,7 +1,6 @@
+import { Form, Input } from 'antd';
 import React, { PropTypes } from 'react';
-import styles from './EmailForm.css';
-import {connect} from 'react-redux'
-import { Form, Input, Icon, Button } from 'antd';
+import { connect } from 'react-redux';
 
 import SubmitButton from './SubmitButton';
 
@@ -11,14 +10,14 @@ const FormItem = Form.Item;
 const formItemLayout = {
   labelCol: { span: 4 },
   wrapperCol: { span: 15 },
-}
+};
 
 
 class EmailForm extends React.Component {
 
   static contextTypes = {
     intl: PropTypes.object.isRequired,
-  }
+  };
   checkPassword = (rule, value, callback) => {
     const form = this.props.form;
     const { intl: { messages } } = this.context;
@@ -27,7 +26,7 @@ class EmailForm extends React.Component {
     } else {
       callback();
     }
-  }
+  };
 
   checkConfirm = (rule, value, callback) => {
     const form = this.props.form;
@@ -35,84 +34,91 @@ class EmailForm extends React.Component {
       form.validateFields(['confirm'], { force: true });
     }
     callback();
-  }
+  };
 
   onSubmit = (e) => {
-    const { form, dispatch, user: {id} } = this.props
+    const { form, dispatch, user: { id } } = this.props;
 
     e && e.preventDefault();
     form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
 
-        const { new_password, password } = values
+        const { new_password, password } = values;
 
-        dispatch({type: "user/updateAccount", payload: { new_password, password, user_id: id }})
+        dispatch({ type: 'user/updateAccount', payload: { new_password, password, user_id: id } });
       }
     });
-  }
+  };
 
-  render(){
-
-    const {form } = this.props
-    const {getFieldDecorator} = form;
-    const { intl: { messages } } = this.context
+  render() {
+    const { form } = this.props;
+    const { getFieldDecorator } = form;
+    const { intl: { messages } } = this.context;
 
     const passwordProps = {
       fromItem: {
         label: 'old passwrod',
-        ...formItemLayout
+        ...formItemLayout,
       },
       decorator: {
         rules: [
-          { required: true, message: messages['Password-length-must-be-between-8-and-24-characters.'], pattern: /^.{8,24}$/ },
-          { validator: this.checkConfirm }
+          {
+            required: true,
+            message: messages['Password-length-must-be-between-8-and-24-characters.'],
+            pattern: /^.{8,24}$/,
+          },
+          { validator: this.checkConfirm },
         ],
       },
       input: {
         placeholder: messages['old-password'],
-        type: 'password'
+        type: 'password',
       },
       input2: {
         placeholder: messages['new-password'],
-        type: 'password'
-      }
-    }
+        type: 'password',
+      },
+    };
 
     const confirmProps = {
       fromItem: {
         label: messages['password-again'],
-        ...formItemLayout
+        ...formItemLayout,
       },
       decorator: {
         rules: [
-          { required: true, message: messages['Password-length-must-be-between-8-and-24-characters.'], pattern: /^.{8,24}$/},
-          { validator: this.checkPassword}
+          {
+            required: true,
+            message: messages['Password-length-must-be-between-8-and-24-characters.'],
+            pattern: /^.{8,24}$/,
+          },
+          { validator: this.checkPassword },
         ],
       },
       input: {
         placeholder: messages['password-again'],
-        type: 'password'
-      }
-    }
+        type: 'password',
+      },
+    };
 
     return (
       <Form onSubmit={this.onSubmit}>
         <FormItem {...passwordProps.fromItem} label={messages['old-password']}>
           {getFieldDecorator('password')(
-            <Input {...passwordProps.input} />
+            <Input {...passwordProps.input} />,
           )}
         </FormItem>
 
         <FormItem {...passwordProps.fromItem} label={messages['new-password']}>
-          {getFieldDecorator('new_password', {...passwordProps.decorator})(
-            <Input {...passwordProps.input2} />
+          {getFieldDecorator('new_password', { ...passwordProps.decorator })(
+            <Input {...passwordProps.input2} />,
           )}
         </FormItem>
 
         <FormItem {...confirmProps.fromItem}>
-          {getFieldDecorator(`confirm`, {...confirmProps.decorator})(
-            <Input {...confirmProps.input} />
+          {getFieldDecorator('confirm', { ...confirmProps.decorator })(
+            <Input {...confirmProps.input} />,
           )}
         </FormItem>
 
@@ -125,18 +131,16 @@ class EmailForm extends React.Component {
 }
 
 
-
-
 function mapStateToProps(state, props) {
   const {
-    user: {user}
-  } = state
+    user: { user },
+  } = state;
   return {
     user,
   };
 }
 
-const WrapperEmailForm = Form.create()(EmailForm)
+const WrapperEmailForm = Form.create()(EmailForm);
 
 export default connect(mapStateToProps)(WrapperEmailForm);
 
