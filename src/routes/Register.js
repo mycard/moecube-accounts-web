@@ -60,22 +60,23 @@ class Register extends React.Component {
     const emailProps = {
       hasFeedback: true,
       validateStatus: checkEmail,
-      help: isEmailExists ? messages.i_email_exists : '',
+      extra: isEmailExists ? messages['i_email_exists'] : '',
     };
 
+
     const emailInputProps = {
-      onBlur: () => dispatch({ type: 'auth/checkEmail', payload: { ...form.getFieldsValue() } }),
+      onBlur: () => !form.getFieldError("email") && dispatch({ type: 'auth/checkEmail', payload: { ...form.getFieldsValue() } }),
       placeholder: messages.email,
     };
 
     const usernameProps = {
       hasFeedback: true,
       validateStatus: checkUsername,
-      help: isUserNameExists ? 'username exists' : '',
+      extra: isUserNameExists ? 'username exists' : '',
     };
 
     const usernameInputProps = {
-      onBlur: () => dispatch({ type: 'auth/checkUsername', payload: { ...form.getFieldsValue() } }),
+      onBlur: () => !form.getFieldError("username") && dispatch({ type: 'auth/checkUsername', payload: { ...form.getFieldsValue() } }),
       placeholder: messages.username,
     };
 

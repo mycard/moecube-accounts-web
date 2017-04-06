@@ -101,44 +101,32 @@ class Profiles extends React.Component {
             <Form onSubmit={this.onUpdateSubmit}>
 
               <FormItem style={{ display: 'flex', justifyContent: 'center' }}>
-                {
-                  isUpload ?
-                    <div>
-                      <Cropper
-                        ref={(cropper) => {
-                          this.cropper = cropper;
-                        }}
-                        src={imageUrl || defaultAvatar}
-                        style={{ height: '20vw', width: '20vw' }}
-                        aspectRatio={1 / 1}
-                        guides
-                      />
-                      <Button>
-                        <label>
-                          <Icon type="plus"/> add file
-                          <input
-                            type="file"
-                            onChange={this.onGetFile}
-                            ref={(file) => {
-                              this.file = file;
-                            }}
-                            style={{ display: 'none' }}
-                          />
-                        </label>
-                      </Button>
-                      <Button type="primary" onClick={this.handleUpload}>
-                        <Icon type="upload"/> upload
-                      </Button>
-                    </div>
-                    :
-                    <img
-                      alt="avatar"
-                      src={avatar || imageUrl || defaultAvatar}
-                      style={{ height: '256px', width: '256px' }}
-                      onClick={() => dispatch({ type: 'upload/start' })}
-                    />
-                }
+                <div style={{ display: isUpload ? 'flex' : 'none', flexDirection: 'column'}}>
+                  <Cropper
+                    ref={cropper => {
+                      this.cropper = cropper;
+                    }}
+                    src={ imageUrl || defaultAvatar}
+                    style={{ height: '20vw', width: '20vw' }}
+                    aspectRatio={1 / 1}
+                    guides={true}
+                  />
+                  <Button type="primary" onClick={this.handleUpload}>
+                    <Icon type="upload"/> upload
+                  </Button>
+                </div>
 
+                <div style={{ display: !isUpload ? 'flex' : 'none', flexDirection: 'column'}}> 
+                  <img src={avatar || imageUrl || defaultAvatar}/>
+                  <Button onClick={() => { dispatch({ type: 'upload/start' }) }}>
+                    <label>
+                      <Icon type="plus"/> Change Avatar
+                      <input type="file" onChange={this.onGetFile} ref={file => {
+                        this.file = file;
+                      }} style={{ display: 'none' }}/>
+                    </label>
+                  </Button>
+                </div>
               </FormItem>
 
               <FormItem {...nameProps.fromItem}>
