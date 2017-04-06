@@ -125,6 +125,7 @@ class Profiles extends React.Component {
                     </div>
                     :
                     <img src={avatar || imageUrl || defaultAvatar}
+                         style={{ height: '256px', width: '256px' }}
                          onClick={() => dispatch({ type: 'upload/start' })}
                     />
                 }

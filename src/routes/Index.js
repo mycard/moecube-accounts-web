@@ -6,9 +6,8 @@ import DocumentTitle from 'react-document-title';
 import { FormattedMessage as Format } from 'react-intl';
 import Particles from 'react-particles-js';
 import logo from '../assets/MoeCube.png';
-const { Header, Footer, Sider, Content } = Layout;
 
-
+const { Header, Footer } = Layout;
 const particleConfig = {
   particles: {
     number: {
@@ -123,7 +122,7 @@ const particleConfig = {
   retina_detect: true,
 };
 
-function Index({ children, messages }) {
+function Index({ children, messages, dispatch }) {
   return (
     <div style={{ height: '100%'}}>
       <DocumentTitle title={messages.title || 'Moe Cube'} />
@@ -144,6 +143,20 @@ function Index({ children, messages }) {
               <Format id="Home"/>
             </Link>
           </Menu.Item>
+        </Menu>
+
+        <Menu
+          theme="dark"
+          mode="horizontal"
+          defaultSelectedKeys={['1']}
+          style={{ lineHeight: '64px', position: 'absolute', right: '50px' }}
+        >
+          {localStorage.getItem('user') ? (<Menu.Item key="1">
+            <div onClick={() => { dispatch({ type : 'auth/signOut' }) }}>
+              <Format id="sign-out"/>
+            </div>
+          </Menu.Item>):(<div></div>)
+          }
         </Menu>
       </Header>
 
