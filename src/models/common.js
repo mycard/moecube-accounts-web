@@ -13,6 +13,11 @@ export default {
         ...state, ...action.payload,
       };
     },
+    changeLanguage(state, { payload: id }) {
+      localStorage.setItem('locale', id.id);
+      history.go(0);
+      return state;
+    },
   },
   effects: {},
   subscriptions: {
