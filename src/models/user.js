@@ -120,12 +120,13 @@ export default {
       const { token } = payload;
 
       try {
-        let { data } = yield call(getAuthUser, { token });
-        if (data) {
-          yield put({ type: 'getAuthUserSuccess', payload: { user: data, token } });
+        let { data } =  yield call(getAuthUser, { token })
+        if(data) {
+          yield put({ type: 'getAuthUserSuccess', payload: { user: data, token }})
         }
-      } catch (error) {
-        message.error(error.message);
+      }catch(error) {
+        yield put({ type: 'getAuthUserFail'})
+        // message.error(error.message)
       }
     },
     *preLogin({ payload }, { call, put, select }) {

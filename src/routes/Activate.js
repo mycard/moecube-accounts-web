@@ -14,7 +14,7 @@ class Active extends React.Component {
   render() {
     const { loading } = this.props;
     return (
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100%' }}>
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flex: 1 }}>
         <Button type="primary" icon="poweroff" loading={loading} onClick={this.handleClick}>
           <Format id={'verify-email'} />
         </Button>

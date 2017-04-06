@@ -77,7 +77,7 @@ class Register extends React.Component {
     };
 
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flex: 1 }}>
 
         <Spin spinning={loading} delay={100}>
           <Steps size="large" current={0}>
