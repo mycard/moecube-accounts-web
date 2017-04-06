@@ -1,19 +1,14 @@
 language: node_js
 node_js: node
-
-#sudo: false
-#dist: trusty
-
 env:
   global:
-    secure: pL8y9VeZcluWZ1DmYg1wt7N9A6BV98lBuP9jWSnBr98vra2e/Ivcr40CxIXbIVC5DAgoIPpLl9FzoHmm2rudG+6HBxzOAaXNCO7U2HtmDP0o7n4eXUu6PUseRs88R/h6QhiTTxwwVnv8H5OyvsR5wsqzs0c8WKwTf5+Gxq3rHFam7dccY7UMGNRAu565veT/uhBnEXrI5vqb3DEs6hPv0YJZIOWsV109s5E/j9sbGZOaDx4XJAe1kGWKI98A2K5mvmm61yKyb2V14F+NDoICgKBgnLNYsCuaNR+88iOAAvblb/ZbPj49cfim2rMnE8W3wjm8cgzThrw+d+Q982zq9pq9AO4pdP+Od1xKe+c0eU57DZ2KUEwfQm9rc4OENYHfUU8Vr35dJ4nJCOzYOIuJCIJVsfLcZejSpSUCEodp8WypaJbiZa8QAlhmDyhtK2WaGwOAsy6qGBT3M5+Om2sNcckvsQXYpCdGLSNvlZ30KpiNrrVYn7reJzk+FEN5gHh1PajgMuXo88ix3g56ZTE4s8S1KoZ2PghZlIUmhEiUuxkWjC++E9ha9tEmE/7JdVPhzgpx6iWRKGB20VB4MZGays+u/CqX4PEkJ4DhvKu5oC8aaaoUfEG3uA7hdRQPb8zDAwf3usB55n4UrAFnvLd4MZjtZJnWPjXoP1WHOWiUBfE=
-
+    secure: NObcZ6fY1VQuoDfxRxKVOZ+p7g3LTDkonG4Ow4HIbx2g8wJ24mMqs9gN0J3Asbdbz68isDMpkKy7IW1mK9+N9fM0pBauqD1YMbglnEv+HhYjhiEsQdRdDM2nzDIjS4PCwavI1Da5TLhaUjSAM4lrHx7bVOK4YsvF3s8JEApS54QgSlbeJgvSbPcCiapl0VwwaL36cGndChc3tawq4xseuk4bP2NrTEd7ifYZMt+iojId+UuhRQk4w0HUlBhEDKiT/fLxeQDwMRv2WIdIPW7D7+Wo01iX+T0Ti629QhQBe/S76affkG6G085HIPin3VvXDQaiYbK4ALbc79O+9jqSxEFd9nwG8xbp2jezzvclUSXPhIyZe7VSRS6z1MdevlyQa56AUEP7My7IMqj8j7NPoUgrnVlKtR8WPHQacfAVkrcOIX+Tzwl2IMOCqonamDtJjUNX5xpYB+IEj+INvQmRqT2NicExGWj9LZp3L3kscwq1u+0hPzgoQ9yovE+OvLFNE/R5AE90GIaSlwXw4MqOeB+8l+ou2JzNZFJhHBvAsOFwQTloFz/pu7ichJ+P0KsMPteLFA4Btuo6bBu31K7R310CmlIdYJIeeybMuM6e6bG8IkbVcMq5skg9LNa64KuDG46oopwGLiWkdRwDzG3VmXGwVm+OF2EWZi/B0wIcTwY=
 script: npm run build
-
 before_deploy:
-  - curl --location --retry 5 --output ossutil 'https://github.com/mycard/ossutil/releases/download/1.0.0.Beta2/ossutil'
-  - chmod +x ossutil
-  - ./ossutil config --endpoint oss-cn-hangzhou.aliyuncs.com --access-key-id $ALIYUN_ID --access-key-secret $ALIYUN_SECRET
+- curl --location --retry 5 --output ossutil 'https://github.com/mycard/ossutil/releases/download/1.0.0.Beta2/ossutil'
+- chmod +x ossutil
+- ./ossutil config --endpoint oss-cn-hangzhou.aliyuncs.com --access-key-id $ALIYUN_ID
+  --access-key-secret $ALIYUN_SECRET
 deploy:
   provider: script
   script: ./ossutil cp -rf dist oss://mycard/accounts
