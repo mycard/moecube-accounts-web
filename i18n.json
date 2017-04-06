@@ -1,6 +1,7 @@
 {
   "en": {
     "title":"MoeCube",
+    "Home":"Home",
     "username": "User Name",
     "email": "E-Mail",
     "password": "Password",
@@ -27,7 +28,7 @@
     "send-email": "Send Email",
     "reset-success": "reset success",
     "reset-fail": "reset fail",
-    "reset-password": "Reset Password",
+    "reset-password2": "Reset Password",
     "remember-me":"Remember me",
     "Please-use-a-correct-E-Mail-address.": "Please use a correct E-Mail address.",
     "User-name-can-not-be-empty.": "User name can not be empty.",
@@ -80,6 +81,7 @@
   },
   "zh": {
     "title":"萌立方",
+    "Home":"主页",
     "username": "用户名",
     "email": "邮箱",
     "password": "密码",
@@ -106,7 +108,7 @@
     "send-email": "发送邮件",
     "reset-success": "修改成功",
     "reset-fail": "修改失败",
-    "reset-password": "重设密码",
+    "reset-password2": "重置密码",
     "remember-me":"记住我",
     "Please-use-a-correct-E-Mail-address.": "请填写正确的邮箱地址",
     "User-name-can-not-be-empty.": "用户名不能为空",

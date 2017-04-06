@@ -3,6 +3,7 @@ import { connect } from 'dva';
 import styles from './Index.less';
 import Particles from 'react-particles-js'
 import DocumentTitle from 'react-document-title'
+import { FormattedMessage as Format } from 'react-intl';
 import { Layout, Button, Menu } from 'antd';
 import { Link } from 'dva/router'
 import logo from '../assets/MoeCube.png'
@@ -126,24 +127,24 @@ const particleConfig = {
 function Index({ dispatch, children, messages }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', flex: 1, height: '100vh' }}>
-      <DocumentTitle title={messages['title'] || 'Moe Cube'} />                                                       
+      <DocumentTitle title={messages['title'] || 'Moe Cube'} />
 
       <Header style={{ display: 'flex', alignItems: 'center'}}>
         <Link to="/" style={{ marginTop: '20px'}}>
-          <img src={logo} style={{ width: '140px', height: '44px'}}/>   
+          <img src={logo} style={{ width: '140px', height: '44px'}}/>
         </Link>
-            
+
           <Menu
           theme="dark"
           mode="horizontal"
           defaultSelectedKeys={['1']}
           style={{ lineHeight: '64px' }}>
           <Menu.Item key="1">
-            <Link to="/">  
-              Home              
+            <Link to="/">
+              <Format id="Home"/>
             </Link>
           </Menu.Item>
-        </Menu>  
+        </Menu>
       </Header>
 
       <Particles
@@ -152,7 +153,7 @@ function Index({ dispatch, children, messages }) {
           position: "fixed"
         }}
       />
-      {children}        
+      {children}
 
       <Footer style={{ position: 'absolute', width: '100%', bottom: 0, left: 0, display: 'flex', justifyContent: 'space-between' }}>
         <div>© MoeCube 2017 all right reserved.</div>

@@ -55,7 +55,7 @@ class Reset extends React.Component {
         <Spin spinning={isResetSubmit} delay={100}>
           <Form onSubmit={this.onSubmitReset} className="login-form">
             <FormItem>
-              <h1><Format id='reset-password'/></h1>
+              <h1><Format id='reset-password2'/></h1>
             </FormItem>
             <FormItem>
               {getFieldDecorator('password', {
@@ -81,7 +81,7 @@ class Reset extends React.Component {
             </FormItem>
 
             <Button type="primary" htmlType="submit" className="login-form-button">
-              <Format id='reset-password'/>
+              <Format id='reset-password2'/>
             </Button>
           </Form>
         </Spin>
