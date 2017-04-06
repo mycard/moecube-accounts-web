@@ -118,7 +118,8 @@ export default {
           yield put({ type: 'getAuthUserSuccess', payload: { user: data, token }})  
         }            
       }catch(error) {
-        message.error(error.message)
+        yield put({ type: 'getAuthUserFail'})          
+        // message.error(error.message)
       }
     },
     *preLogin({ payload }, { call, put, select }) {
