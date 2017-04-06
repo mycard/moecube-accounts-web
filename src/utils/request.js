@@ -10,11 +10,11 @@ async function checkStatus(response) {
     return response;
   }
 
-  let message 
+  let message;
   try {
-    message = (await response.json())["message"]
+    message = (await response.json()).message;
   } catch (error) {
-    message = response.statusText
+    message = response.statusText;
   }
 
   const error = new Error(message);
@@ -29,17 +29,19 @@ async function checkStatus(response) {
  * @param  {object} [options] The options we want to pass to "fetch"
  * @return {object}           An object containing either "data" or "err"
  */
-export default function request(url, options) {
-  url = `${config.apiRoot}${url}`
-  if(options && !options.headers) {
-    options.headers = {
-      "content-type": "application/json"
-    }
+export default function request(relativeUrl, options) {
+  const url = `${config.apiRoot}${relativeUrl}`;
+  if (options && !options.headers) {
+    Object.assign(options, {
+      headers: {
+        'content-type': 'application/json',
+      },
+    });
   }
-  console.log(options)
+  console.log(options);
   return fetch(url, options)
     .then(checkStatus)
     .then(parseJSON)
-    .then(data => ({ data }))
-    // .catch(err => ({ err }));
-}
+    .then(data => ({ data }));
+  // .catch(err => ({ err }));
+};

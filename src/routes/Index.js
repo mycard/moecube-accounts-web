@@ -124,12 +124,12 @@ const particleConfig = {
 
 function Index({ children, messages, dispatch }) {
   return (
-    <div style={{ height: '100%'}}>
-      <DocumentTitle title={messages.title || 'Moe Cube'} />
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100%' }}>
+      <DocumentTitle title={messages.title || 'Moe Cube'}/>
 
       <Header style={{ display: 'flex', alignItems: 'center' }}>
         <Link to="/" style={{ marginTop: '20px' }}>
-          <img src={logo} style={{ width: '140px', height: '44px' }}/>
+          <img src={logo} style={{ width: '140px', height: '44px' }} alt="logo"/>
         </Link>
 
         <Menu
@@ -152,10 +152,14 @@ function Index({ children, messages, dispatch }) {
           style={{ lineHeight: '64px', position: 'absolute', right: '50px' }}
         >
           {localStorage.getItem('user') ? (<Menu.Item key="1">
-            <div onClick={() => { dispatch({ type : 'auth/signOut' }) }}>
+            <div
+              onClick={() => {
+                dispatch({ type: 'auth/signOut' });
+              }}
+            >
               <Format id="sign-out"/>
             </div>
-          </Menu.Item>):(<div></div>)
+          </Menu.Item>) : (<div/>)
           }
         </Menu>
       </Header>
@@ -168,7 +172,7 @@ function Index({ children, messages, dispatch }) {
       />
       {children}
 
-      <Footer style={{ position: 'absolute', width: '100%'}}>
+      <Footer style={{ position: 'absolute', width: '100%' }}>
         <div>© MoeCube 2017 all right reserved.</div>
       </Footer>
     </div>

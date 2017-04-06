@@ -18,7 +18,9 @@ class EmailForm extends React.Component {
   onSubmit = (e) => {
     const { form, dispatch, user: { id } } = this.props;
 
-    e && e.preventDefault();
+    if (e) {
+      e.preventDefault();
+    }
     form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);

@@ -14,9 +14,11 @@ class Login extends React.Component {
   };
 
   onSubmitLogin = (e) => {
-    const { form, dispatch, params: { id } } = this.props;
+    const { form, dispatch } = this.props;
 
-    e && e.preventDefault();
+    if (e) {
+      e.preventDefault();
+    }
     form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
@@ -33,7 +35,7 @@ class Login extends React.Component {
     const { loading } = this.props;
     const { intl: { messages } } = this.context;
     return (
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%'}}>
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
         <Spin spinning={loading} delay={100}>
           <Form onSubmit={this.onSubmitLogin} className="login-form">
 
@@ -46,7 +48,10 @@ class Login extends React.Component {
               {getFieldDecorator('email', {
                 rules: [{ required: true, message: 'Please input your username or email!' }],
               })(
-                <Input prefix={<Icon type="user" style={{ fontSize: 13 }}/>} placeholder={messages['email-address-or-username']}/>,
+                <Input
+                  prefix={<Icon type="user" style={{ fontSize: 13 }}/>}
+                  placeholder={messages['email-address-or-username']}
+                />,
               )}
             </FormItem>
 

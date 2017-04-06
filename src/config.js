@@ -1,4 +1,4 @@
-
+/* global apiRoot */
 export default {
-  apiRoot: apiRoot
+  apiRoot,
 };

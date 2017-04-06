@@ -35,7 +35,7 @@ class Login extends React.Component {
     const { intl: { messages } } = this.context;
 
     return (
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+      <div style={{ display: 'flex', flexGrow: 1, justifyContent: 'center', alignItems: 'center', height: '100%' }}>
         <Spin spinning={loading} delay={100}>
 
           <Form onSubmit={this.onSubmitLogin} className="login-form">
@@ -43,14 +43,20 @@ class Login extends React.Component {
               {getFieldDecorator('account', {
                 rules: [{ required: true, message: messages['Please input your account!'] }],
               })(
-                <Input prefix={<Icon type="user" style={{ fontSize: 13 }}/>} placeholder={messages['email-address-or-username']}/>,
+                <Input
+                  prefix={<Icon type="user" style={{ fontSize: 13 }}/>}
+                  placeholder={messages['email-address-or-username']}
+                />,
               )}
             </FormItem>
             <FormItem>
               {getFieldDecorator('password', {
                 rules: [{ required: true, message: messages['Please-input-your-Password!'] }],
               })(
-                <Input prefix={<Icon type="lock" style={{ fontSize: 13 }}/>} type="password" placeholder={messages.password}/>,
+                <Input
+                  prefix={<Icon type="lock" style={{ fontSize: 13 }}/>} type="password"
+                  placeholder={messages.password}
+                />,
               )}
             </FormItem>
             <FormItem>
