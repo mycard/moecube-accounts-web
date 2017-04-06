@@ -24,7 +24,7 @@ export default {
     signOut(state) {
       console.log('sign out');
       localStorage.removeItem('token');
-      localStorage.removeItem('user');
+      location.href = '/';
       return state;
     },
     change(state, action) {
