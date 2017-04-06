@@ -1,8 +1,6 @@
-import { login, forgot, register, reset, activate, checkUserExists } from '../services/auth'
-import { message } from 'antd'
-import { routerRedux } from 'dva/router'
-import config from '../config'
-
+import { message } from 'antd';
+import { routerRedux } from 'dva/router';
+import { activate, checkUserExists, forgot, login, register, reset } from '../services/auth';
 
 
 export default {
@@ -30,23 +28,26 @@ export default {
     },
     checkEmail(state, action) {
       return {
-        ...state, ...{
+        ...state,
+        ...{
           checkEmail: 'validating',
-        }
+        },
       };
     },
     checkUsername(state, action) {
       return {
-        ...state, ...{
+        ...state,
+        ...{
           checkUsername: 'validating',
-        }
+        },
       };
     },
     activate(state, action) {
       return {
-        ...state, ...{
+        ...state,
+        ...{
           activateState: true,
-        }
+        },
       };
     },
     check(state, action) {
@@ -56,86 +57,99 @@ export default {
     },
     register(state, action) {
       return {
-        ...state, ...{
+        ...state,
+        ...{
           isRegisterSubmit: true,
         }
       };
     },
     registerSuccess(state, action) {
       return {
-        ...state, ...{
+        ...state,
+        ...{
           isRegisterSubmit: false,
-        }
+        },
       };
     },
     registerFail(state, action) {
       return {
-        ...state, ...{
+        ...state,
+        ...{
           isRegisterSubmit: false,
-        }
+        },
       };
     },
     login(state, action) {
       return {
-        ...state, ...{
+        ...state,
+        ...{
           isLoginSubmit: true,
-        }
+        },
       };
     },
     loginSuccess(state, action) {
       return {
-        ...state, ...action.payload, ...{
+        ...state,
+        ...action.payload,
+        ...{
           isLoginSubmit: false,
-        }
+        },
       };
     },
     loginFail(state, action) {
       return {
-        ...state, ...{
+        ...state,
+        ...{
           isLoginSubmit: false,
-        }
+        },
       };
     },
     forgot(state, action) {
       return {
-        ...state, ...{
+        ...state,
+        ...{
           isForgotSubmit: true,
-        }
+        },
       };
     },
     forgotSuccess(state, action) {
       return {
-        ...state, ...{
+        ...state,
+        ...{
           isForgotSubmit: false,
-        }
+        },
       };
     },
     forgotFail(state, action) {
       return {
-        ...state, ...{
+        ...state,
+        ...{
           isForgotSubmit: false,
-        }
+        },
       };
     },
     reset(state, action) {
       return {
-        ...state, ...{
+        ...state,
+        ...{
           isResetSubmit: true,
-        }
+        },
       };
     },
     resetSuccess(state, action) {
       return {
-        ...state, ...{
+        ...state,
+        ...{
           isResetSubmit: false,
-        }
+        },
       };
     },
     resetFail(state, action) {
       return {
-        ...state, ...{
+        ...state,
+        ...{
           isResetSubmit: false,
-        }
+        },
       };
     },
   },
@@ -193,7 +207,7 @@ export default {
         }
       } catch (error) {
         yield put({ type: 'loginFail' });
-        message.error(messages[error.message]);
+        message.error(messages[error.message] || error.message);
       }
     },
     *forgot({ payload }, { call, put, select }) {
@@ -206,7 +220,7 @@ export default {
         }
       } catch (error) {
         yield put({ type: 'forgotFail' });
-        message.error(messages[error.message], 3);
+        message.error(messages[error.message] || error.message, 3);
       }
     },
     *register({ payload }, { call, put, select }) {
@@ -223,7 +237,7 @@ export default {
         }
       } catch (error) {
         yield put({ type: 'registerFail' });
-        message.error(messages[error.message], 3);
+        message.error(messages[error.message] || error.message, 3);
       }
     },
     *reset({ payload }, { call, put, select }) {
@@ -236,10 +250,9 @@ export default {
         }
       } catch (error) {
         yield put({ type: 'resetFail' });
-        message.error(messages[error.message], 3);
+        message.error(messages[error.message] || error.message, 3);
       }
     },
   },
-  subscriptions: {
-  }
+  subscriptions: {},
 };

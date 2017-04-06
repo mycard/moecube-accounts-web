@@ -1,215 +1,222 @@
-import { routerRedux } from 'dva/router'
-import { updateProfile, updateAccount } from '../services/user'
-import { getAuthUser } from '../services/auth'
-import { message } from 'antd'
-import { handleSSO } from '../utils/sso'
-
+import { message } from 'antd';
+import { routerRedux } from 'dva/router';
+import { getAuthUser } from '../services/auth';
+import { updateAccount, updateProfile } from '../services/user';
+import { handleSSO } from '../utils/sso';
 
 
 export default {
   namespace: 'user',
   state: {
-    token: "",
+    token: '',
     user: {},
-    isUpdateSubmit: false
+    isUpdateSubmit: false,
   },
   reducers: {
     loginFromStorage(state, action) {
       return {
         ...state, ...action.payload
-      }
+      };
     },
     loginSuccess(state, action) {
       return {
         ...state, ...action.payload.data
-      }
+      };
     },
     updateProfile(state, action) {
       return {
-        ...state, ...{
-          isUpdateSubmit: true
-        }
-      }
+        ...state,
+        ...{
+          isUpdateSubmit: true,
+        },
+      };
     },
     updateProfileSuccess(state, action) {
       return {
-        ...state, ...action.payload, ...{
-          isUpdateSubmit: false
-        }
-      }
+        ...state,
+        ...action.payload,
+        ...{
+          isUpdateSubmit: false,
+        },
+      };
     },
     updateProfileFail(state, action) {
       return {
-        ...state, ...{
-          isUpdateSubmit: false
-        }
-      }
+        ...state,
+        ...{
+          isUpdateSubmit: false,
+        },
+      };
     },
     updateAccount(state, action) {
       return {
-        ...state, ...{
-          isUpdateSubmit: true
-        }
-      }
+        ...state,
+        ...{
+          isUpdateSubmit: true,
+        },
+      };
     },
     updateAccountSuccess(state, action) {
       return {
-        ...state, ...action.payload, ...{
-          isUpdateSubmit: false
-        }
-      }
+        ...state,
+        ...action.payload,
+        ...{
+          isUpdateSubmit: false,
+        },
+      };
     },
     updateAccountFail(state, action) {
       return {
-        ...state, ...{
-          isUpdateSubmit: false
-        }
-      }
+        ...state,
+        ...{
+          isUpdateSubmit: false,
+        },
+      };
     },
     storeToken(state, action) {
       return {
-        ...state, ...action.payload
-      }
+        ...state, ...action.payload,
+      };
     },
     preLoginSuccess(state, action) {
       return {
-        ...state, ...action.payload
-      }
+        ...state, ...action.payload,
+      };
     },
     getAuthUserSuccess(state, action) {
       return {
-        ...state, ...action.payload
-      }
-    }
+        ...state, ...action.payload,
+      };
+    },
   },
   effects: {
     *loginSuccess({ payload }, { call, put }) {
 
-      const { data: {user, token} } = payload
+      const { data: { user, token } } = payload;
 
-      if(!payload.data) {
-        message.error("error ")
+      if (!payload.data) {
+        message.error('error ');
       }
-      if(token) {
-        yield put({ type: 'storeToken', payload: { token }})
-        localStorage.setItem("token", token)
+      if (token) {
+        yield put({ type: 'storeToken', payload: { token } });
+        localStorage.setItem('token', token);
       }
 
-      if(user) {
-        if(handleSSO(user)){
-          return
+      if (user) {
+        if (handleSSO(user)) {
+          return;
         }
-         
-        
-        if(user.active) {
-          yield put(routerRedux.replace("/profiles"))
-          // message.info("登录成功")        
+
+
+        if (user.active) {
+          yield put(routerRedux.replace('/profiles'));
+          // message.info("登录成功")
         } else {
-          yield put(routerRedux.replace(`/verify`))        
+          yield put(routerRedux.replace('/verify'));
         }
       }
     },
     *getAuthUser({ payload }, { call, put, select }) {
-      const { token } = payload
+      const { token } = payload;
 
       try {
-        let { data } =  yield call(getAuthUser, { token })  
-        if(data) {
-          yield put({ type: 'getAuthUserSuccess', payload: { user: data, token }})  
-        }            
-      }catch(error) {
-        message.error(error.message)
+        let { data } = yield call(getAuthUser, { token });
+        if (data) {
+          yield put({ type: 'getAuthUserSuccess', payload: { user: data, token } });
+        }
+      } catch (error) {
+        message.error(error.message);
       }
     },
     *preLogin({ payload }, { call, put, select }) {
-      const {token } = payload
-      
-      if(!token) {
-        yield put(routerRedux.replace("/signin"))        
+      const { token } = payload;
+
+      if (!token) {
+        yield put(routerRedux.replace('/signin'));
       }
 
       try {
-        let { data } =  yield call(getAuthUser, { token })          
+        let { data } = yield call(getAuthUser, { token });
         if (data) {
-            if(handleSSO(data)){
-              return
-            }           
+          if (handleSSO(data)) {
+            return;
+          }
 
-            if(data.active) {
-              yield put(routerRedux.replace("/profiles"))
-            }else {
-              yield put(routerRedux.replace("/verify"))
-            }   
-        }       
+          if (data.active) {
+            yield put(routerRedux.replace('/profiles'));
+          } else {
+            yield put(routerRedux.replace('/verify'));
+          }
+        }
       } catch (error) {
-        yield put(routerRedux.replace("/signin")) 
-        message.error(error.message)       
+        yield put(routerRedux.replace('/signin'));
+        message.error(error.message);
       }
     },
     *updateProfile({ payload }, { call, put, select }) {
-      message.destroy()
+      message.destroy();
 
-      let token = yield select(state => state.user.token)        
-      let { messages } = yield select(state => state.common)
+      let token = yield select(state => state.user.token);
+      let { messages } = yield select(state => state.common);
       try {
 
-        let { data } = yield call(updateProfile, {...payload, token})
+        let { data } = yield call(updateProfile, { ...payload, token });
 
         if (data) {
-          yield put({ type: 'updateProfileSuccess', payload: { user: data, token } })
+          yield put({ type: 'updateProfileSuccess', payload: { user: data, token } });
 
-          message.info(messages["update_success"])
+          message.info(messages.update_success);
         }
       } catch (error) {
-        yield put({ type: 'updateProfileFail' })
-        message.error(error.message)
+        yield put({ type: 'updateProfileFail' });
+        message.error(error.message);
       }
     },
     *updateEmail({ payload }, { call, put, select }) {
-      let { messages } = yield select(state => state.common)
+      let { messages } = yield select(state => state.common);
       try {
-        let token = yield select(state => state.user.token)
-        let { data } = yield call(updateAccount, {...payload, token})
+        let token = yield select(state => state.user.token);
+        let { data } = yield call(updateAccount, { ...payload, token });
 
         if (data) {
-          yield put({ type: 'updateAccountSuccess', payload: { user: data, token } })
-          message.info(messages['A-verification-email-has-been-sent-to-you,please-check-the-mail-to-complete.'])
+          yield put({ type: 'updateAccountSuccess', payload: { user: data, token } });
+          message.info(messages['A-verification-email-has-been-sent-to-you,please-check-the-mail-to-complete.']);
         }
       } catch (error) {
-        yield put({ type: 'updateAccountFail' })
-        message.error(messages[error.message])
+        yield put({ type: 'updateAccountFail' });
+        message.error(messages[error.message] || error.message);
       }
     },
 
     *updateAccount({ payload }, { call, put, select }) {
-      let { messages } = yield select(state => state.common)
+      let { messages } = yield select(state => state.common);
       try {
-        let token = yield select(state => state.user.token)
-        let { data } = yield call(updateAccount, {...payload, token})
+        let token = yield select(state => state.user.token);
+        let { data } = yield call(updateAccount, { ...payload, token });
 
         if (data) {
-          yield put({ type: 'updateAccountSuccess', payload: { user: data, token } })
-          message.info(messages["update_success"])
+          yield put({ type: 'updateAccountSuccess', payload: { user: data, token } });
+          message.info(messages.update_success);
         }
       } catch (error) {
-        yield put({ type: 'updateAccountFail' })
-        message.error(messages[error.message])
+        yield put({ type: 'updateAccountFail' });
+        message.error(messages[error.message] || error.message);
       }
     },
   },
   subscriptions: {
     setup({ dispatch, history }) {
-      let token = localStorage.getItem("token")
+      let token = localStorage.getItem('token');
 
       if (token) {
-        dispatch({type: 'getAuthUser', payload: { token }})        
+        dispatch({ type: 'getAuthUser', payload: { token } });
       }
 
       history.listen(({ pathname, query }) => {
-        if(pathname == '/') {
-          dispatch({ type: 'preLogin', payload: { token } })                       
+        if (pathname == '/') {
+          dispatch({ type: 'preLogin', payload: { token } });
         }
-      })
-    }
+      });
+    },
   },
 };
