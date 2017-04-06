@@ -166,7 +166,6 @@ export default {
       }
     },
     *checkEmail({ payload }, { call, put }) {
-
       if (!payload.email) {
         yield put({ type: 'check', payload: { checkEmail: 'error' } });
         return;

@@ -118,7 +118,7 @@ export default {
       const { token } = payload;
 
       try {
-        let { data } = yield call(getAuthUser, { token });
+        const { data } = yield call(getAuthUser, { token });
         if (data) {
           yield put({ type: 'getAuthUserSuccess', payload: { user: data, token } });
         }
@@ -135,7 +135,7 @@ export default {
       }
 
       try {
-        let { data } = yield call(getAuthUser, { token });
+        const { data } = yield call(getAuthUser, { token });
         if (data) {
           if (handleSSO(data)) {
             return;
@@ -155,10 +155,10 @@ export default {
     *updateProfile({ payload }, { call, put, select }) {
       message.destroy();
 
-      let token = yield select(state => state.user.token);
-      let { messages } = yield select(state => state.common);
+      const token = yield select(state => state.user.token);
+      const { messages } = yield select(state => state.common);
       try {
-        let { data } = yield call(updateProfile, { ...payload, token });
+        const { data } = yield call(updateProfile, { ...payload, token });
 
         if (data) {
           yield put({ type: 'updateProfileSuccess', payload: { user: data, token } });
@@ -170,10 +170,10 @@ export default {
       }
     },
     *updateEmail({ payload }, { call, put, select }) {
-      let { messages } = yield select(state => state.common);
+      const { messages } = yield select(state => state.common);
       try {
-        let token = yield select(state => state.user.token);
-        let { data } = yield call(updateAccount, { ...payload, token });
+        const token = yield select(state => state.user.token);
+        const { data } = yield call(updateAccount, { ...payload, token });
         if (data) {
           yield put({ type: 'updateAccountSuccess', payload: { user: data, token } });
           message.info(messages['A-verification-email-has-been-sent-to-you,please-check-the-mail-to-complete.']);
@@ -185,10 +185,10 @@ export default {
     },
 
     *updateAccount({ payload }, { call, put, select }) {
-      let { messages } = yield select(state => state.common);
+      const { messages } = yield select(state => state.common);
       try {
-        let token = yield select(state => state.user.token);
-        let { data } = yield call(updateAccount, { ...payload, token });
+        const token = yield select(state => state.user.token);
+        const { data } = yield call(updateAccount, { ...payload, token });
         if (data) {
           yield put({ type: 'updateAccountSuccess', payload: { user: data, token } });
           message.info(messages.update_success);
@@ -201,12 +201,12 @@ export default {
   },
   subscriptions: {
     setup({ dispatch, history }) {
-      let token = localStorage.getItem('token');
+      const token = localStorage.getItem('token');
       if (token) {
         dispatch({ type: 'getAuthUser', payload: { token } });
       }
       history.listen(({ pathname }) => {
-        if (pathname == '/') {
+        if (pathname === '/') {
           dispatch({ type: 'preLogin', payload: { token } });
         }
       });

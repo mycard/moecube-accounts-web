@@ -24,10 +24,7 @@ class Active extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const {} = state;
-
   const loading = state.loading.global || false;
-
   return {
     loading,
   };

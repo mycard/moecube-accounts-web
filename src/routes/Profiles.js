@@ -41,11 +41,9 @@ class Profiles extends React.Component {
       console.log(blob);
       this.props.dispatch({ type: 'upload/upload', payload: { image: blob, user_id: id } });
     });
-
   };
 
   onGetFile = (e) => {
-
     let files;
     if (e.dataTransfer) {
       files = e.dataTransfer.files;
@@ -75,9 +73,9 @@ class Profiles extends React.Component {
   };
 
   render() {
-    const { dispatch, form, user, loading, progress, status, imageUrl, isUpload, uploadedImage } = this.props;
+    const { dispatch, form, user, loading, imageUrl, isUpload } = this.props;
     const { getFieldDecorator } = form;
-    const { username, name, id, avatar } = user;
+    const { name, avatar } = user;
     const { intl: { messages } } = this.context;
 
     const nameProps = {
@@ -91,12 +89,6 @@ class Profiles extends React.Component {
       input: {
         placeholder: messages.nickname,
       },
-    };
-
-    const crop = {
-      maxHeight: 80,
-      width: 30,
-      aspect: 16 / 16,
     };
 
 
@@ -127,19 +119,20 @@ class Profiles extends React.Component {
                           }} style={{ display: 'none' }}/>
                         </label>
                       </Button>
-                      <Button type="primary" onClick={ this.handleUpload}>
+                      <Button type="primary" onClick={this.handleUpload}>
                         <Icon type="upload"/> upload
                       </Button>
                     </div>
                     :
-                    <img src={  avatar || imageUrl || defaultAvatar }
-                         onClick={() => dispatch({ type: 'upload/start' })}/>
+                    <img src={avatar || imageUrl || defaultAvatar}
+                         onClick={() => dispatch({ type: 'upload/start' })}
+                    />
                 }
 
               </FormItem>
 
               <FormItem {...nameProps.fromItem}>
-                {getFieldDecorator(`name`, { ...nameProps.decorator })(
+                {getFieldDecorator('name', { ...nameProps.decorator })(
                   <Input {...nameProps.input} />,
                 )}
               </FormItem>

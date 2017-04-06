@@ -1,4 +1,4 @@
-import { Button, Form, Icon, Input, Select, Spin, Steps } from 'antd';
+import { Button, Form, Icon, Input, Spin, Steps } from 'antd';
 import { connect } from 'dva';
 import { Link } from 'dva/router';
 import React, { PropTypes } from 'react';

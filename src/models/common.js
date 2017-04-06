@@ -17,7 +17,7 @@ export default {
   effects: {},
   subscriptions: {
     setup({ dispatch }) {
-      let language = localStorage.getItem('locale') || navigator.language || (navigator.languages && navigator.languages[0]) || navigator.userLanguage;
+      const language = localStorage.getItem('locale') || navigator.language || (navigator.languages && navigator.languages[0]) || navigator.userLanguage;
 
       const languageWithoutRegionCode = language.toLowerCase().split(/[_-]+/)[0];
       const messages = i18n[languageWithoutRegionCode];

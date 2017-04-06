@@ -72,7 +72,7 @@ class EmailForm extends React.Component {
 }
 
 
-function mapStateToProps(state, props) {
+function mapStateToProps(state) {
   const {
     user: { user },
     auth: { isEmailExists, checkEmail, isSendEmailActive },

@@ -126,7 +126,7 @@ const particleConfig = {
 function Index({ children, messages }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column',  flex: 1, height: '100vh' }}>
-      <DocumentTitle title={messages['title'] || 'Moe Cube'} />
+      <DocumentTitle title={messages.title || 'Moe Cube'} />
 
       <Header style={{ display: 'flex', alignItems: 'center' }}>
         <Link to="/" style={{ marginTop: '20px' }}>
