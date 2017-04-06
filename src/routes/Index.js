@@ -139,12 +139,12 @@ function Index({ children, messages, dispatch }) {
     </Menu>
   );
   return (
-    <div style={{ height: '100%'}}>
-      <DocumentTitle title={messages.title || 'Moe Cube'} />
+    <div style={{ display: 'flex', flexDirection: 'column', flex: 1, minHeight: '100%' }}>
+      <DocumentTitle title={messages.title || 'Moe Cube'}/>
 
       <Header style={{ display: 'flex', alignItems: 'center' }}>
         <Link to="/" style={{ marginTop: '20px' }}>
-          <img src={logo} style={{ width: '140px', height: '44px' }}/>
+          <img alt="logo" src={logo} style={{ width: '140px', height: '44px' }}/>
         </Link>
 
         <Menu
@@ -167,7 +167,11 @@ function Index({ children, messages, dispatch }) {
           style={{ lineHeight: '64px', position: 'absolute', right: '50px' }}
         >
           {localStorage.getItem('token') ? (<Menu.Item key="1">
-            <div onClick={() => { dispatch({ type : 'auth/signOut' }) }}>
+            <div
+              onClick={() => {
+                dispatch({ type: 'auth/signOut' });
+              }}
+            >
               <Format id="sign-out"/>
             </div>
           </Menu.Item>) : ('')
@@ -196,7 +200,7 @@ function Index({ children, messages, dispatch }) {
       />
       {children}
 
-      <Footer style={{ position: 'absolute', width: '100%'}}>
+      <Footer style={{ width: '100%' }}>
         <div>© MoeCube 2017 all right reserved.</div>
       </Footer>
     </div>

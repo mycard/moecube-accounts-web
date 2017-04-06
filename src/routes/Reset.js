@@ -1,11 +1,9 @@
-import { Button, Form, Icon, Input, Select, Spin } from 'antd';
+import { Button, Form, Icon, Input, Spin } from 'antd';
 import { connect } from 'dva';
 import React, { PropTypes } from 'react';
 import { FormattedMessage as Format } from 'react-intl';
 
 const FormItem = Form.Item;
-const Option = Select.Option;
-
 
 class Reset extends React.Component {
 
@@ -16,7 +14,9 @@ class Reset extends React.Component {
   onSubmitReset = (e) => {
     const { form, dispatch, location: { query: { key, user_id } } } = this.props;
 
-    e && e.preventDefault();
+    if (e) {
+      e.preventDefault();
+    }
     form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
@@ -51,11 +51,11 @@ class Reset extends React.Component {
     const { intl: { messages } } = this.context;
 
     return (
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+      <div style={{ display: 'flex', flex: 1, justifyContent: 'center', alignItems: 'center', height: '100%' }}>
         <Spin spinning={isResetSubmit} delay={100}>
           <Form onSubmit={this.onSubmitReset} className="login-form">
             <FormItem>
-              <h1><Format id='reset-password2'/></h1>
+              <h1><Format id="reset-password2"/></h1>
             </FormItem>
             <FormItem>
               {getFieldDecorator('password', {
@@ -63,8 +63,10 @@ class Reset extends React.Component {
               }, {
                 validator: this.checkConfirm,
               })(
-                <Input prefix={<Icon type="lock" style={{ fontSize: 13 }}/>} type="password"
-                       placeholder={messages.password}/>,
+                <Input
+                  prefix={<Icon type="lock" style={{ fontSize: 13 }}/>} type="password"
+                  placeholder={messages.password}
+                />,
               )}
             </FormItem>
 
@@ -81,7 +83,7 @@ class Reset extends React.Component {
             </FormItem>
 
             <Button type="primary" htmlType="submit" className="login-form-button">
-              <Format id='reset-password2'/>
+              <Format id="reset-password2"/>
             </Button>
           </Form>
         </Spin>
@@ -90,7 +92,7 @@ class Reset extends React.Component {
   }
 }
 
-function mapStateToProps(state, props) {
+function mapStateToProps(state) {
   const {
     auth: { isResetSubmit },
   } = state;

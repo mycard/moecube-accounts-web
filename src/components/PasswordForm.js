@@ -18,6 +18,24 @@ class EmailForm extends React.Component {
   static contextTypes = {
     intl: PropTypes.object.isRequired,
   };
+
+  onSubmit = (e) => {
+    const { form, dispatch, user: { id } } = this.props;
+
+    if (e) {
+      e.preventDefault();
+    }
+    form.validateFieldsAndScroll((err, values) => {
+      if (!err) {
+        console.log('Received values of form: ', values);
+
+        const { new_password, password } = values;
+
+        dispatch({ type: 'user/updateAccount', payload: { new_password, password, user_id: id } });
+      }
+    });
+  };
+
   checkPassword = (rule, value, callback) => {
     const form = this.props.form;
     const { intl: { messages } } = this.context;
@@ -36,20 +54,6 @@ class EmailForm extends React.Component {
     callback();
   };
 
-  onSubmit = (e) => {
-    const { form, dispatch, user: { id } } = this.props;
-
-    e && e.preventDefault();
-    form.validateFieldsAndScroll((err, values) => {
-      if (!err) {
-        console.log('Received values of form: ', values);
-
-        const { new_password, password } = values;
-
-        dispatch({ type: 'user/updateAccount', payload: { new_password, password, user_id: id } });
-      }
-    });
-  };
 
   render() {
     const { form } = this.props;
@@ -131,7 +135,7 @@ class EmailForm extends React.Component {
 }
 
 
-function mapStateToProps(state, props) {
+function mapStateToProps(state) {
   const {
     user: { user },
   } = state;

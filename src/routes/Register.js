@@ -1,11 +1,10 @@
-import { Button, Form, Icon, Input, Select, Spin, Steps } from 'antd';
+import { Button, Form, Icon, Input, Spin, Steps } from 'antd';
 import { connect } from 'dva';
 import { Link } from 'dva/router';
 import React, { PropTypes } from 'react';
 import { FormattedMessage as Format } from 'react-intl';
 
 const FormItem = Form.Item;
-const Option = Select.Option;
 const Step = Steps.Step;
 
 
@@ -16,14 +15,16 @@ class Register extends React.Component {
   };
 
   onSubmitLogin = (e) => {
-    const { form, dispatch, params: { id } } = this.props;
+    const { form, dispatch } = this.props;
 
-    e && e.preventDefault();
+    if (e) {
+      e.preventDefault();
+    }
     form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
 
-        const { email, username, password, } = values;
+        const { email, username, password } = values;
 
         dispatch({ type: 'auth/register', payload: { email, username, password } });
       }
@@ -49,35 +50,38 @@ class Register extends React.Component {
   };
 
   render() {
-    const { dispatch, register, form, checkEmail, checkUsername, isEmailExists, isUserNameExists, isRegisterSubmit, loading } = this.props;
-    const { getFieldDecorator, } = form;
-    const { email, username, password } = register;
+    const {
+      dispatch, form, checkEmail, checkUsername,
+      isEmailExists, isUserNameExists, loading,
+    } = this.props;
+    const { getFieldDecorator } = form;
     const { intl: { messages } } = this.context;
 
     const emailProps = {
       hasFeedback: true,
       validateStatus: checkEmail,
-      help: isEmailExists ? messages['i_email_exists'] : '',
+      extra: isEmailExists ? messages.i_email_exists : '',
     };
 
+
     const emailInputProps = {
-      onBlur: () => dispatch({ type: 'auth/checkEmail', payload: { ...form.getFieldsValue() } }),
+      onBlur: () => !form.getFieldError('email') && dispatch({ type: 'auth/checkEmail', payload: { ...form.getFieldsValue() } }),
       placeholder: messages.email,
     };
 
     const usernameProps = {
       hasFeedback: true,
       validateStatus: checkUsername,
-      help: isUserNameExists ? 'username exists' : '',
+      extra: isUserNameExists ? 'username exists' : '',
     };
 
     const usernameInputProps = {
-      onBlur: () => dispatch({ type: 'auth/checkUsername', payload: { ...form.getFieldsValue() } }),
+      onBlur: () => !form.getFieldError('username') && dispatch({ type: 'auth/checkUsername', payload: { ...form.getFieldsValue() } }),
       placeholder: messages.username,
     };
 
     return (
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%'}}>
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
 
         <Spin spinning={loading} delay={100}>
           <Steps size="large" current={0}>
@@ -86,7 +90,7 @@ class Register extends React.Component {
           </Steps>
 
           <Form onSubmit={this.onSubmitLogin} className="login-form" style={{ marginTop: '24px' }}>
-            <FormItem  {...emailProps} >
+            <FormItem {...emailProps} >
               {getFieldDecorator('email', {
                 rules: [{
                   required: true,
@@ -123,7 +127,8 @@ class Register extends React.Component {
                 <Input
                   prefix={<Icon type="lock" style={{ fontSize: 13 }}/>}
                   type="password"
-                  placeholder={messages.password}/>,
+                  placeholder={messages.password}
+                />,
               )}
             </FormItem>
 
@@ -141,7 +146,8 @@ class Register extends React.Component {
                   prefix={<Icon type="lock" style={{ fontSize: 13 }}/>}
                   type="password"
                   onBlur={this.handleConfirmBlur}
-                  placeholder={messages['password-again']}/>,
+                  placeholder={messages['password-again']}
+                />,
               )}
             </FormItem>
 
@@ -163,7 +169,10 @@ class Register extends React.Component {
 
 function mapStateToProps(state) {
   const {
-    auth: { register, checkEmail, checkUsername, isEmailExists, isUserNameExists, isRegisterSubmit },
+    auth: {
+      register, checkEmail, checkUsername, isEmailExists,
+      isUserNameExists, isRegisterSubmit,
+    },
   } = state;
 
   const loading = state.loading.global || false;

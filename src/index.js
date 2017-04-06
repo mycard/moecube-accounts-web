@@ -11,7 +11,7 @@ import './index.less';
 
 // 1. Initialize
 const app = dva({
-  onError: (error, dispatch) => {
+  onError: (error) => {
     message.destroy();
     message.error(error.message);
   },

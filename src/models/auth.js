@@ -22,8 +22,9 @@ export default {
   },
   reducers: {
     signOut(state) {
+      console.log('sign out');
       localStorage.removeItem('token');
-      location='/';
+      location.href = '/';
       return state;
     },
     change(state, action) {

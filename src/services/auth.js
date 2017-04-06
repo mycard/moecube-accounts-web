@@ -1,35 +1,35 @@
 import request from '../utils/request';
 
 export async function login(params) {
-  return request(`/signin`, {
+  return request('/signin', {
     method: 'POST',
     body: JSON.stringify(params),
   });
 }
 
 export async function forgot(params) {
-  return request(`/forgot`, {
+  return request('/forgot', {
     method: 'POST',
     body: JSON.stringify(params),
   });
 }
 
 export async function register(params) {
-  return request(`/signup`, {
+  return request('/signup', {
     method: 'POST',
     body: JSON.stringify(params),
   });
 }
 
 export async function reset(params) {
-  return request(`/reset`, {
+  return request('/reset', {
     method: 'PATCH',
     body: JSON.stringify(params),
   });
 }
 
 export async function activate(params) {
-  return request(`/activate`, {
+  return request('/activate', {
     method: 'POST',
     body: JSON.stringify(params),
   });
@@ -50,7 +50,7 @@ export async function getUserByUsername(params) {
 }
 
 export async function checkUserExists(params) {
-  return request(`/user/exists`, {
+  return request('/user/exists', {
     method: 'POST',
     body: JSON.stringify(params),
   });
@@ -58,7 +58,7 @@ export async function checkUserExists(params) {
 
 
 export async function getAuthUser(params) {
-  return request(`/authUser`, {
+  return request('/authUser', {
     method: 'GET',
     headers: {
       Authorization: `Bearer ${params.token}`,

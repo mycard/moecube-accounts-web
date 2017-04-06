@@ -19,11 +19,11 @@ const formItemLayout = {
   wrapperCol: { span: 15 },
 };
 
-function getBase64(img, callback) {
-  const reader = new FileReader();
-  reader.addEventListener('load', () => callback(reader.result));
-  reader.readAsDataURL(img);
-}
+// function getBase64(img, callback) {
+//   const reader = new FileReader();
+//   reader.addEventListener('load', () => callback(reader.result));
+//   reader.readAsDataURL(img);
+// }
 
 class Profiles extends React.Component {
 
@@ -31,15 +31,20 @@ class Profiles extends React.Component {
     intl: PropTypes.object.isRequired,
   };
 
-  handleUpload = () => {
-    if (typeof this.cropper.getCroppedCanvas() === 'undefined') {
-      return;
-    }
-    const { user: { id } } = this.props;
+  onUpdateSubmit = (e) => {
+    const { form, dispatch, user: { id } } = this.props;
 
-    this.cropper.getCroppedCanvas().toBlob(blob => {
-      console.log(blob);
-      this.props.dispatch({ type: 'upload/upload', payload: { image: blob, user_id: id } });
+    if (e) {
+      e.preventDefault();
+    }
+    form.validateFieldsAndScroll((err, values) => {
+      if (!err) {
+        console.log('Received values of form: ', values);
+
+        const { username, name, password } = values;
+
+        dispatch({ type: 'user/updateProfile', payload: { username, name, password, user_id: id } });
+      }
     });
   };
 
@@ -57,18 +62,15 @@ class Profiles extends React.Component {
     reader.readAsDataURL(files[0]);
   };
 
-  onUpdateSubmit = (e) => {
-    const { form, dispatch, user: { id }, } = this.props;
+  handleUpload = () => {
+    if (typeof this.cropper.getCroppedCanvas() === 'undefined') {
+      return;
+    }
+    const { user: { id } } = this.props;
 
-    e && e.preventDefault();
-    form.validateFieldsAndScroll((err, values) => {
-      if (!err) {
-        console.log('Received values of form: ', values);
-
-        const { username, name, password } = values;
-
-        dispatch({ type: 'user/updateProfile', payload: { username, name, password, user_id: id } });
-      }
+    this.cropper.getCroppedCanvas().toBlob((blob) => {
+      console.log(blob);
+      this.props.dispatch({ type: 'upload/upload', payload: { image: blob, user_id: id } });
     });
   };
 
@@ -91,7 +93,7 @@ class Profiles extends React.Component {
       },
     };
 
-
+    /* eslint-disable jsx-a11y/label-has-for */
     return (
       <Spin spinning={loading} delay={100}>
         <Tabs defaultActiveKey="1" className="app-detail-nav">
@@ -99,37 +101,34 @@ class Profiles extends React.Component {
             <Form onSubmit={this.onUpdateSubmit}>
 
               <FormItem style={{ display: 'flex', justifyContent: 'center' }}>
-                {
-                  isUpload ?
-                    <div>
-                      <Cropper
-                        ref={cropper => {
-                          this.cropper = cropper;
-                        }}
-                        src={ imageUrl || defaultAvatar}
-                        style={{ height: '20vw', width: '20vw' }}
-                        aspectRatio={1 / 1}
-                        guides={true}
-                      />
-                      <Button>
-                        <label >
-                          <Icon type="plus"/> add file
-                          <input type="file" onChange={this.onGetFile} ref={file => {
-                            this.file = file;
-                          }} style={{ display: 'none' }}/>
-                        </label>
-                      </Button>
-                      <Button type="primary" onClick={this.handleUpload}>
-                        <Icon type="upload"/> upload
-                      </Button>
-                    </div>
-                    :
-                    <img src={avatar || imageUrl || defaultAvatar}
-                         style={{ height: '256px', width: '256px' }}
-                         onClick={() => dispatch({ type: 'upload/start' })}
-                    />
-                }
+                <div style={{ display: isUpload ? 'flex' : 'none', flexDirection: 'column' }}>
+                  <Cropper
+                    ref={(cropper) => {
+                      this.cropper = cropper;
+                    }}
+                    src={imageUrl || defaultAvatar}
+                    style={{ height: '20vw', width: '20vw' }}
+                    aspectRatio={1 / 1}
+                    guides
+                  />
+                  <Button type="primary" onClick={this.handleUpload}>
+                    <Icon type="upload"/> upload
+                  </Button>
+                </div>
 
+                <div style={{ display: !isUpload ? 'flex' : 'none', flexDirection: 'column' }}>
+                  <img alt="avatar" src={avatar || imageUrl || defaultAvatar}/>
+                  <Button onClick={() => { dispatch({ type: 'upload/start' }); }}>
+                    <label>
+                      <Icon type="plus"/> Change Avatar
+                      <input
+                        type="file" onChange={this.onGetFile} ref={(file) => {
+                          this.file = file;
+                        }} style={{ display: 'none' }}
+                      />
+                    </label>
+                  </Button>
+                </div>
               </FormItem>
 
               <FormItem {...nameProps.fromItem}>

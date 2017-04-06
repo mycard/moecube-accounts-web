@@ -144,7 +144,7 @@ export default {
           if (data.active) {
             yield put(routerRedux.replace('/profiles'));
           } else {
-            yield put(routerRedux.replace('/verify'));
+            yield put(routerRedux.replace('/signin'));
           }
         }
       } catch (error) {
@@ -204,10 +204,18 @@ export default {
       const token = localStorage.getItem('token');
       if (token) {
         dispatch({ type: 'getAuthUser', payload: { token } });
+      } else if (location.pathname === '/profiles') {
+        dispatch(routerRedux.replace('/signin'));
       }
-      history.listen(({ pathname }) => {
+
+      history.listen(({ pathname, query }) => {
         if (pathname === '/') {
           dispatch({ type: 'preLogin', payload: { token } });
+        }
+        if (pathname === '/reset' || pathname === '/activate') {
+          if (!query.key) {
+            message.error('缺少参数');
+          }
         }
       });
     },

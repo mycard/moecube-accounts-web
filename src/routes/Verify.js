@@ -4,6 +4,7 @@ import { routerRedux } from 'dva/router';
 import React, { PropTypes } from 'react';
 import { FormattedMessage as Format } from 'react-intl';
 import SubmitButton from '../components/SubmitButton';
+
 const FormItem = Form.Item;
 
 const Step = Steps.Step;
@@ -20,7 +21,9 @@ class Verify extends React.Component {
   onSubmit = (e) => {
     const { form, dispatch, input: { password }, user: { id } } = this.props;
 
-    e && e.preventDefault();
+    if (e) {
+      e.preventDefault();
+    }
     form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
@@ -35,12 +38,14 @@ class Verify extends React.Component {
   onReSend = (e) => {
     const { dispatch, input: { password }, user: { id, email } } = this.props;
 
-    e && e.preventDefault();
+    if (e) {
+      e.preventDefault();
+    }
 
     dispatch({ type: 'user/updateEmail', payload: { email, password, user_id: id } });
   };
 
-  render(select) {
+  render() {
     const { form, dispatch, user, checkEmail, isEmailExists, loading, input } = this.props;
     const { getFieldDecorator } = form;
     const { id, email } = user;
@@ -64,7 +69,8 @@ class Verify extends React.Component {
 
     return (
       <div
-        style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flex: 1 }}>
+        style={{ display: 'flex', flex: 1, justifyContent: 'center', alignItems: 'center', height: '100%' }}
+      >
 
         <Spin spinning={loading} delay={100}>
           <Steps size="large" current={1}>
@@ -72,7 +78,7 @@ class Verify extends React.Component {
             <Step title={messages['verify-email']} icon={<Icon type="mail"/>}/>
           </Steps>
 
-          {id && input['password'] ?
+          {id && input.password ?
             <Alert
               style={{ marginTop: '24px' }}
               message={
@@ -93,8 +99,9 @@ class Verify extends React.Component {
               message={
                 <div>
                   <span style={{ marginRight: '10px' }}><Format id={'Please-sign-in'}/></span>
-                  <Tag color="blue" onClick={ () => dispatch(routerRedux.replace('/signin'))}><Format
-                    id={'sign-in'}/></Tag>
+                  <Tag color="blue" onClick={() => dispatch(routerRedux.replace('/signin'))}><Format
+                    id={'sign-in'}
+                  /></Tag>
                 </div>
               }
               type="warning"
@@ -109,7 +116,8 @@ class Verify extends React.Component {
                 {getFieldDecorator('email', { ...emailProps.decorator })(
                   <Input
                     {...emailProps.input}
-                    onBlur={() => dispatch({ type: 'auth/checkEmail', payload: { ...form.getFieldsValue(), id } })}/>,
+                    onBlur={() => dispatch({ type: 'auth/checkEmail', payload: { ...form.getFieldsValue(), id } })}
+                  />,
                 )}
               </FormItem>
 
@@ -125,7 +133,7 @@ class Verify extends React.Component {
   }
 }
 
-function mapStateToProps(state, props) {
+function mapStateToProps(state) {
   const {
     user: { user },
     auth: { input, isEmailExists, checkEmail },

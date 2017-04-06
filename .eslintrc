@@ -23,11 +23,16 @@
     "no-bitwise": [0],
     "no-cond-assign": [0],
     "import/no-unresolved": [0],
-    "require-yield": [1]
+    "require-yield": [1],
+    "react/react-in-jsx-scope": [0],
+    "no-extra-semi": [0]
   },
   "parserOptions": {
     "ecmaFeatures": {
       "experimentalObjectRestSpread": true
     }
+  },
+  "env": {
+    "browser": true
   }
 }
