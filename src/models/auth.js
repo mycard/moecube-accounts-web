@@ -168,15 +168,16 @@ export default {
           message.success(messages['Your-account-has-been-successfully-activated!'], 3);
         }
       } catch (error) {
-        message.error(error.message, 3);
+        message.error(messages[error.message] || error.message, 3);
       }
     },
-    *checkEmail({ payload }, { call, put }) {
+    *checkEmail({ payload }, { call, put, select }) {
       if (!payload.email) {
         yield put({ type: 'check', payload: { checkEmail: 'error' } });
         return;
       }
 
+      const { messages } = yield select(state => state.common);
       try {
         const { data } = yield call(checkUserExists, {
           email: payload.email,
@@ -186,15 +187,20 @@ export default {
           yield put({ type: 'check', payload: { isEmailExists: true, checkEmail: 'warning' } });
         }
       } catch (error) {
-        yield put({ type: 'check', payload: { isEmailExists: false, checkEmail: 'success' } });
+        if (error.message === 'i_not_found') {
+          yield put({ type: 'check', payload: { isEmailExists: false, checkEmail: 'success' } });
+        } else {
+          message.error(messages[error.message] || error.message, 3);
+        }
       }
     },
-    *checkUsername({ payload }, { call, put }) {
+    *checkUsername({ payload }, { call, put, select }) {
       if (!payload.username) {
         yield put({ type: 'check', payload: { checkUsername: 'error' } });
         return;
       }
 
+      const { messages } = yield select(state => state.common);
       try {
         const { data } = yield call(checkUserExists, {
           username: payload.username,
@@ -204,7 +210,11 @@ export default {
           yield put({ type: 'check', payload: { isUserNameExists: true, checkUsername: 'warning' } });
         }
       } catch (error) {
-        yield put({ type: 'check', payload: { isUserNameExists: false, checkUsername: 'success' } });
+        if (error.message === 'i_not_found') {
+          yield put({ type: 'check', payload: { isUserNameExists: false, checkUsername: 'success' } });
+        } else {
+          message.error(messages[error.message] || error.message, 3);
+        }
       }
     },
     *login({ payload }, { call, put, select }) {

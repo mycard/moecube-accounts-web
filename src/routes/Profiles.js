@@ -114,7 +114,8 @@ class Profiles extends React.Component {
                         this.cropper = cropper;
                       }}
                       src={imageUrl || defaultAvatar}
-                      style={{ maxHeight: '20vw', maxWidth: '20vw' }}
+                      className="cropper-image"
+                      style={{ height: '20vw', width: '20vw' }}
                       aspectRatio={1 / 1}
                       guides
                     />
@@ -124,7 +125,7 @@ class Profiles extends React.Component {
                   </div>
 
                   <div style={{ display: !isUpload ? 'flex' : 'none', flexDirection: 'column' }}>
-                    <img alt="avatar" src={avatar || imageUrl || defaultAvatar}/>
+                    <img alt="avatar" style={{ height: '20vw', width: '20vw' }} src={avatar || imageUrl || defaultAvatar}/>
                     <Button style={{ padding: '4px 0' }}>
                       <label style={{ display: 'flex', flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                         <Icon type="plus"/><Format id="Change-Avatar"/>

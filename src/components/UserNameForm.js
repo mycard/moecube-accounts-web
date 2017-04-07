@@ -43,7 +43,7 @@ class EmailForm extends React.Component {
         label: messages.username,
         hasFeedback: true,
         validateStatus: checkUsername,
-        help: isUserNameExists ? 'username exists' : '',
+        extra: isUserNameExists ? 'username exists' : '',
         ...formItemLayout,
       },
       decorator: {
@@ -84,7 +84,7 @@ class EmailForm extends React.Component {
         </FormItem>
 
         <FormItem {...passwordProps.fromItem}>
-          {getFieldDecorator('password')(
+          {getFieldDecorator('password', { ...passwordProps.decorator })(
             <Input {...passwordProps.input} />,
           )}
         </FormItem>
