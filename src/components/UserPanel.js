@@ -12,8 +12,7 @@ function UserPanel({ dispatch, user, token }) {
     <Menu trigger={['click']}>
       <Menu.Item>
         {
-          // i18n
-          token ? <Link to="/profiles">个人中心</Link> : <Link to="/signin">登录</Link>
+          token ? <Link to="/profiles"><Format id="User-Center"/></Link> : <Link to="/signin"><Format id="sign-in"/></Link>
         }
       </Menu.Item>
 
