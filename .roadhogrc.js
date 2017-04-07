@@ -1,7 +1,14 @@
 
 let publicPath = 'https://cdn01.moecube.com/accounts/'
+
+const API_ROOT = {
+  test: 'http://192.168.1.9:3000',
+  dev: 'http://114.215.243.95:8082',
+  prod: 'https://api.moeube.com/accounts'
+}
+
 let defineConf = {
-  apiRoot: process.env["API_ROOT"]
+  apiRoot: API_ROOT[process.env["ENV"]],
 }
 
 export default {
