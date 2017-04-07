@@ -6,6 +6,7 @@ import DocumentTitle from 'react-document-title';
 import { FormattedMessage as Format } from 'react-intl';
 import Particles from 'react-particles-js';
 import logo from '../assets/MoeCube.png';
+import UserPanel from '../components/UserPanel'
 
 const languageMap = {
   'zh-CN': '中文',
@@ -157,8 +158,7 @@ function Index({ children, messages, dispatch, client, token, language }) {
             theme="dark"
             mode="horizontal"
             defaultSelectedKeys={['1']}
-            style={{ lineHeight: '64px' }}
-          >
+            style={{ lineHeight: '64px' }}>
             <Menu.Item key="1">
               <Link to="/">
                 <Format id="Home" />
@@ -166,24 +166,9 @@ function Index({ children, messages, dispatch, client, token, language }) {
             </Menu.Item>
           </Menu>
 
-          <Menu
-            theme="dark"
-            mode="horizontal"
-            defaultSelectedKeys={['1']}
-            style={{ lineHeight: '64px', position: 'absolute', right: '50px' }}
-          >
-            {token && (<Menu.Item key="1">
-              <div
-                onClick={() => {
-                  dispatch({ type: 'auth/signOut' });
-                }}
-              >
-                <Format id="sign-out" />
-              </div>
-            </Menu.Item>)
-            }
-          </Menu>
-
+          <div style={{ position: 'absolute', right: '40px' }}> 
+            <UserPanel />            
+          </div>
         </Header>
       }
 

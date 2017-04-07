@@ -17,6 +17,7 @@ import Reset from './routes/Reset.js';
 
 import Verify from './routes/Verify.js';
 
+
 function RouterConfig({ history }) {
   return (
     <Router history={history}>
