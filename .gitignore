@@ -8,6 +8,7 @@
 
 # misc
 .DS_Store
-*.log*
+npm-debug.log*
 
 /utils/config.js
+.idea/workspace.xml
