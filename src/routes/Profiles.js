@@ -49,14 +49,21 @@ class Profiles extends React.Component {
   };
 
   onGetFile = (e) => {
-    let files;
+    let files = [];
     if (e.dataTransfer) {
       files = e.dataTransfer.files;
     } else if (e.target) {
       files = e.target.files;
     }
+
+    if (files.length <= 0) {
+      this.props.dispatch({ type: 'upload/abort' })
+      return
+    }
+
     const reader = new FileReader();
     reader.onload = () => {
+      this.props.dispatch({ type: 'upload/start' })
       this.props.dispatch({ type: 'upload/getfile', payload: { imageUrl: reader.result } });
     };
     reader.readAsDataURL(files[0]);
@@ -69,13 +76,12 @@ class Profiles extends React.Component {
     const { user: { id } } = this.props;
 
     this.cropper.getCroppedCanvas().toBlob((blob) => {
-      console.log(blob);
       this.props.dispatch({ type: 'upload/upload', payload: { image: blob, user_id: id } });
     });
   };
 
   render() {
-    const { dispatch, form, user, loading, imageUrl, isUpload } = this.props;
+    const { form, user, loading, imageUrl, isUpload } = this.props;
     const { getFieldDecorator } = form;
     const { name, avatar } = user;
     const { intl: { messages } } = this.context;
@@ -119,8 +125,8 @@ class Profiles extends React.Component {
 
                   <div style={{ display: !isUpload ? 'flex' : 'none', flexDirection: 'column' }}>
                     <img alt="avatar" src={avatar || imageUrl || defaultAvatar}/>
-                    <Button onClick={() => { dispatch({ type: 'upload/start' }); }}>
-                      <label>
+                    <Button style={{ padding: '4px 0' }}>
+                      <label style={{ display: 'flex', flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                         <Icon type="plus"/><Format id="Change-Avatar"/>
                         <input
                           type="file" onChange={this.onGetFile} ref={(file) => {

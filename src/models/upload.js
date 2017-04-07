@@ -17,6 +17,14 @@ export default {
         },
       };
     },
+    abort(state) {
+      return {
+        ...state,
+        ...{
+          isUpload: false,
+        },
+      };
+    },
     getfile(state, action) {
       return {
         ...state, ...action.payload,
