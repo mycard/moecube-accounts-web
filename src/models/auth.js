@@ -178,7 +178,7 @@ export default {
       }
 
       try {
-        const { data } = yield call(checkUserExists, { email: payload.email });
+        const { data } = yield call(checkUserExists, { email: payload.email, user_id: payload.user_id });
         if (data) {
           yield put({ type: 'check', payload: { isEmailExists: true, checkEmail: 'warning' } });
         }
@@ -193,7 +193,7 @@ export default {
       }
 
       try {
-        const { data } = yield call(checkUserExists, { username: payload.username });
+        const { data } = yield call(checkUserExists, { username: payload.username, user_id: payload.user_id });
         if (data) {
           yield put({ type: 'check', payload: { isUserNameExists: true, checkUsername: 'warning' } });
         }
