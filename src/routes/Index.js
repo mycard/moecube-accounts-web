@@ -122,7 +122,7 @@ const particleConfig = {
   retina_detect: true,
 };
 
-function Index({ children, messages, dispatch }) {
+function Index({ children, messages, dispatch, client }) {
   const language = localStorage.getItem('locale') || navigator.language || (navigator.languages && navigator.languages[0]) || navigator.userLanguage || navigator.browserLanguage || 'zh-CN';
   const menu = (
     <Menu style={{ transform: 'translateX(-16px)' }}>
@@ -148,6 +148,7 @@ function Index({ children, messages, dispatch }) {
     <div style={{ display: 'flex', flexDirection: 'column', flex: 1, minHeight: '100%' }}>
       <DocumentTitle title={messages.title || 'Moe Cube'}/>
 
+      {client !== 'electron' &&
       <Header style={{ display: 'flex', alignItems: 'center' }}>
         <Link to="/" style={{ marginTop: '20px' }}>
           <img alt="logo" src={logo} style={{ width: '140px', height: '44px' }}/>
@@ -185,6 +186,7 @@ function Index({ children, messages, dispatch }) {
         </Menu>
 
       </Header>
+      }
 
       <Particles
         params={particleConfig}
@@ -197,9 +199,9 @@ function Index({ children, messages, dispatch }) {
       <Footer style={{ width: '100%', justifyContent: 'space-between', display: 'flex', zIndex: 100 }}>
         <div><Dropdown overlay={menu} trigger={['click']}>
           {language === 'en-US' ?
-            <a className="ant-dropdown-link changelanguage" href="#">
+            <a className="ant-dropdown-link changelanguage">
               &nbsp;English <Icon type="down" className="flag"/>
-            </a> : <a className="ant-dropdown-link changelanguage" href="#">
+            </a> : <a className="ant-dropdown-link changelanguage">
               &nbsp;中文 <Icon type="down" className="flag"/>
             </a>
           }
@@ -212,10 +214,11 @@ function Index({ children, messages, dispatch }) {
 
 function mapStateToProps(state) {
   const {
-    common: { messages },
+    common: { messages, client },
   } = state;
   return {
     messages,
+    client,
   };
 }
 
