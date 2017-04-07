@@ -63,7 +63,7 @@
     "verify-email":"Verify Email",
     "account-info":"Account Info",
     "reset-username":"Reset Username",
-    "reset-email":"Reset Email",
+    "Reset-Email":"Reset Email",
     "reset-password":"Reset Password",
     "old-password":"old password",
     "new-password":"new password",
@@ -71,6 +71,13 @@
     "email_exists":"email exists",
     "update_success": "Update Success!",
     "A-verification-email-has-been-sent-to-you,please-check-the-mail-to-complete.":"A verification email has been sent to you, please check the mail to complete.",
+
+    "Your-are-almost-done!":"Your are almost done!",
+    "Thank-you!-This-is-the-last-step.":"Thank you! This is the last step.",
+    "Please click the following button to confirm your email address":"Please click the following button to confirm your email address",
+    "Finish-Verification":"Finish Verification",
+    "After-verification,-you-can-sign-in-to-MoeCube-with-this-email-address.":"After verification, you can sign in to MoeCube with this email address.",
+    "Welcome-to-MoeCube!":"Welcome to MoeCube!",
 
 
     "i_password_error": "Incorrect password. ",
@@ -149,7 +156,7 @@
     "verify-email":"验证邮箱",
     "account-info":"账户信息",
     "reset-username":"修改用户名",
-    "reset-email":"修改邮箱",
+    "Reset-Email":"修改邮箱",
     "reset-password":"修改密码",
     "old-password":"原密码",
     "new-password":"新密码",
@@ -158,6 +165,13 @@
     "update_success": "修改成功",
     "A-verification-email-has-been-sent-to-you,please-check-the-mail-to-complete.":"一封验证邮件已经发送给您，请查看邮件完成修改。",
 
+    "Your-are-almost-done!":"即将完成邮箱验证",
+    "Thank-you!-This-is-the-last-step.":"恭喜，这是最后一步啦。",
+    "Please click the following button to confirm your email address":"请点击以下按钮确认在萌立方使用您的邮箱地址",
+    "Finish-Verification":"完成邮箱验证",
+    "After-verification,-you-can-sign-in-to-MoeCube-with-this-email-address.":"验证完成后，您就可以使用邮箱在萌立方客户端登陆啦。",
+    "Welcome-to-MoeCube!":"欢迎加入萌立方这个大家庭！",
+
     "i_password_error": "密码错误",
     "i_user_unexists":"用户不存在",
     "i_email_exists":"邮箱已存在",
@@ -165,6 +179,8 @@
     "i_not_found":"用户不存在",
     "i_key_time_out":"此链接已过期",
     "i_key_invalid":"此链接已失效",
+
+
     "没毛用":"防逗号报错,上线删"
 
   }

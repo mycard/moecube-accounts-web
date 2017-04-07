@@ -53,7 +53,7 @@ class Verify extends React.Component {
 
     const emailProps = {
       fromItem: {
-        label: messages['reset-email'],
+        label: messages['Reset-Email'],
         hasFeedback: true,
         validateStatus: checkEmail,
         help: isEmailExists ? messages.email_exists : '',
