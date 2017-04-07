@@ -95,6 +95,7 @@ class Profiles extends React.Component {
 
     /* eslint-disable jsx-a11y/label-has-for */
     return (
+      <div style={{ flex: 1, height: '100%' }}>
       <Spin spinning={loading} delay={100}>
         <Tabs defaultActiveKey="1" className="app-detail-nav">
           <TabPane tab={<span><Icon type="user"/><Format id={'user-info'}/> </span>} key="1">
@@ -107,7 +108,7 @@ class Profiles extends React.Component {
                       this.cropper = cropper;
                     }}
                     src={imageUrl || defaultAvatar}
-                    style={{ height: '20vw', width: '20vw' }}
+                    style={{ maxHeight: '20vw', maxWidth: '20vw' }}
                     aspectRatio={1 / 1}
                     guides
                   />
@@ -164,6 +165,7 @@ class Profiles extends React.Component {
           </TabPane>
         </Tabs>
       </Spin>
+      </div>
     );
   }
 }

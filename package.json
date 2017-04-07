@@ -1,9 +1,9 @@
 {
   "private": true,
   "scripts": {
-    "start": "cross-env API_ROOT=http://192.168.1.9:3000 roadhog server",
-    "build:dev": "cross-env API_ROOT=http://114.215.243.95:8082 roadhog build",
-    "build": "cross-env API_ROOT=https://api.moeube.com/accounts roadhog build",
+    "start": "cross-env ENV=test roadhog server",
+    "build:dev": "cross-env ENV=dev roadhog build",
+    "build": "cross-env ENV=prod roadhog build",
     "lint": "eslint --ext .js src test",
     "precommit": "npm run lint"
   },

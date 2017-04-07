@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="eb37985e-18dc-4e2f-82ba-9874832785ff" name="Default" comment="">
+    <list default="true" id="eb37985e-18dc-4e2f-82ba-9874832785ff" name="Default" comment="change language 按钮位置">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/models/common.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/routes/Register.js" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.eslintrc" afterPath="$PROJECT_DIR$/.eslintrc" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.roadhogrc.js" afterPath="$PROJECT_DIR$/.roadhogrc.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/config.js" afterPath="$PROJECT_DIR$/src/config.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/routes/Index.js" afterPath="$PROJECT_DIR$/src/routes/Index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/utils/request.js" afterPath="$PROJECT_DIR$/src/utils/request.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/router.js" afterPath="$PROJECT_DIR$/src/router.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/routes/Profiles.js" afterPath="$PROJECT_DIR$/src/routes/Profiles.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -61,26 +64,26 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="user.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/models/user.js">
+      <file leaf-file-name="Index.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/routes/Index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3933">
-              <caret line="211" column="24" lean-forward="false" selection-start-line="211" selection-start-column="24" selection-end-line="211" selection-end-column="24" />
-              <folding />
+            <state relative-caret-position="1805">
+              <caret line="207" column="15" lean-forward="true" selection-start-line="207" selection-start-column="15" selection-end-line="207" selection-end-column="15" />
+              <folding>
+                <element signature="e#0#52#0" expanded="true" />
+                <element signature="e#398#2275#0" expanded="false" />
+                <marker date="1491534380238" expanded="true" signature="5091:5096" ph="{&quot;messages&quot;: messages...}" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Index.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/routes/Index.js">
+      <file leaf-file-name=".eslintrc" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/.eslintrc">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="246">
-              <caret line="166" column="15" lean-forward="true" selection-start-line="166" selection-start-column="15" selection-end-line="166" selection-end-column="15" />
-              <folding>
-                <element signature="e#0#52#0" expanded="true" />
-                <element signature="e#398#2275#0" expanded="false" />
-                <marker date="1491533202282" expanded="true" signature="5092:5096" ph="{&quot;messages&quot;: messages...}" />
-              </folding>
+            <state relative-caret-position="399">
+              <caret line="27" column="23" lean-forward="false" selection-start-line="27" selection-start-column="23" selection-end-line="27" selection-end-column="23" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -90,7 +93,9 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="76">
               <caret line="4" column="0" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-              <folding />
+              <folding>
+                <marker date="1491533542759" expanded="true" signature="36:50" ph="{&quot;apiRoot&quot;: apiRoot...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -99,8 +104,12 @@
         <entry file="file://$PROJECT_DIR$/.roadhogrc.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="152">
-              <caret line="8" column="13" lean-forward="true" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-              <folding />
+              <caret line="15" column="13" lean-forward="true" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+              <folding>
+                <marker date="1491534380488" expanded="true" signature="252:254" ph="{...}" />
+                <marker date="1491534380488" expanded="true" signature="371:525" ph="{...}" />
+                <marker date="1491534380488" expanded="true" signature="400:519" ph="[...]" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -122,7 +131,11 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="38">
               <caret line="2" column="14" lean-forward="true" selection-start-line="2" selection-start-column="14" selection-end-line="2" selection-end-column="14" />
-              <folding />
+              <folding>
+                <marker date="1491534380518" expanded="true" signature="278:311" ph="{&quot;install-node&quot;: &quot;6.9.2&quot;...}" />
+                <marker date="1491534380518" expanded="true" signature="331:658" ph="{&quot;antd&quot;: &quot;^2.8.2&quot;...}" />
+                <marker date="1491534380518" expanded="true" signature="681:1148" ph="{&quot;babel-eslint&quot;: &quot;^7.1.1&quot;...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -140,10 +153,14 @@
       <file leaf-file-name="Profiles.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/routes/Profiles.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2033">
-              <caret line="107" column="22" lean-forward="true" selection-start-line="107" selection-start-column="22" selection-end-line="107" selection-end-column="22" />
+            <state relative-caret-position="2052">
+              <caret line="108" column="22" lean-forward="true" selection-start-line="108" selection-start-column="22" selection-end-line="108" selection-end-column="22" />
               <folding>
                 <element signature="e#0#61#0" expanded="true" />
+                <marker date="1491534380538" expanded="true" signature="895:5442" ph="{...}" />
+                <marker date="1491534380538" expanded="true" signature="2128:5440" ph="{...}" />
+                <marker date="1491534380538" expanded="true" signature="5476:5868" ph="{...}" />
+                <marker date="1491534380538" expanded="true" signature="5710:5865" ph="{&quot;user&quot;: user...}" />
               </folding>
             </state>
           </provider>
@@ -195,7 +212,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/.eslintrc" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/src/components/Example.js" />
@@ -223,10 +239,11 @@
         <option value="$PROJECT_DIR$/src/routes/Verify.js" />
         <option value="$PROJECT_DIR$/src/routes/Profiles.js" />
         <option value="$PROJECT_DIR$/i18n.json" />
-        <option value="$PROJECT_DIR$/src/routes/Index.js" />
         <option value="$PROJECT_DIR$/src/utils/request.js" />
         <option value="$PROJECT_DIR$/.roadhogrc.js" />
         <option value="$PROJECT_DIR$/src/config.js" />
+        <option value="$PROJECT_DIR$/.eslintrc" />
+        <option value="$PROJECT_DIR$/src/routes/Index.js" />
       </list>
     </option>
   </component>
@@ -292,6 +309,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mycard-account-web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mycard-account-web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="models" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -451,7 +486,7 @@
       <workItem from="1491362317876" duration="18018000" />
       <workItem from="1491448144293" duration="3984000" />
       <workItem from="1491459521278" duration="9381000" />
-      <workItem from="1491532261913" duration="1785000" />
+      <workItem from="1491532261913" duration="2395000" />
     </task>
     <task id="LOCAL-00001" summary="i18n">
       <created>1490948057319</created>
@@ -593,11 +628,18 @@
       <option name="project" value="LOCAL" />
       <updated>1491475345189</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="change language 按钮位置">
+      <created>1491534110082</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1491534110082</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="95522000" />
+    <option name="totallyTimeSpent" value="96132000" />
   </component>
   <component name="TodoView" selected-index="3">
     <todo-panel id="selected-file">
@@ -611,15 +653,15 @@
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1176" extended-state="6" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25237092" sideWeight="0.6646489" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25237092" sideWeight="0.6641318" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32917467" sideWeight="0.49578503" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32917467" sideWeight="0.5021075" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32917467" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21743697" sideWeight="0.49789253" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2428023" sideWeight="0.49789253" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25237092" sideWeight="0.33535108" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2428023" sideWeight="0.49789253" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25237092" sideWeight="0.33586818" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20729366" sideWeight="0.49367756" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20729366" sideWeight="0.49367756" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -668,7 +710,8 @@
     <MESSAGE value="travis" />
     <MESSAGE value="change language" />
     <MESSAGE value="i18n" />
-    <option name="LAST_COMMIT_MESSAGE" value="i18n" />
+    <MESSAGE value="change language 按钮位置" />
+    <option name="LAST_COMMIT_MESSAGE" value="change language 按钮位置" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -679,6 +722,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/router.js</url>
+          <line>1</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
@@ -750,13 +794,6 @@
         <state relative-caret-position="210">
           <caret line="14" column="32" lean-forward="true" selection-start-line="14" selection-start-column="32" selection-end-line="14" selection-end-column="32" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.eslintrc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="27" column="23" lean-forward="false" selection-start-line="27" selection-start-column="23" selection-end-line="27" selection-end-column="23" />
         </state>
       </provider>
     </entry>
@@ -868,7 +905,7 @@
         <state relative-caret-position="114">
           <caret line="8" column="14" lean-forward="false" selection-start-line="8" selection-start-column="14" selection-end-line="8" selection-end-column="14" />
           <folding>
-            <element signature="e#0#31#0" expanded="true" />
+            <element signature="e#0#31#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -964,10 +1001,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/routes/Profiles.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2033">
-          <caret line="107" column="22" lean-forward="true" selection-start-line="107" selection-start-column="22" selection-end-line="107" selection-end-column="22" />
+        <state relative-caret-position="2052">
+          <caret line="108" column="22" lean-forward="true" selection-start-line="108" selection-start-column="22" selection-end-line="108" selection-end-column="22" />
           <folding>
             <element signature="e#0#61#0" expanded="true" />
+            <marker date="1491534380538" expanded="true" signature="895:5442" ph="{...}" />
+            <marker date="1491534380538" expanded="true" signature="2128:5440" ph="{...}" />
+            <marker date="1491534380538" expanded="true" signature="5476:5868" ph="{...}" />
+            <marker date="1491534380538" expanded="true" signature="5710:5865" ph="{&quot;user&quot;: user...}" />
           </folding>
         </state>
       </provider>
@@ -976,14 +1017,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="19">
           <caret line="45" column="22" lean-forward="false" selection-start-line="45" selection-start-column="22" selection-end-line="45" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/i18n.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
           <folding />
         </state>
       </provider>
@@ -1000,7 +1033,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="38">
           <caret line="2" column="14" lean-forward="true" selection-start-line="2" selection-start-column="14" selection-end-line="2" selection-end-column="14" />
-          <folding />
+          <folding>
+            <marker date="1491534380518" expanded="true" signature="278:311" ph="{&quot;install-node&quot;: &quot;6.9.2&quot;...}" />
+            <marker date="1491534380518" expanded="true" signature="331:658" ph="{&quot;antd&quot;: &quot;^2.8.2&quot;...}" />
+            <marker date="1491534380518" expanded="true" signature="681:1148" ph="{&quot;babel-eslint&quot;: &quot;^7.1.1&quot;...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1025,8 +1062,12 @@
     <entry file="file://$PROJECT_DIR$/.roadhogrc.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="152">
-          <caret line="8" column="13" lean-forward="true" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-          <folding />
+          <caret line="15" column="13" lean-forward="true" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+          <folding>
+            <marker date="1491534380488" expanded="true" signature="252:254" ph="{...}" />
+            <marker date="1491534380488" expanded="true" signature="371:525" ph="{...}" />
+            <marker date="1491534380488" expanded="true" signature="400:519" ph="[...]" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1034,19 +1075,37 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="76">
           <caret line="4" column="0" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+          <folding>
+            <marker date="1491533542759" expanded="true" signature="36:50" ph="{&quot;apiRoot&quot;: apiRoot...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.eslintrc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="27" column="23" lean-forward="false" selection-start-line="27" selection-start-column="23" selection-end-line="27" selection-end-column="23" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/routes/Index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="246">
-          <caret line="166" column="15" lean-forward="true" selection-start-line="166" selection-start-column="15" selection-end-line="166" selection-end-column="15" />
+        <state relative-caret-position="1805">
+          <caret line="207" column="15" lean-forward="true" selection-start-line="207" selection-start-column="15" selection-end-line="207" selection-end-column="15" />
           <folding>
             <element signature="e#0#52#0" expanded="true" />
             <element signature="e#398#2275#0" expanded="false" />
-            <marker date="1491533202282" expanded="true" signature="5092:5096" ph="{&quot;messages&quot;: messages...}" />
+            <marker date="1491534380238" expanded="true" signature="5091:5096" ph="{&quot;messages&quot;: messages...}" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/i18n.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>
