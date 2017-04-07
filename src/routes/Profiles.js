@@ -96,75 +96,75 @@ class Profiles extends React.Component {
     /* eslint-disable jsx-a11y/label-has-for */
     return (
       <div style={{ flex: 1, height: '100%' }}>
-      <Spin spinning={loading} delay={100}>
-        <Tabs defaultActiveKey="1" className="app-detail-nav">
-          <TabPane tab={<span><Icon type="user"/><Format id={'user-info'}/> </span>} key="1">
-            <Form onSubmit={this.onUpdateSubmit}>
+        <Spin spinning={loading} delay={100}>
+          <Tabs defaultActiveKey="1" className="app-detail-nav">
+            <TabPane tab={<span><Icon type="user"/><Format id={'user-info'}/> </span>} key="1">
+              <Form onSubmit={this.onUpdateSubmit}>
 
-              <FormItem style={{ display: 'flex', justifyContent: 'center' }}>
-                <div style={{ display: isUpload ? 'flex' : 'none', flexDirection: 'column' }}>
-                  <Cropper
-                    ref={(cropper) => {
-                      this.cropper = cropper;
-                    }}
-                    src={imageUrl || defaultAvatar}
-                    style={{ maxHeight: '20vw', maxWidth: '20vw' }}
-                    aspectRatio={1 / 1}
-                    guides
-                  />
-                  <Button type="primary" onClick={this.handleUpload}>
-                    <Icon type="upload"/> <Format id="upload"/>
-                  </Button>
-                </div>
+                <FormItem style={{ display: 'flex', justifyContent: 'center' }}>
+                  <div style={{ display: isUpload ? 'flex' : 'none', flexDirection: 'column' }}>
+                    <Cropper
+                      ref={(cropper) => {
+                        this.cropper = cropper;
+                      }}
+                      src={imageUrl || defaultAvatar}
+                      style={{ maxHeight: '20vw', maxWidth: '20vw' }}
+                      aspectRatio={1 / 1}
+                      guides
+                    />
+                    <Button type="primary" onClick={this.handleUpload}>
+                      <Icon type="upload"/> <Format id="upload"/>
+                    </Button>
+                  </div>
 
-                <div style={{ display: !isUpload ? 'flex' : 'none', flexDirection: 'column' }}>
-                  <img alt="avatar" src={avatar || imageUrl || defaultAvatar}/>
-                  <Button onClick={() => { dispatch({ type: 'upload/start' }); }}>
-                    <label>
-                      <Icon type="plus"/><Format id="Change-Avatar"/>
-                      <input
-                        type="file" onChange={this.onGetFile} ref={(file) => {
-                          this.file = file;
-                        }} style={{ display: 'none' }}
-                      />
-                    </label>
-                  </Button>
-                </div>
-              </FormItem>
+                  <div style={{ display: !isUpload ? 'flex' : 'none', flexDirection: 'column' }}>
+                    <img alt="avatar" src={avatar || imageUrl || defaultAvatar}/>
+                    <Button onClick={() => { dispatch({ type: 'upload/start' }); }}>
+                      <label>
+                        <Icon type="plus"/><Format id="Change-Avatar"/>
+                        <input
+                          type="file" onChange={this.onGetFile} ref={(file) => {
+                            this.file = file;
+                          }} style={{ display: 'none' }}
+                        />
+                      </label>
+                    </Button>
+                  </div>
+                </FormItem>
 
-              <FormItem {...nameProps.fromItem}>
-                {getFieldDecorator('name', { ...nameProps.decorator })(
-                  <Input {...nameProps.input} />,
-                )}
-              </FormItem>
+                <FormItem {...nameProps.fromItem}>
+                  {getFieldDecorator('name', { ...nameProps.decorator })(
+                    <Input {...nameProps.input} />,
+                  )}
+                </FormItem>
 
-              <FormItem>
-                <div className={styles.wrapSubmit}>
-                  <Button type="primary" htmlType="submit" size="large"><Format id={'save'}/></Button>
-                </div>
-              </FormItem>
-            </Form>
-          </TabPane>
+                <FormItem>
+                  <div className={styles.wrapSubmit}>
+                    <Button type="primary" htmlType="submit" size="large"><Format id={'save'}/></Button>
+                  </div>
+                </FormItem>
+              </Form>
+            </TabPane>
 
-          <TabPane tab={<span><Icon type="setting"/><Format id={'account-info'}/></span>} key="2">
+            <TabPane tab={<span><Icon type="setting"/><Format id={'account-info'}/></span>} key="2">
 
-            <Tabs type="card" className="app-detail-nav">
-              <TabPane tab={messages['reset-username']} key={0}>
-                <UserNameForm />
-              </TabPane>
+              <Tabs type="card" className="app-detail-nav">
+                <TabPane tab={messages['reset-username']} key={0}>
+                  <UserNameForm />
+                </TabPane>
 
-              <TabPane tab={messages['reset-email']} key={1}>
-                <EmailForm />
-              </TabPane>
+                <TabPane tab={messages['reset-email']} key={1}>
+                  <EmailForm />
+                </TabPane>
 
-              <TabPane tab={messages['reset-password']} key={2}>
-                <PasswordForm />
-              </TabPane>
-            </Tabs>
+                <TabPane tab={messages['reset-password']} key={2}>
+                  <PasswordForm />
+                </TabPane>
+              </Tabs>
 
-          </TabPane>
-        </Tabs>
-      </Spin>
+            </TabPane>
+          </Tabs>
+        </Spin>
       </div>
     );
   }

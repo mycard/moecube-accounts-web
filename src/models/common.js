@@ -14,10 +14,13 @@ export default {
         ...state, ...action.payload,
       };
     },
-    changeLanguage(state, { payload: id }) {
-      localStorage.setItem('locale', id.id);
+    changeLanguage(state, action) {
+      localStorage.setItem('locale', action.payload.language);
       history.go(0);
-      return state;
+      return {
+        ...state,
+        ...action.payload,
+      };
     },
   },
   effects: {},
@@ -26,8 +29,8 @@ export default {
       let client;
       const language = localStorage.getItem('locale') || navigator.language || (navigator.languages && navigator.languages[0]) || navigator.userLanguage;
 
-      const languageWithoutRegionCode = language.toLowerCase().split(/[_-]+/)[0];
-      const messages = i18n[languageWithoutRegionCode];
+      // const languageWithoutRegionCode = language.toLowerCase().split(/[_-]+/)[0];
+      const messages = i18n[language];
 
       const { userAgent } = navigator;
 
@@ -35,7 +38,7 @@ export default {
         client = 'electron';
       }
 
-      dispatch({ type: 'init', payload: { language: languageWithoutRegionCode, messages, client } });
+      dispatch({ type: 'init', payload: { language, messages, client } });
     },
   },
 };

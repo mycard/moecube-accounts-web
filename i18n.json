@@ -1,5 +1,5 @@
 {
-  "en": {
+  "en-US": {
     "title":"MoeCube",
     "Home":"Home",
     "username": "User Name",
@@ -82,7 +82,7 @@
 
     "没毛用":"防逗号报错,上线删"
   },
-  "zh": {
+  "zh-CN": {
     "title":"萌立方",
     "Home":"主页",
     "username": "用户名",
