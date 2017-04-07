@@ -27,9 +27,10 @@ export default {
   subscriptions: {
     setup({ dispatch }) {
       let client;
-      const language = localStorage.getItem('locale') || navigator.language || (navigator.languages && navigator.languages[0]) || navigator.userLanguage;
+      const languageY = localStorage.getItem('locale') || navigator.language || (navigator.languages && navigator.languages[0]) || navigator.userLanguage;
 
-      // const languageWithoutRegionCode = language.toLowerCase().split(/[_-]+/)[0];
+      const anguageWithoutRegionCode = languageY.toLowerCase().split(/[_-]+/)[0];
+      const language = anguageWithoutRegionCode === 'zh' ? 'zh-CN' : 'en-US';
       const messages = i18n[language];
 
       const { userAgent } = navigator;

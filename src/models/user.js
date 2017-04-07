@@ -208,14 +208,9 @@ export default {
         dispatch(routerRedux.replace('/signin'));
       }
 
-      history.listen(({ pathname, query }) => {
+      history.listen(({ pathname }) => {
         if (pathname === '/') {
           dispatch({ type: 'preLogin', payload: { token } });
-        }
-        if (pathname === '/reset' || pathname === '/activate') {
-          if (!query.key) {
-            message.error('缺少参数');
-          }
         }
       });
     },

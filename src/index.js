@@ -47,13 +47,12 @@ app.router(require('./router'));
 
 
 addLocaleData([...en, ...zh]);
-/*eslint-disable */
-let language = localStorage.getItem('locale') || navigator.language || (navigator.languages && navigator.languages[0]) || navigator.userLanguage;
-/*eslint-enable */
 
-const languageWithoutRegionCode = language.toLowerCase().split(/[_-]+/)[0];
-language = (localeData[languageWithoutRegionCode] || localeData[language]) ? language : 'zh-CN';
-const messages = localeData[languageWithoutRegionCode] || localeData[language] || localeData.zh;
+const languageY = localStorage.getItem('locale') || navigator.language || (navigator.languages && navigator.languages[0]) || navigator.userLanguage;
+
+const anguageWithoutRegionCode = languageY.toLowerCase().split(/[_-]+/)[0];
+const language = anguageWithoutRegionCode === 'zh' ? 'zh-CN' : 'en-US';
+const messages = localeData[language];
 
 const App = app.start();
 ReactDOM.render(
