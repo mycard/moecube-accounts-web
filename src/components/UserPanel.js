@@ -40,6 +40,7 @@ function UserPanel({ dispatch, user }) {
           style={{ borderRadius: '45px',
             height: '45px',
             weight: '45px',
+            boxSizing: 'content-box',
             border: '2px solid rgba(255,255,255,0.2' }} />
       </div>
     </Dropdown>
