@@ -12,13 +12,13 @@ function UserPanel({ dispatch, user, token }) {
     <Menu trigger={['click']}>
       <Menu.Item>
         {
-          token ? <Link to="/profiles"><Format id="User-Center"/></Link> : <Link to="/signin"><Format id="sign-in"/></Link>
+          user.active ? <Link to="/profiles"><Format id="User-Center"/></Link> : <Link to="/signin"><Format id="sign-in"/></Link>
         }
       </Menu.Item>
 
       <Menu.Divider/>
       {
-        token &&
+        user.active &&
         <Menu.Item >
           <div
             onClick={() => {
