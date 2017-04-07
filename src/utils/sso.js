@@ -20,6 +20,7 @@ export const handleSSO = (user) => {
     params.set('return_sso_url', sso.get('return_sso_url'));
     params.set('nonce', sso.get('nonce'));
     params.set('external_id', user.id);
+    params.set('avatar_url', user.avatar);
     const payload = Buffer.from(params.toString()).toString('base64');
 
     url.searchParams.set('sso', payload);
