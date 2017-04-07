@@ -93,7 +93,7 @@ export default {
     *loginSuccess({ payload }, { put }) {
       const { data: { user, token } } = payload;
       if (!payload.data) {
-        message.error('error ');
+        message.error('error ', 3);
       }
       if (token) {
         yield put({ type: 'storeToken', payload: { token } });
@@ -108,7 +108,7 @@ export default {
 
         if (user.active) {
           yield put(routerRedux.replace('/profiles'));
-          // message.info("登录成功")
+          // message.info("登录成功, 3")
         } else {
           yield put(routerRedux.replace('/verify'));
         }
@@ -124,7 +124,7 @@ export default {
         }
       } catch (error) {
         yield put({ type: 'getAuthUserFail' });
-        // message.error(error.message)
+        // message.error(error.messag, 3e)
       }
     },
     *preLogin({ payload }, { call, put }) {
@@ -149,7 +149,7 @@ export default {
         }
       } catch (error) {
         yield put(routerRedux.replace('/signin'));
-        // message.error(error.message)
+        // message.error(error.messag, 3e)
       }
     },
     *updateProfile({ payload }, { call, put, select }) {
@@ -162,11 +162,11 @@ export default {
 
         if (data) {
           yield put({ type: 'updateProfileSuccess', payload: { user: data, token } });
-          message.info(messages.update_success);
+          message.info(messages.update_success, 3);
         }
       } catch (error) {
         yield put({ type: 'updateProfileFail' });
-        message.error(error.message);
+        message.error(error.message, 3);
       }
     },
     *updateEmail({ payload }, { call, put, select }) {
@@ -176,11 +176,11 @@ export default {
         const { data } = yield call(updateAccount, { ...payload, token });
         if (data) {
           yield put({ type: 'updateAccountSuccess', payload: { user: data, token } });
-          message.info(messages['A-verification-email-has-been-sent-to-you,please-check-the-mail-to-complete.']);
+          message.info(messages['A-verification-email-has-been-sent-to-you,please-check-the-mail-to-complete.'], 3);
         }
       } catch (error) {
         yield put({ type: 'updateAccountFail' });
-        message.error(messages[error.message] || error.message);
+        message.error(messages[error.message] || error.message, 3);
       }
     },
 
@@ -191,11 +191,11 @@ export default {
         const { data } = yield call(updateAccount, { ...payload, token });
         if (data) {
           yield put({ type: 'updateAccountSuccess', payload: { user: data, token } });
-          message.info(messages.update_success);
+          message.info(messages.update_success, 3);
         }
       } catch (error) {
         yield put({ type: 'updateAccountFail' });
-        message.error(messages[error.message] || error.message);
+        message.error(messages[error.message] || error.message, 3);
       }
     },
   },

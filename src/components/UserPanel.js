@@ -6,19 +6,19 @@ import { FormattedMessage as Format } from 'react-intl';
 
 const defaultAvatar = require('../../public/default_avatar.jpg');
 
-function UserPanel({ dispatch, user, token }) {
+function UserPanel({ dispatch, user }) {
   const { avatar } = user;
   const menu = (
     <Menu trigger={['click']}>
       <Menu.Item>
         {
-          token ? <Link to="/profiles"><Format id="User-Center"/></Link> : <Link to="/signin"><Format id="sign-in"/></Link>
+          user.active ? <Link to="/profiles"><Format id="User-Center"/></Link> : <Link to="/signin"><Format id="sign-in"/></Link>
         }
       </Menu.Item>
 
       <Menu.Divider/>
       {
-        token &&
+        user.active &&
         <Menu.Item >
           <div
             onClick={() => {
@@ -37,8 +37,10 @@ function UserPanel({ dispatch, user, token }) {
       <div className="ant-dropdown-link" style={{ display: 'flex', alignItems: 'center' }}>
         <img
           alt="avatar" src={avatar || defaultAvatar}
-          style={{ borderRadius: '40px', height: '40px', weight: 'auto' }}
-        />
+          style={{ borderRadius: '45px',
+            height: '45px',
+            weight: '45px',
+            border: '2px solid rgba(255,255,255,0.2' }} />
       </div>
     </Dropdown>
   );

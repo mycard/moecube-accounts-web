@@ -165,10 +165,10 @@ export default {
       try {
         const { data } = yield call(activate, payload);
         if (data) {
-          message.success(messages['Your-account-has-been-successfully-activated!'], 5);
+          message.success(messages['Your-account-has-been-successfully-activated!'], 3);
         }
       } catch (error) {
-        message.error(error.message);
+        message.error(error.message, 3);
       }
     },
     *checkEmail({ payload }, { call, put }) {
@@ -178,7 +178,10 @@ export default {
       }
 
       try {
-        const { data } = yield call(checkUserExists, { email: payload.email });
+        const { data } = yield call(checkUserExists, {
+          email: payload.email,
+          user_id: payload.user_id,
+        });
         if (data) {
           yield put({ type: 'check', payload: { isEmailExists: true, checkEmail: 'warning' } });
         }
@@ -193,7 +196,10 @@ export default {
       }
 
       try {
-        const { data } = yield call(checkUserExists, { username: payload.username });
+        const { data } = yield call(checkUserExists, {
+          username: payload.username,
+          user_id: payload.user_id,
+        });
         if (data) {
           yield put({ type: 'check', payload: { isUserNameExists: true, checkUsername: 'warning' } });
         }
@@ -212,7 +218,7 @@ export default {
         }
       } catch (error) {
         yield put({ type: 'loginFail' });
-        message.error(messages[error.message] || error.message);
+        message.error(messages[error.message] || error.message, 3);
       }
     },
     *forgot({ payload }, { call, put, select }) {
@@ -221,7 +227,7 @@ export default {
         const { data } = yield call(forgot, payload);
         if (data) {
           yield put({ type: 'forgotSuccess' });
-          message.info(messages['A-password-reset-email-has-been-sent-to-you.'], 5);
+          message.info(messages['A-password-reset-email-has-been-sent-to-you.'], 3);
         }
       } catch (error) {
         yield put({ type: 'forgotFail' });
@@ -237,7 +243,7 @@ export default {
 
           yield put({ type: 'user/loginSuccess', payload: { data } });
           yield put({ type: 'loginSuccess', payload: { input: payload } });
-          message.info(messages['Your-account-has-been-created.'], 5);
+          message.info(messages['Your-account-has-been-created.'], 3);
           yield put(routerRedux.replace('/verify'));
         }
       } catch (error) {

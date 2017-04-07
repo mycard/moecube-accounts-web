@@ -61,7 +61,7 @@ class EmailForm extends React.Component {
           {getFieldDecorator('email', { ...emailProps.decorator })(
             <Input
               {...emailProps.input}
-              onBlur={() => dispatch({ type: 'auth/checkEmail', payload: { ...form.getFieldsValue(), id } })}
+              onBlur={() => dispatch({ type: 'auth/checkEmail', payload: { ...form.getFieldsValue(), user_id: id } })}
             />,
           )}
         </FormItem>
