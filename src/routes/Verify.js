@@ -1,4 +1,4 @@
-import { Alert, Form, Icon, Input, Spin, Steps, Tag } from 'antd';
+import { Alert, Form, Icon, Input, Spin, Steps, Tag, Breadcrumb } from 'antd';
 import { connect } from 'dva';
 import { routerRedux } from 'dva/router';
 import React, { PropTypes } from 'react';
@@ -68,9 +68,7 @@ class Verify extends React.Component {
 
 
     return (
-      <div
-        style={{ display: 'flex', flex: 1, justifyContent: 'center', alignItems: 'center', height: '100%' }}
-      >
+      <div style={{ display: 'flex', flex: 1, justifyContent: 'center', alignItems: 'center', height: '100%' }}>
 
         <Spin spinning={loading} delay={100}>
           <Steps size="large" current={1}>
