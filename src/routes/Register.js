@@ -60,12 +60,12 @@ class Register extends React.Component {
     const emailProps = {
       hasFeedback: true,
       validateStatus: checkEmail,
-      extra: isEmailExists ? messages['i_email_exists'] : '',
+      extra: isEmailExists ? messages.i_email_exists : '',
     };
 
 
     const emailInputProps = {
-      onBlur: () => !form.getFieldError("email") && dispatch({ type: 'auth/checkEmail', payload: { ...form.getFieldsValue() } }),
+      onBlur: () => !form.getFieldError('email') && dispatch({ type: 'auth/checkEmail', payload: { ...form.getFieldsValue() } }),
       placeholder: messages.email,
     };
 
@@ -76,12 +76,12 @@ class Register extends React.Component {
     };
 
     const usernameInputProps = {
-      onBlur: () => !form.getFieldError("username") && dispatch({ type: 'auth/checkUsername', payload: { ...form.getFieldsValue() } }),
+      onBlur: () => !form.getFieldError('username') && dispatch({ type: 'auth/checkUsername', payload: { ...form.getFieldsValue() } }),
       placeholder: messages.username,
     };
 
     return (
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+      <div style={{ display: 'flex', flex: 1, justifyContent: 'center', alignItems: 'center', height: '100%' }}>
 
         <Spin spinning={loading} delay={100}>
           <Steps size="large" current={0}>
