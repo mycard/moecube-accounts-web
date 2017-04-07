@@ -12,14 +12,15 @@ class Active extends React.Component {
   };
 
   render() {
-    const { loading } = this.props;
+    const { loading }  = this.props;
+    const email=this.props.location.query.email;
     return (
       <div style={{ display: 'flex', flex: 1, justifyContent: 'center', alignItems: 'center', height: '100%', }}>
         <div style={{ width:'60%', background: 'rgba(230,230,230,0.8)',padding:'40px', flexDirection: 'column',justifyContent: 'center',display: 'flex', alignItems: 'center', zIndex:1 }}>
           <h2><Format id="Your-are-almost-done!" /></h2>
           <br/><br/>
           <p><Format id="Thank-you!-This-is-the-last-step." /></p>
-          <p><Format id="Please click the following button to confirm your email address" />hjistc@moecube.com</p>
+          <p><Format id="Please click the following button to confirm your email address" />: {email}</p>
           <br/><br/>
           <Button type="primary" icon="poweroff" loading={loading} onClick={this.handleClick}>
             <Format id={'Finish-Verification'}/>
