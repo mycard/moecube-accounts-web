@@ -186,9 +186,9 @@ function Index({ children, messages, dispatch, client }) {
           <Menu.Item key="2">
             <Dropdown overlay={menu} trigger={['click']}>
               {language === 'en-US' ?
-                <a className="ant-dropdown-link changelanguage" href="#">
+                <a className="ant-dropdown-link changelanguage">
                   &nbsp;English <Icon type="down" className="flag"/>
-                </a> : <a className="ant-dropdown-link changelanguage" href="#">
+                </a> : <a className="ant-dropdown-link changelanguage">
                   &nbsp;中文 <Icon type="down" className="flag"/>
                 </a>
               }
