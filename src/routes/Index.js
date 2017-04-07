@@ -182,17 +182,6 @@ function Index({ children, messages, dispatch }) {
             </div>
           </Menu.Item>) : ('')
           }
-          <Menu.Item key="2">
-            <Dropdown overlay={menu} trigger={['click']}>
-              {language === 'en-US' ?
-                <a className="ant-dropdown-link changelanguage" href="#">
-                  &nbsp;English <Icon type="down" className="flag"/>
-                </a> : <a className="ant-dropdown-link changelanguage" href="#">
-                  &nbsp;中文 <Icon type="down" className="flag"/>
-                </a>
-              }
-            </Dropdown>
-          </Menu.Item>
         </Menu>
 
       </Header>
@@ -205,7 +194,16 @@ function Index({ children, messages, dispatch }) {
       />
       {children}
 
-      <Footer style={{ width: '100%' }}>
+      <Footer style={{ width: '100%', justifyContent: 'space-between', display: 'flex', zIndex: 100 }}>
+        <div><Dropdown overlay={menu} trigger={['click']}>
+          {language === 'en-US' ?
+            <a className="ant-dropdown-link changelanguage" href="#">
+              &nbsp;English <Icon type="down" className="flag"/>
+            </a> : <a className="ant-dropdown-link changelanguage" href="#">
+              &nbsp;中文 <Icon type="down" className="flag"/>
+            </a>
+          }
+        </Dropdown></div>
         <div>© MoeCube 2017 all right reserved.</div>
       </Footer>
     </div>
