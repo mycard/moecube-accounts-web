@@ -6,11 +6,12 @@ import DocumentTitle from 'react-document-title';
 import { FormattedMessage as Format } from 'react-intl';
 import Particles from 'react-particles-js';
 import logo from '../assets/MoeCube.png';
+import UserPanel from '../components/UserPanel';
 
 const languageMap = {
   'zh-CN': '中文',
   'en-US': 'English',
-}
+};
 
 const { Header, Footer } = Layout;
 const particleConfig = {
@@ -127,64 +128,53 @@ const particleConfig = {
   retina_detect: true,
 };
 
-function Index({ children, messages, dispatch, client, token, language }) {
+function Index({ children, messages, dispatch, client, language }) {
   const menu = (
     <Menu style={{ transform: 'translateX(-16px)' }}>
       {
         Object.keys(languageMap).map((lan, i) => {
           return (
             <Menu.Item key={i}>
-              <a onClick={() => { dispatch({ type: 'common/changeLanguage', payload: { language: lan } }) }}>
+              <a
+                onClick={() => {
+                  dispatch({ type: 'common/changeLanguage', payload: { language: lan } });
+                }}
+              >
                 {languageMap[lan]}
               </a>
             </Menu.Item>
-          )
+          );
         })
       }
     </Menu>
   );
   return (
     <div style={{ display: 'flex', flexDirection: 'column', flex: 1, minHeight: '100%' }}>
-      <DocumentTitle title={messages.title || 'Moe Cube'} />
+      <DocumentTitle title={messages.title || 'Moe Cube'}/>
 
       {client !== 'electron' &&
-        <Header style={{ display: 'flex', alignItems: 'center' }}>
-          <Link to="/" style={{ marginTop: '20px' }}>
-            <img alt="logo" src={logo} style={{ width: '140px', height: '44px' }} />
-          </Link>
+      <Header style={{ display: 'flex', alignItems: 'center' }}>
+        <Link to="/" style={{ marginTop: '20px' }}>
+          <img alt="logo" src={logo} style={{ width: '140px', height: '44px' }}/>
+        </Link>
 
-          <Menu
-            theme="dark"
-            mode="horizontal"
-            defaultSelectedKeys={['1']}
-            style={{ lineHeight: '64px' }}
-          >
-            <Menu.Item key="1">
-              <Link to="/">
-                <Format id="Home" />
-              </Link>
-            </Menu.Item>
-          </Menu>
+        <Menu
+          theme="dark"
+          mode="horizontal"
+          defaultSelectedKeys={['1']}
+          style={{ lineHeight: '64px' }}
+        >
+          <Menu.Item key="1">
+            <Link to="/">
+              <Format id="Home"/>
+            </Link>
+          </Menu.Item>
+        </Menu>
 
-          <Menu
-            theme="dark"
-            mode="horizontal"
-            defaultSelectedKeys={['1']}
-            style={{ lineHeight: '64px', position: 'absolute', right: '50px' }}
-          >
-            {token && (<Menu.Item key="1">
-              <div
-                onClick={() => {
-                  dispatch({ type: 'auth/signOut' });
-                }}
-              >
-                <Format id="sign-out" />
-              </div>
-            </Menu.Item>)
-            }
-          </Menu>
-
-        </Header>
+        <div style={{ position: 'absolute', right: '40px' }}>
+          <UserPanel />
+        </div>
+      </Header>
       }
 
       <Particles
@@ -198,7 +188,7 @@ function Index({ children, messages, dispatch, client, token, language }) {
       <Footer style={{ width: '100%', justifyContent: 'space-between', display: 'flex', zIndex: 100 }}>
         <div><Dropdown overlay={menu} trigger={['click']}>
           <a className="ant-dropdown-link changelanguage">
-            {languageMap[language]} <Icon type="down" className="flag" />
+            {languageMap[language]} <Icon type="down" className="flag"/>
           </a>
         </Dropdown></div>
         <div>© MoeCube 2017 all right reserved.</div>
