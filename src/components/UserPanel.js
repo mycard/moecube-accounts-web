@@ -6,7 +6,7 @@ import { FormattedMessage as Format } from 'react-intl';
 
 const defaultAvatar = require('../../public/default_avatar.jpg');
 
-function UserPanel({ dispatch, user, token }) {
+function UserPanel({ dispatch, user }) {
   const { avatar } = user;
   const menu = (
     <Menu trigger={['click']}>
