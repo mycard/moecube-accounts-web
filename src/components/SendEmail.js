@@ -43,7 +43,7 @@ class EmailForm extends React.Component {
         label: messages.email,
         hasFeedback: true,
         validateStatus: checkEmail,
-        help: isEmailExists ? 'email exists' : '',
+        extra: isEmailExists ? '//i18n email exists' : '',
         ...formItemLayout,
       },
       decorator: {

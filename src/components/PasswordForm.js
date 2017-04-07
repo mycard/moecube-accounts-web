@@ -62,7 +62,7 @@ class EmailForm extends React.Component {
 
     const passwordProps = {
       fromItem: {
-        label: 'old passwrod',
+        label: messages['old-password'],
         ...formItemLayout,
       },
       decorator: {
