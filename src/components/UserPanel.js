@@ -38,8 +38,8 @@ function UserPanel({ dispatch, user }) {
         <img
           alt="avatar" src={avatar || defaultAvatar}
           style={{ borderRadius: '45px',
-            height: '45px',
-            weight: '45px',
+            height: '40px',
+            weight: '40px',
             boxSizing: 'content-box',
             border: '2px solid rgba(255,255,255,0.3' }} />
       </div>
