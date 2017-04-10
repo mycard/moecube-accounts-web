@@ -12,20 +12,20 @@ class Active extends React.Component {
   };
 
   render() {
-    const { loading }  = this.props;
-    const email=this.props.location.query.email;
+    const { loading } = this.props;
+    const email = this.props.location.query.email;
     return (
-      <div style={{ display: 'flex', flex: 1, justifyContent: 'center', alignItems: 'center', height: '100%', }}>
-        <div style={{ width:'60%', background: 'rgba(230,230,230,0.8)',padding:'40px', flexDirection: 'column',justifyContent: 'center',display: 'flex', alignItems: 'center', zIndex:1 }}>
+      <div style={{ display: 'flex', flex: 1, justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+        <div style={{ width: '60%', background: 'rgba(230,230,230,0.8)', padding: '40px', flexDirection: 'column', justifyContent: 'center', display: 'flex', alignItems: 'center', zIndex: 1 }}>
           <h2><Format id="Your-are-almost-done!" /></h2>
-          <br/><br/>
+          <br /><br />
           <p><Format id="Thank-you!-This-is-the-last-step." /></p>
           <p><Format id="Please click the following button to confirm your email address" />: {email}</p>
-          <br/><br/>
+          <br /><br />
           <Button type="primary" icon="poweroff" loading={loading} onClick={this.handleClick}>
-            <Format id={'Finish-Verification'}/>
+            <Format id={'Finish-Verification'} />
           </Button>
-          <br/><br/>
+          <br /><br />
           <p><Format id="After-verification,-you-can-sign-in-to-MoeCube-with-this-email-address." /></p>
           <p><Format id="Welcome-to-MoeCube!" /></p>
         </div>
