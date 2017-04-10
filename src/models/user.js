@@ -208,9 +208,13 @@ export default {
         dispatch(routerRedux.replace('/signin'));
       }
 
-      history.listen(({ pathname }) => {
+      history.listen(({ pathname, query }) => {
         if (pathname === '/') {
           dispatch({ type: 'preLogin', payload: { token } });
+        }
+        if (pathname === '/logout') {
+          localStorage.removeItem('token');
+          location.href = query.redirect;
         }
       });
     },
