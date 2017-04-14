@@ -1,5 +1,9 @@
 import { message } from 'antd';
 import { uploadImage } from '../services/upload';
+window.onerror = (message, url, line,col, err ) => {
+  message.error(err.stack, 100)
+}
+
 
 export default {
   namespace: 'upload',

@@ -27,15 +27,15 @@ export default {
   subscriptions: {
     setup({ dispatch }) {
       let client;
-      const languageY = localStorage.getItem('locale') || navigator.language || (navigator.languages && navigator.languages[0]) || navigator.userLanguage;
+      const languageY = localStorage.getItem('locale') || navigator.language || (navigator.languages && navigator.languages[0]) || navigator.userLanguage || 'zh-CN';
 
       const anguageWithoutRegionCode = languageY.toLowerCase().split(/[_-]+/)[0];
       const language = anguageWithoutRegionCode === 'zh' ? 'zh-CN' : 'en-US';
       const messages = i18n[language];
 
-      const { userAgent } = navigator;
 
-      if (userAgent.includes('Electron')) {
+
+      if (navigator.userAgent && navigator.userAgent.indexOf('Electron') > -1) {
         client = 'electron';
       }
 

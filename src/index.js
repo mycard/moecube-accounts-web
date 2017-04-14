@@ -24,10 +24,6 @@ app.model(require('./models/upload'));
 
 app.model(require('./models/auth'));
 
-// app.model(require('./models/haha'));
-
-// app.model(require("./models/login"));
-
 app.model(require('./models/common'));
 
 
@@ -42,6 +38,7 @@ app.router(require('./router'));
 
 // 5. Start
 const App = app.start();
+
 ReactDOM.render(
   <App/>,
   document.getElementById('root'),
