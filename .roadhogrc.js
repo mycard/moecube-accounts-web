@@ -19,11 +19,13 @@ export default {
       'extraBabelPlugins': [
         'dva-hmr',
         'transform-runtime',
+        'babel-plugin-transform-decorators-legacy',
         ['import', { 'libraryName': 'antd', 'style': 'css' }]
       ]
     },
     'production': {
       'extraBabelPlugins': [
+        'babel-plugin-transform-decorators-legacy',
         'transform-runtime',
         ['import', { 'libraryName': 'antd', 'style': 'css' }]
       ]

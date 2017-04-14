@@ -1,7 +1,8 @@
 import { Button } from 'antd';
 import { connect } from 'dva';
 import React from 'react';
-import { FormattedMessage as Format } from 'react-intl';
+// import { FormattedMessage as Format } from 'react-intl';
+import Format from '../components/Format'
 
 class Active extends React.Component {
 

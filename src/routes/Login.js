@@ -1,8 +1,10 @@
 import { Button, Form, Icon, Input, Spin } from 'antd';
 import { connect } from 'dva';
 import { Link } from 'dva/router';
-import React, { PropTypes } from 'react';
-import { FormattedMessage as Format } from 'react-intl';
+import React from 'react';
+// import { FormattedMessage as Format } from 'react-intl';
+import Format from '../components/Format'
+
 import './Login.less';
 
 const FormItem = Form.Item;
@@ -10,9 +12,9 @@ const FormItem = Form.Item;
 
 class Login extends React.Component {
 
-  static contextTypes = {
-    intl: PropTypes.object.isRequired,
-  };
+  // static contextTypes = {
+  //   intl: PropTypes.object.isRequired,
+  // };
 
   onSubmitLogin = (e) => {
     const { form, dispatch } = this.props;
@@ -31,8 +33,8 @@ class Login extends React.Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    const { loading } = this.props;
-    const { intl: { messages } } = this.context;
+    const { loading, messages } = this.props;
+    // const { intl: { messages } } = this.context;
 
     return (
       <div style={{ display: 'flex', flex: 1, justifyContent: 'center', alignItems: 'center', height: '100%' }}>
@@ -79,12 +81,13 @@ class Login extends React.Component {
 
 function mapStateToProps(state) {
   const {
-    common: { language },
+    common: { language, messages },
   } = state;
 
   const loading = state.loading.global || false;
 
   return {
+    messages,
     loading,
     language,
   };

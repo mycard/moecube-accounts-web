@@ -1,9 +1,11 @@
 import { Button, Form, Icon, Input, Spin, Tabs } from 'antd';
 import 'cropperjs/dist/cropper.css';
 import { connect } from 'dva';
-import React, { PropTypes } from 'react';
+import React from 'react';
 import Cropper from 'react-cropper';
-import { FormattedMessage as Format } from 'react-intl';
+// import { FormattedMessage as Format } from 'react-intl';
+import Format from '../components/Format'
+
 import EmailForm from '../components/EmailForm';
 import PasswordForm from '../components/PasswordForm';
 import UserNameForm from '../components/UserNameForm';
@@ -27,9 +29,6 @@ const formItemLayout = {
 
 class Profiles extends React.Component {
 
-  static contextTypes = {
-    intl: PropTypes.object.isRequired,
-  };
 
   onUpdateSubmit = (e) => {
     const { form, dispatch, user: { id } } = this.props;
@@ -81,10 +80,10 @@ class Profiles extends React.Component {
   };
 
   render() {
-    const { form, user, loading, imageUrl, isUpload } = this.props;
+    const { form, user, loading, imageUrl, isUpload, messages } = this.props;
     const { getFieldDecorator } = form;
     const { name, avatar } = user;
-    const { intl: { messages } } = this.context;
+    // const { intl: { messages } } = this.context;
 
     const nameProps = {
       fromItem: {
@@ -182,6 +181,7 @@ function mapStateToProps(state) {
     user: { user, isUpdateSubmit },
     auth: { checkUsername, isEmailExists, isUserNameExists },
     upload: { imageUrl, isUpload, uploadedImage },
+    common: { messages },
   } = state;
 
   const loading = state.loading.global || false;
@@ -189,6 +189,7 @@ function mapStateToProps(state) {
   return {
     user,
     loading,
+    messages,
     imageUrl,
     isUpload,
     checkUsername,

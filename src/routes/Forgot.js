@@ -1,17 +1,14 @@
 import { Button, Form, Icon, Input, Spin, Steps } from 'antd';
 import { connect } from 'dva';
 import { Link } from 'dva/router';
-import React, { PropTypes } from 'react';
-import { FormattedMessage as Format } from 'react-intl';
+import React from 'react';
+import Format from '../components/Format'
 
 const FormItem = Form.Item;
 const Step = Steps.Step;
 
 class Login extends React.Component {
 
-  static contextTypes = {
-    intl: PropTypes.object.isRequired,
-  };
 
   onSubmitLogin = (e) => {
     const { form, dispatch } = this.props;
@@ -32,8 +29,8 @@ class Login extends React.Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    const { loading } = this.props;
-    const { intl: { messages } } = this.context;
+    const { loading, messages } = this.props;
+
     return (
       <div style={{ display: 'flex', flex: 1, justifyContent: 'center', alignItems: 'center', height: '100%' }}>
         <Spin spinning={loading} delay={100}>
@@ -74,12 +71,14 @@ class Login extends React.Component {
 function mapStateToProps(state) {
   const {
     auth: { isForgotSubmit },
+    common: { messages },
   } = state;
 
   const loading = state.loading.global || false;
 
   return {
     loading,
+    messages,
     isForgotSubmit,
   };
 }

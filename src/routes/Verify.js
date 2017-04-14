@@ -1,9 +1,11 @@
 import { Alert, Form, Icon, Input, Spin, Steps, Tag } from 'antd';
 import { connect } from 'dva';
 import { routerRedux } from 'dva/router';
-import React, { PropTypes } from 'react';
-import { FormattedMessage as Format } from 'react-intl';
+import React from 'react';
+// import { FormattedMessage as Format } from 'react-intl';
 import SubmitButton from '../components/SubmitButton';
+import Format from '../components/Format'
+
 
 const FormItem = Form.Item;
 
@@ -11,9 +13,9 @@ const Step = Steps.Step;
 
 class Verify extends React.Component {
 
-  static contextTypes = {
-    intl: PropTypes.object.isRequired,
-  };
+  // static contextTypes = {
+  //   intl: PropTypes.object.isRequired,
+  // };
   state = {
     isChangeEmail: false,
   };
@@ -46,10 +48,12 @@ class Verify extends React.Component {
   };
 
   render() {
-    const { form, dispatch, user, checkEmail, isEmailExists, loading, input } = this.props;
+    const { form, dispatch, user, checkEmail,
+      isEmailExists, loading, input, messages,
+     } = this.props;
     const { getFieldDecorator } = form;
     const { id, email } = user;
-    const { intl: { messages } } = this.context;
+    // const { intl: { messages } } = this.context;
 
     const emailProps = {
       fromItem: {
@@ -135,6 +139,7 @@ function mapStateToProps(state) {
   const {
     user: { user },
     auth: { input, isEmailExists, checkEmail },
+    common: { messages },
   } = state;
 
   const loading = state.loading.global || false;
@@ -143,6 +148,7 @@ function mapStateToProps(state) {
     input,
     user,
     loading,
+    messages,
     checkEmail,
     isEmailExists,
   };

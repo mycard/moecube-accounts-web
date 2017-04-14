@@ -2,9 +2,10 @@ import { Dropdown, Icon, Layout, Menu } from 'antd';
 import { connect } from 'dva';
 import { Link } from 'dva/router';
 import React from 'react';
-import DocumentTitle from 'react-document-title';
-import { FormattedMessage as Format } from 'react-intl';
 import Particles from 'react-particles-js';
+import DocumentTitle from 'react-document-title';
+// import { FormattedMessage as Format } from 'react-intl';
+import Format from '../components/Format';
 import logo from '../assets/MoeCube.png';
 import UserPanel from '../components/UserPanel';
 

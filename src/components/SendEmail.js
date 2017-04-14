@@ -1,5 +1,5 @@
 import { Form, Input } from 'antd';
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import SubmitButton from './SubmitButton';
 
@@ -11,10 +11,6 @@ const formItemLayout = {
 
 
 class EmailForm extends React.Component {
-
-  static contextTypes = {
-    intl: PropTypes.object.isRequired,
-  };
 
   onSubmit = (e) => {
     const { form, dispatch, user: { id } } = this.props;
@@ -33,10 +29,9 @@ class EmailForm extends React.Component {
   };
 
   render() {
-    const { form, dispatch, user, checkEmail, isEmailExists } = this.props;
+    const { form, dispatch, user, checkEmail, isEmailExists, messages } = this.props;
     const { getFieldDecorator } = form;
     const { id, email } = user;
-    const { intl: { messages } } = this.context;
 
     const emailProps = {
       fromItem: {
@@ -79,9 +74,11 @@ function mapStateToProps(state) {
   const {
     user: { user },
     auth: { isEmailExists, checkEmail, isSendEmailActive },
+    common: { messages },
   } = state;
   return {
     user,
+    messages,
     checkEmail,
     isEmailExists,
     isSendEmailActive,

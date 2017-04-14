@@ -1,15 +1,16 @@
 import { Button, Form, Icon, Input, Spin } from 'antd';
 import { connect } from 'dva';
-import React, { PropTypes } from 'react';
-import { FormattedMessage as Format } from 'react-intl';
+import React from 'react';
+// import { FormattedMessage as Format } from 'react-intl';
+import Format from '../components/Format'
 
 const FormItem = Form.Item;
 
 class Reset extends React.Component {
 
-  static contextTypes = {
-    intl: PropTypes.object.isRequired,
-  };
+  // static contextTypes = {
+  //   intl: PropTypes.object.isRequired,
+  // };
 
   onSubmitReset = (e) => {
     const { form, dispatch, location: { query: { key, user_id } } } = this.props;
@@ -47,8 +48,8 @@ class Reset extends React.Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    const { isResetSubmit = false } = this.props;
-    const { intl: { messages } } = this.context;
+    const { isResetSubmit = false, messages } = this.props;
+    // const { intl: { messages } } = this.context;
 
     return (
       <div style={{ display: 'flex', flex: 1, justifyContent: 'center', alignItems: 'center', height: '100%' }}>
@@ -95,8 +96,10 @@ class Reset extends React.Component {
 function mapStateToProps(state) {
   const {
     auth: { isResetSubmit },
+    common: { messages },
   } = state;
   return {
+    messages,
     isResetSubmit,
   };
 }

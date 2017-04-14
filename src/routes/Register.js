@@ -1,8 +1,9 @@
 import { Button, Form, Icon, Input, Spin, Steps } from 'antd';
 import { connect } from 'dva';
 import { Link } from 'dva/router';
-import React, { PropTypes } from 'react';
-import { FormattedMessage as Format } from 'react-intl';
+import React from 'react';
+// import { FormattedMessage as Format } from 'react-intl';
+import Format from '../components/Format'
 
 const FormItem = Form.Item;
 const Step = Steps.Step;
@@ -10,9 +11,9 @@ const Step = Steps.Step;
 
 class Register extends React.Component {
 
-  static contextTypes = {
-    intl: PropTypes.object.isRequired,
-  };
+  // static contextTypes = {
+  //   intl: PropTypes.object.isRequired,
+  // };
 
   onSubmitLogin = (e) => {
     const { form, dispatch } = this.props;
@@ -52,10 +53,10 @@ class Register extends React.Component {
   render() {
     const {
       dispatch, form, checkEmail, checkUsername,
-      isEmailExists, isUserNameExists, loading,
+      isEmailExists, isUserNameExists, loading, messages,
     } = this.props;
     const { getFieldDecorator } = form;
-    const { intl: { messages } } = this.context;
+    // const { intl: { messages } } = this.context;
 
     const emailProps = {
       hasFeedback: true,
@@ -173,12 +174,14 @@ function mapStateToProps(state) {
       register, checkEmail, checkUsername, isEmailExists,
       isUserNameExists, isRegisterSubmit,
     },
+    common: { messages },
   } = state;
 
   const loading = state.loading.global || false;
 
   return {
     loading,
+    messages,
     register,
     checkEmail,
     checkUsername,

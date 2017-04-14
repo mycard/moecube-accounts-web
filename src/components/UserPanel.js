@@ -2,7 +2,8 @@ import { Dropdown, Menu } from 'antd';
 import { connect } from 'dva';
 import { Link } from 'dva/router';
 import React from 'react';
-import { FormattedMessage as Format } from 'react-intl';
+// import { FormattedMessage as Format } from 'react-intl';
+import Format from '../components/Format'
 
 const defaultAvatar = require('../../public/default_avatar.jpg');
 
