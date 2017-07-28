@@ -4,8 +4,7 @@
     "start": "cross-env ENV=development roadhog server",
     "build:test": "cross-env ENV=test roadhog build",
     "build": "cross-env ENV=production roadhog build",
-    "lint": "eslint --ext .js src test",
-    "precommit": "npm run lint"
+    "lint": "eslint --ext .js src test"
   },
   "engines": {
     "install-node": "6.9.2"
