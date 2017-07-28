@@ -4,6 +4,16 @@ import createLoading from 'dva-loading';
 import { browserHistory } from 'dva/router';
 import ReactDOM from 'react-dom';
 
+import Promise from 'promise-polyfill';
+
+// To add to window
+if (!window.Promise) {
+  console.log("Promise not found");
+  window.Promise = Promise;
+} else {
+  console.log("Promise exit");
+}
+
 import './index.less';
 
 // 1. Initialize
@@ -40,7 +50,7 @@ app.router(require('./router'));
 const App = app.start();
 
 ReactDOM.render(
-  <App/>,
+  <App />,
   document.getElementById('root'),
 );
 

@@ -1,7 +1,7 @@
 let publicPath = 'https://cdn01.moecube.com/accounts/';
 
 const API_ROOT = {
-  development: 'http://192.168.1.9:3000',
+  development: 'https://api.moecube.com/accounts',
   test: 'http://114.215.243.95:8082',
   production: 'https://api.moecube.com/accounts'
 };

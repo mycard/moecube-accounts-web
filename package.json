@@ -15,6 +15,7 @@
     "babel-runtime": "^6.9.2",
     "dva": "^1.2.1",
     "dva-loading": "^0.2.1",
+    "promise-polyfill": "^6.0.2",
     "react": "^15.4.0",
     "react-cropper": "^0.10.1",
     "react-document-title": "^2.0.2",
