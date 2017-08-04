@@ -168,6 +168,7 @@ export default {
           message.success(messages['Your-account-has-been-successfully-activated!'], 3);
         }
       } catch (error) {
+        console.error(error);
         message.error(messages[error.message] || error.message, 3);
       }
     },
@@ -190,6 +191,7 @@ export default {
         if (error.message === 'i_not_found') {
           yield put({ type: 'check', payload: { isEmailExists: false, checkEmail: 'success' } });
         } else {
+          console.error(error);
           message.error(messages[error.message] || error.message, 3);
         }
       }
@@ -210,6 +212,7 @@ export default {
           yield put({ type: 'check', payload: { isUserNameExists: true, checkUsername: 'warning' } });
         }
       } catch (error) {
+        console.error(error);
         if (error.message === 'i_not_found') {
           yield put({ type: 'check', payload: { isUserNameExists: false, checkUsername: 'success' } });
         } else {
@@ -227,6 +230,7 @@ export default {
           yield put({ type: 'user/loginSuccess', payload: { data } });
         }
       } catch (error) {
+        console.error(error);
         yield put({ type: 'loginFail' });
         message.error(messages[error.message] || error.message, 3);
       }
@@ -240,6 +244,7 @@ export default {
           message.info(messages['A-password-reset-email-has-been-sent-to-you.'], 3);
         }
       } catch (error) {
+        console.error(error);
         yield put({ type: 'forgotFail' });
         message.error(messages[error.message] || error.message, 3);
       }
@@ -257,6 +262,7 @@ export default {
           yield put(routerRedux.replace('/verify'));
         }
       } catch (error) {
+        console.error(error);
         yield put({ type: 'registerFail' });
         message.error(messages[error.message] || error.message, 3);
       }
@@ -270,6 +276,7 @@ export default {
           message.info(messages.update_success, 3);
         }
       } catch (error) {
+        console.error(error);
         yield put({ type: 'resetFail' });
         message.error(messages[error.message] || error.message, 3);
       }

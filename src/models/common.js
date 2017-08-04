@@ -33,8 +33,6 @@ export default {
       const language = anguageWithoutRegionCode === 'zh' ? 'zh-CN' : 'en-US';
       const messages = i18n[language];
 
-
-
       if (navigator.userAgent && navigator.userAgent.indexOf('Electron') > -1) {
         client = 'electron';
       }

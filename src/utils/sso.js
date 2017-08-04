@@ -18,11 +18,13 @@ export const handleSSO = (user) => {
       params.set(key, value);
     }
     params.set('return_sso_url', sso.get('return_sso_url'));
-    params.set('nonce', sso.get('nonce'));
+    if (sso.get('nonce')) {
+      params.set('nonce', sso.get('nonce'));
+    }
     params.set('external_id', user.id);
     params.set('avatar_url', user.avatar);
-    const payload = Buffer.from(params.toString()).toString('base64');
-
+    const payload = Buffer.from(params.toString()).toString('base64');    
+    
     url.searchParams.set('sso', payload);
     url.searchParams.set('sig', crypto.createHmac('sha256', 'zsZv6LXHDwwtUAGa').update(payload).digest('hex'));
 

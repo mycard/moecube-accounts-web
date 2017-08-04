@@ -1,8 +1,15 @@
 import { message } from 'antd';
 import { uploadImage } from '../services/upload';
-window.onerror = (message, url, line,col, err ) => {
-  message.error(err.stack, 100)
-}
+
+// 这里这个 msg 参数原本名字为 message，跟顶上 import 的重了，我把它改名为 msg
+// 下面 message.error 语法上似乎应该是指原本第一个参数 message
+// 但是语义上应该是在调用 antd 的 message，我不知道之前为什么能跑，这里需要测试
+// by zh99998
+
+window.onerror = (msg, url, line, col, err) => {
+  console.error(err);
+  message.error(err.stack, 100);
+};
 
 
 export default {
@@ -45,7 +52,7 @@ export default {
     },
   },
   effects: {
-    *upload({ payload }, { call, put }) {
+    * upload({ payload }, { call, put }) {
       try {
         const { data } = yield call(uploadImage, payload);
 
