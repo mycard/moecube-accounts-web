@@ -121,7 +121,7 @@
     "register":"注册",
     "forgot-password": "忘记密码",
     "send-email": "发送邮件",
-    "reset-success": "修改成功",
+    "reset-success": "修改成功。请重新登录MC平台使更改生效，否则有可能无法进入游戏",
     "reset-fail": "修改失败",
     "reset-password2": "重置密码",
     "remember-me":"记住我",
@@ -162,7 +162,7 @@
     "new-password":"新密码",
     "Password-length-must-be-between-8-and-24-characters.":"密码必须为8-24位",
     "email_exists":"邮箱已存在",
-    "update_success": "修改成功",
+    "update_success": "修改成功。请重新登录MC平台使更改生效，否则有可能无法进入游戏",
     "A-verification-email-has-been-sent-to-you,please-check-the-mail-to-complete.":"一封验证邮件已经发送给您，请查看邮件完成修改。",
 
     "Your-are-almost-done!":"即将完成邮箱验证",
