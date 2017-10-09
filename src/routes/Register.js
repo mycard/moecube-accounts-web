@@ -73,7 +73,7 @@ class Register extends React.Component {
     const usernameProps = {
       hasFeedback: true,
       validateStatus: checkUsername,
-      extra: isUserNameExists ? 'username exists' : '',
+      extra: isUserNameExists ? 'username exists or invalid ' : '',
     };
 
     const usernameInputProps = {

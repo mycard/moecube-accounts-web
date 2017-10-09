@@ -166,8 +166,10 @@ export default {
         const { data } = yield call(activate, payload);
         if (data) {
           message.success(messages['Your-account-has-been-successfully-activated!'], 3);
+          window.location.href = "https://bbs.ygobbs.com"
         }
       } catch (error) {
+        window.location.href = "https://bbs.ygobbs.com"
         console.error(error);
         message.error(messages[error.message] || error.message, 3);
       }
