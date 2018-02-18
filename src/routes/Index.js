@@ -170,6 +170,16 @@ function Index({ children, messages, dispatch, client, language }) {
               <Format id="Home"/>
             </Link>
           </Menu.Item>
+           <Menu.Item key="2">
+            <Link href="https://ygobbs.com/">
+              <Format id="BBS"/>
+            </Link>
+          </Menu.Item>
+           <Menu.Item key="3">
+            <Link href="https://mycard.moe/ygopro/arena/index.html">
+              <Format id="DATABASE"/>
+            </Link>
+          </Menu.Item>
         </Menu>
 
         <div style={{ position: 'absolute', right: '40px' }}>
