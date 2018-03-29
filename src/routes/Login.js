@@ -69,8 +69,8 @@ class Login extends React.Component {
             </FormItem>
 
             <div>
-              <Link to="/signup"><Format id={'sign-up'}/></Link>
-              <Link to="/forgot" className="login-form-forgot"><Format id={'forgot-password'}/></Link>
+              <Link to="/signup" className="fromFont"><Format id={'sign-up'}/></Link>
+              <Link to="/forgot" className="login-form-forgot fromFont"><Format id={'forgot-password'}/></Link>
             </div>
           </Form>
         </Spin>

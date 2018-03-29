@@ -18,6 +18,15 @@ function UserPanel({ dispatch, user }) {
       </Menu.Item>
 
       <Menu.Divider/>
+      
+      {
+        !user.active &&
+        <Menu.Item >
+          <Link to="/signup"><Format id="register"/></Link>
+        </Menu.Item>
+      }
+
+
       {
         user.active &&
         <Menu.Item >
