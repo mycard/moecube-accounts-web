@@ -75,8 +75,12 @@ class EmailForm extends React.Component {
       <Form onSubmit={this.onSubmit}>
         <FormItem {...usernameProps.fromItem}>
           {getFieldDecorator('username', { ...usernameProps.decorator })(
-            <Input {...usernameProps.input}/>,
+            <Input {...usernameProps.input} />,
           )}
+          {
+            <div class="alert alert-warning" role="alert">修改用户名后战绩会清零、也会失去绑定的云卡组。建议提前备份卡组。</div>
+          }
+
         </FormItem>
 
         <FormItem {...passwordProps.fromItem}>
