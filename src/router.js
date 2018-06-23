@@ -9,6 +9,8 @@ import Index from './routes/Index.js';
 
 import Login from './routes/Login.js';
 
+import Logout from './routes/Logout.js'
+
 import Profiles from './routes/Profiles.js';
 
 import Register from './routes/Register.js';
@@ -23,6 +25,8 @@ function RouterConfig({ history }) {
     <Router history={history}>
       <Route path="/" component={Index}>
         <Route path="/signin" component={Login}/>
+        <Route path="/signout" component={Logout}/>
+
         <Route path="/forgot" component={Forgot}/>
         <Route path="/signup" component={Register}/>
         <Route path="/reset" component={Reset}/>
