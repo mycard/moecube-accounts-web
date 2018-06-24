@@ -23,6 +23,10 @@ export const handleSSO = (user) => {
     }
     params.set('external_id', user.id);
     params.set('avatar_url', user.avatar);
+    if (!user.active) {
+      params.set('require_activation', 'true');
+    }
+
     const payload = Buffer.from(params.toString()).toString('base64');    
     
     url.searchParams.set('sso', payload);
