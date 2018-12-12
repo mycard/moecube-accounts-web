@@ -2,7 +2,7 @@
   "en-US": {
     "title":"MoeCube",
     "Home":"Home",
-    "BBS":"Community",
+    "BBS":"BBS",
     "DATABASE":"DataBase",
     "username": "User Name",
     "email": "E-Mail",
@@ -96,7 +96,7 @@
     "title":"萌立方",
     "Home":"主页",
     "BBS":"社区",
-    "DATABASE":"决斗数据库",
+    "DATABASE":"数据库",
     "username": "用户名",
     "email": "邮箱",
     "password": "密码",

@@ -107,7 +107,7 @@ class Profiles extends React.Component {
               <Form onSubmit={this.onUpdateSubmit}>
 
                 <FormItem style={{ display: 'flex', justifyContent: 'center' }}>
-                  <div style={{ display: isUpload ? 'flex' : 'none', flexDirection: 'column' }}>
+                  <div style={{ display: isUpload ? 'flex' : 'none', flexDirection: 'column'}}>
                     <Cropper
                       ref={(cropper) => {
                         this.cropper = cropper;
@@ -118,6 +118,7 @@ class Profiles extends React.Component {
                       aspectRatio={1 / 1}
                       guides
                     />
+                    <br/>
                     <Button type="primary" onClick={this.handleUpload}>
                       <Icon type="upload"/> <Format id="upload"/>
                     </Button>

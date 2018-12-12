@@ -165,11 +165,11 @@ function Index({ children, messages, dispatch, client, language }) {
           defaultSelectedKeys={['1']}
           style={{ lineHeight: '64px' }}
         >
-          <Menu.Item key="1">
+          {/*<Menu.Item key="1">
             <Link to="/">
               <Format id="Home"/>
             </Link>
-          </Menu.Item>
+          </Menu.Item>*/}
            <Menu.Item key="2">
             <Link href="https://ygobbs.com/">
               <Format id="BBS"/>
