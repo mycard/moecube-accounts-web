@@ -1,18 +1,16 @@
 language: node_js
 node_js: node
-env:
-  global:
-    secure: NObcZ6fY1VQuoDfxRxKVOZ+p7g3LTDkonG4Ow4HIbx2g8wJ24mMqs9gN0J3Asbdbz68isDMpkKy7IW1mK9+N9fM0pBauqD1YMbglnEv+HhYjhiEsQdRdDM2nzDIjS4PCwavI1Da5TLhaUjSAM4lrHx7bVOK4YsvF3s8JEApS54QgSlbeJgvSbPcCiapl0VwwaL36cGndChc3tawq4xseuk4bP2NrTEd7ifYZMt+iojId+UuhRQk4w0HUlBhEDKiT/fLxeQDwMRv2WIdIPW7D7+Wo01iX+T0Ti629QhQBe/S76affkG6G085HIPin3VvXDQaiYbK4ALbc79O+9jqSxEFd9nwG8xbp2jezzvclUSXPhIyZe7VSRS6z1MdevlyQa56AUEP7My7IMqj8j7NPoUgrnVlKtR8WPHQacfAVkrcOIX+Tzwl2IMOCqonamDtJjUNX5xpYB+IEj+INvQmRqT2NicExGWj9LZp3L3kscwq1u+0hPzgoQ9yovE+OvLFNE/R5AE90GIaSlwXw4MqOeB+8l+ou2JzNZFJhHBvAsOFwQTloFz/pu7ichJ+P0KsMPteLFA4Btuo6bBu31K7R310CmlIdYJIeeybMuM6e6bG8IkbVcMq5skg9LNa64KuDG46oopwGLiWkdRwDzG3VmXGwVm+OF2EWZi/B0wIcTwY=
-
+cache:
+  directories:
+    - "$HOME/.npm"
 script: npm run build
-before_deploy:
-- curl --location --retry 5 --output ossutil 'https://github.com/mycard/ossutil/releases/download/1.0.0.Beta2/ossutil'
-- chmod +x ossutil
-- ./ossutil config --endpoint oss-cn-hangzhou.aliyuncs.com --access-key-id $ALIYUN_ID
-  --access-key-secret $ALIYUN_SECRET
 deploy:
-  provider: script
-  script: ./ossutil cp -rf dist oss://mycard/accounts
+  provider: s3
+  access_key_id: ztDf0fCxr0eCgSIi
+  secret_access_key:
+     secure: rL0DOiSBdu/Xj24klpx3+4PdzEPVB5h1GzB0m2/HZ6bw2ihbR297DA8/lapzOAzQGThkaa3UTUathwxMQRu1S+l9cWosz91ER1yHp1sg8Xfy0UXDjP86pRDNX4xpuJAaMUfwIkY4UekqPuSDWxPGubMoCHB6BjPxpsH7kRLz8ePnL7T5BBrNya0vFo3DddHldwneGV6lc0OZ4ZgMbc54IwrSMlBwr0DkHJ+bcjkmdO6kjUNtP4p56kjMLpX84DIjnHu1DTOKhK+/JkhtzO/l0m0jWoFTsgfa+Q5w16Eq+eUvYkqsfcHBNeU5/tRZeIlJqWQ9B10MBqB1vJ3nhU6ddKG8vMWPNiHbLklAz1Jtr7mPU/YoWHMinH5z3a7X3r4khCAYs+o5OKqwsT+1vSoaxNRfwaVdaBOCN7PgVcC80+nTX2hWPVK7ayoJDcbHZX8btsFcC265yY2cN/z/IGpMmKt0NNV8IAQ+lasKdLhVMRfhA4zoUdWVZL78qI0GzB/4+eUZJ9vSIsrXgFHiLLyPxuAlYV5xvJSF9LeUJ4yJHtIrSUAtfFPqopP2TEmnRknNInR6ZfBpaDKbePVMnp4aMY/Fphx23t0TLBreCFW8odQxLHPfFhgm8465CDf6wJvs2Q21Gqt6ibkIR1SckcR9qiFs2TfLipv6pXBXVZN8KEc=
+  bucket: mycard
   skip_cleanup: true
-  on:
-    branch: master
+  local-dir: dist
+  upload-dir: accounts
+  endpoint: https://minio.mycard.moe:9000
