@@ -23,6 +23,7 @@ export const handleSSO = (user) => {
     }
     params.set('external_id', user.id);
     params.set('avatar_url', user.avatar);
+    params.set('avatar_force_update', 'true');
     if (!user.active) {
       params.set('require_activation', 'true');
     }
