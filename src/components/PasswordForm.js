@@ -33,7 +33,7 @@ class EmailForm extends React.Component {
   };
 
   checkPassword = (rule, value, callback) => {
-    const form = this.props.form;
+    const { form, messages } = this.props;
     //const { intl: { messages } } = this.context;
     if (value && value !== form.getFieldValue('new_password')) {
       callback(messages['Incorrect-password.2']);

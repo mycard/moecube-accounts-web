@@ -34,7 +34,7 @@ class Register extends React.Component {
 
 
   checkPassword = (rule, value, callback) => {
-    const form = this.props.form;
+    const { form, messages } = this.props;
     if (value && value !== form.getFieldValue('password')) {
       // callback(this.context.intl.messages['Incorrect-password.2']);
       callback(messages['Incorrect-password.2']);

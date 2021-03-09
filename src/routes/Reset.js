@@ -30,9 +30,9 @@ class Reset extends React.Component {
   };
 
   checkPassword = (rule, value, callback) => {
-    const form = this.props.form;
+    const { form, messages } = this.props;
     if (value && value !== form.getFieldValue('password')) {
-      callback('Two passwords that you enter is inconsistent!');
+      callback(messages['Incorrect-password.2']);
     } else {
       callback();
     }
