@@ -75,10 +75,10 @@ class EmailForm extends React.Component {
       <Form onSubmit={this.onSubmit}>
         <FormItem {...usernameProps.fromItem}>
           {getFieldDecorator('username', { ...usernameProps.decorator })(
-            <Input {...usernameProps.input} disabled />,
+            <Input {...usernameProps.input} />,
           )}
           {
-            <div class="alert alert-warning" role="alert"><strong>目前修改用户名功能暂时关闭。</strong>修改用户名后战绩会清零、也会失去绑定的云卡组。建议提前备份卡组。</div>
+            <div class="alert alert-warning" role="alert">修改用户名后战绩会清零、也会失去绑定的云卡组。建议提前备份卡组。</div>
           }
 
         </FormItem>
@@ -90,7 +90,7 @@ class EmailForm extends React.Component {
         </FormItem>
 
         <FormItem>
-          <SubmitButton disabled />
+          <SubmitButton />
         </FormItem>
       </Form>
     );
