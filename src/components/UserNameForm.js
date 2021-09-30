@@ -78,7 +78,7 @@ class EmailForm extends React.Component {
             <Input {...usernameProps.input} disabled />,
           )}
           {
-            <div class="alert alert-warning" role="alert"><strong>目前修改用户名功能暂时关闭。</strong>修改用户名后战绩会清零、也会失去绑定的云卡组。建议提前备份卡组。</div>
+            <div class="alert alert-warning" role="alert">修改用户名后战绩会清零、也会失去绑定的云卡组。建议提前备份卡组。改名在10月8日23：59关闭。并且需要点击切换用户按钮来重新登录，才可以进入游戏。</div>
           }
 
         </FormItem>
@@ -90,7 +90,7 @@ class EmailForm extends React.Component {
         </FormItem>
 
         <FormItem>
-          <SubmitButton disabled />
+          <SubmitButton />
         </FormItem>
       </Form>
     );
